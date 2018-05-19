@@ -1,0 +1,27 @@
+.container
+  h3 幻水総選挙2018
+  a.waves-effect.waves-light.btn button
+
+  .carousel
+    = link_to 'https://www.yahoo.co.jp/', class: 'carousel-item'
+        = image_tag 'hello/nature_01.jpg'
+    = link_to '#two!', class: 'carousel-item'
+        = image_tag 'hello/nature_02.jpg'
+    = link_to '#three!', class: 'carousel-item'
+        = image_tag 'hello/nature_03.jpg'
+    = link_to '#four!', class: 'carousel-item'
+        = image_tag 'hello/nature_04.jpg'
+    = link_to '#five!', class: 'carousel-item'
+        = image_tag 'hello/nature_05.jpg'
+
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems);
+  });
+
+/ img src="https://lorempixel.com/250/250/nature/1"
+/ img src="https://lorempixel.com/250/250/nature/1"
+/ img src="https://lorempixel.com/250/250/nature/1"
+/ img src="https://lorempixel.com/250/250/nature/1"
+/ img src="https://lorempixel.com/250/250/nature/1"
