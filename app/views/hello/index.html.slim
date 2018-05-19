@@ -4,18 +4,30 @@
   h4 button
   a.waves-effect.waves-light.btn button
 
+  h4 table
+  table.highlight.responsive-table
+    thead
+      - headers = ['Name', 'Item Name', 'Item Price']
+      tr
+      - headers.each do |header|
+        th = header
+
+    tbody
+      - @return_value.each do |element|
+        tr
+          td = element[0]
+          td = element[1]
+          td = element[2]
+      / end は不要
+
   h4 Carousel
+  - @images = ['hello/nature_01.jpg', 'hello/nature_02.jpg', 'hello/nature_03.jpg', 'hello/nature_04.jpg', 'hello/nature_05.jpg']
+  - @carousel_class_name = 'carousel-item'
+
   .carousel
-    = link_to '', class: 'carousel-item'
-        = image_tag 'hello/nature_01.jpg'
-    = link_to '', class: 'carousel-item'
-        = image_tag 'hello/nature_02.jpg'
-    = link_to '', class: 'carousel-item'
-        = image_tag 'hello/nature_03.jpg'
-    = link_to '', class: 'carousel-item'
-        = image_tag 'hello/nature_04.jpg'
-    = link_to '', class: 'carousel-item'
-        = image_tag 'hello/nature_05.jpg'
+    - @images.each do |image|
+      = link_to '', class: @carousel_class_name
+        = image_tag image
 
   h4 collapsible
   ul.collapsible
@@ -38,15 +50,7 @@
       .collapsible-body
         span Lorem ipsum dolor sit amet.
 
+  h4 Media
+  = image_tag 'hello/beautiful.jpg', class: 'materialboxed', width: 650
+
 = javascript_include_tag 'hello/materialize.js'
-
-/ javascript:
-/   document.addEventListener('DOMContentLoaded', function() {
-/     var elems = document.querySelectorAll('.carousel');
-/     var instances = M.Carousel.init(elems);
-/   });
-
-/   document.addEventListener('DOMContentLoaded', function() {
-/     var elems = document.querySelectorAll('.collapsible');
-/     var instances = M.Collapsible.init(elems);
-/   });
