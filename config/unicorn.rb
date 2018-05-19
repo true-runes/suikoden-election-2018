@@ -2,10 +2,9 @@ worker_processes 2
 
 pid     'tmp/unicorn.pid'
 listen 10842
-# listen  'tmp/unicorn.sock'
 
-stderr_path 'log/foobar_unicorn_stderr.log'
-stdout_path 'log/foobar_unicorn_stdout.log'
+stderr_path 'log/unicorn_stderr.log'
+stdout_path 'log/unicorn_stdout.log'
 
 timeout 30
 
