@@ -24,8 +24,8 @@ class HelloController < ApplicationController
         "$#{sample_method}.00",
       ],
       [
-        HogeFuga::SITE_NAME,
-        HogeFuga::My_site_name,
+        MyConstants::MY_NAME,
+        MyConstants::MY_FAVORITE_GAME,
         "$#{sample_method}.00",
       ],
     ]
