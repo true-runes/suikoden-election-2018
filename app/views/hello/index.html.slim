@@ -1,0 +1,56 @@
+.container
+  h3 幻水総選挙2018
+
+  h4 button
+  a.waves-effect.waves-light.btn button
+
+  h4 table
+  table.highlight.responsive-table
+    thead
+      - headers = ['Name', 'Item Name', 'Item Price']
+      tr
+      - headers.each do |header|
+        th = header
+
+    tbody
+      - @return_value.each do |element|
+        tr
+          td = element[0]
+          td = element[1]
+          td = element[2]
+      / end は不要
+
+  h4 Carousel
+  - @images = ['hello/nature_01.jpg', 'hello/nature_02.jpg', 'hello/nature_03.jpg', 'hello/nature_04.jpg', 'hello/nature_05.jpg']
+  - @carousel_class_name = 'carousel-item'
+
+  .carousel
+    - @images.each do |image|
+      = link_to '', class: @carousel_class_name
+        = image_tag image
+
+  h4 collapsible
+  ul.collapsible
+    li
+      .collapsible-header
+        i.material-icons filter_drama
+        = 'First'
+      .collapsible-body
+        span Lorem ipsum dolor sit amet.
+    li
+      .collapsible-header
+        i.material-icons place
+        = 'Second'
+      .collapsible-body
+        span Lorem ipsum dolor sit amet.
+    li
+      .collapsible-header
+        i.material-icons whatshot
+        = 'Third'
+      .collapsible-body
+        span Lorem ipsum dolor sit amet.
+
+  h4 Media
+  = image_tag 'hello/beautiful.jpg', class: 'materialboxed', width: 650
+
+= javascript_include_tag 'hello/materialize.js'
