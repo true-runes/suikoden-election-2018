@@ -1,3 +1,8 @@
+# Development
+```bash
+$ bundle exec webpacker:install
+```
+
 # Suikoden election 2018
 - `幻水総選挙 2018` in Japanese
 
