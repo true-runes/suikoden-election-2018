@@ -1,6 +1,7 @@
 class HelloController < ApplicationController
+  before_action :sample_method, only: [:index]
+
   def index
-    sample_method
     rows = [
       [
         'Alvin',
