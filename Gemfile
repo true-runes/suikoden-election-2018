@@ -39,7 +39,7 @@ gem 'webpacker' # bundle exec rails webpacker:install
 
 # Controller
 # gem 'retryable' # 例外処理の回数を指定した処理が書ける https://qiita.com/giiko_/items/311a9d3869912daa9128
-# gem 'draper'
+gem 'draper' # ビューのロジックをプレゼンテーション層へ委譲する
 
 # Middleware
 gem 'sidekiq'
@@ -72,6 +72,7 @@ gem 'activerecord-import' # BULK INSERT をするための gem https://qiita.com
 # View
 gem 'slim-rails'
 gem 'sass-rails'
+gem 'simple_form'
 gem 'uglifier' # UglifyJS2 という JavaScript のコード軽量化ライブラリを、Ruby で簡単に使えるようにした gem
 gem 'jbuilder'
 # gem 'active_model_serializers'
