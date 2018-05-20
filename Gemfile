@@ -62,6 +62,7 @@ gem 'devise'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'bullet' # N+1問題の検出 https://maetoo11.hatenablog.com/entry/2016/03/14/212524
+gem 'paranoia' # 論理削除支援 https://github.com/rubysherpas/paranoia
 gem 'annotate' # schemaをmodelに書き出してくれる https://techracho.bpsinc.jp/ikeda-kazuyuki/2014_08_29/18876
 gem 'groupdate' # モデルの日時を簡単にグルーピングできる https://github.com/ankane/groupdate
 gem 'activerecord-import' # BULK INSERT をするための gem https://qiita.com/xend/items/79184ded56158ea1b97a
