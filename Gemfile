@@ -43,7 +43,9 @@ gem 'draper' # ビューのロジックをプレゼンテーション層へ委�
 
 # Middleware
 gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'sidekiq-scheduler'
+gem 'redis-namespace'
 gem 'unicorn'
 # gem 'rufo'
 gem 'redis'

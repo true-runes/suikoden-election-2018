@@ -30,6 +30,8 @@ class HelloController < ApplicationController
       ],
     ]
 
+    HardWorker.perform_async('bob', 5)
+
     @return_value = rows
   end
 
