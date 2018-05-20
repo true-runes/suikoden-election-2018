@@ -1,16 +1,21 @@
 default: &default
-  adapter: sqlite3
+  adapter: <%= Rails.application.credentials.mysql[:default][:adapter] %> # mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: <%= Rails.application.credentials.mysql[:default][:encoding] %> # utf8mb4
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  host: <%= Rails.application.credentials.mysql[:development][:host] %>
+  port: <%= Rails.application.credentials.mysql[:development][:port] %>
+  username: <%= Rails.application.credentials.mysql[:development][:username] %>
+  password: <%= Rails.application.credentials.mysql[:development][:password] %>
+  database: <%= Rails.application.credentials.mysql[:development][:database] %>
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: sosenkyo_2018_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: sosenkyo_2018_production
