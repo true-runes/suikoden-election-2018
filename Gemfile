@@ -111,11 +111,14 @@ end
 # Deploy
 gem 'capistrano'
 gem 'capistrano-rails'
+gem 'capistrano-rails-console', require: false
 gem 'capistrano-bundler'
 gem 'capistrano-rbenv'
 gem 'capistrano3-unicorn'
+gem 'capistrano-yarn'
 
 # Others
 gem 'faraday'
 gem "shrine"
 gem 'smarter_csv'
+gem 'simple_form'

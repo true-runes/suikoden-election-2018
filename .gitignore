@@ -26,3 +26,4 @@ vendor/
 coverage/
 spec/tmp
 .rspec
+start_unicorn.sh
