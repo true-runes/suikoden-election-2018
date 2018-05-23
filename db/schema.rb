@@ -10,15 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_20_112103) do
+ActiveRecord::Schema.define(version: 2018_05_23_154248) do
 
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "tweet_id"
-    t.string "user_id"
+    t.string "tweet_number"
+    t.bigint "user_id", null: false
+    t.string "text", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_tweets_on_deleted_at"
+    t.index ["tweet_number"], name: "index_tweets_on_tweet_number", unique: true
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "screen_name", default: "", null: false
+    t.string "user_number", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
