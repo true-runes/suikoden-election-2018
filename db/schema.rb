@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_23_154248) do
+ActiveRecord::Schema.define(version: 2018_05_24_134825) do
 
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "tweet_number"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "text", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(version: 2018_05_23_154248) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "screen_name", default: "", null: false
-    t.string "user_number", default: "", null: false
+    t.string "user_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_number"], name: "index_users_on_user_number", unique: true
   end
 
+  add_foreign_key "tweets", "users"
 end
