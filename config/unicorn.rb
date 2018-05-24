@@ -19,11 +19,12 @@ before_fork do |server, worker|
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
+      # do something...
     end
   end
 end
 
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.establish_connection
+    ActiveRecord::Base.establish_connection
 end
