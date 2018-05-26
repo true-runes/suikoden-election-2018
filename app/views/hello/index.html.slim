@@ -1,26 +1,22 @@
 .container
-  h3 幻水総選挙2018
+  h3 幻水総選挙2018.dev
 
-  p = link_to 'named route', goodbye_path
-
-  h4 button
-  a.waves-effect.waves-light.btn button
-
-  h4 table
+  h5 ツイート一覧
   table.highlight.responsive-table
     thead
-      - headers = ['Name', 'Item Name', 'Item Price']
+      - headers = ['screen_name', 'tweet_text', 'tweet_id' ,'created_at']
       tr
       - headers.each do |header|
         th = header
 
     tbody
-      - @return_value.each do |element|
+      - tweets_by_hashtag.each do |tweet|
         tr
-          td = element[0]
-          td = element[1]
-          td = element[2]
-      / end は不要
+          td = tweet.user.screen_name
+          td = tweet.attrs[:full_text]
+          td
+            = link_to 'ツイートへのリンク', "https://twitter.com/statuses/#{tweet.id}", target: '_blank'
+          td = tweet.created_at.in_time_zone
 
   h4 Carousel
   - @images = ['hello/nature_01.jpg', 'hello/nature_02.jpg', 'hello/nature_03.jpg', 'hello/nature_04.jpg', 'hello/nature_05.jpg']
@@ -54,5 +50,10 @@
 
   h4 Media
   = image_tag 'hello/beautiful.jpg', class: 'materialboxed', width: 650
+
+  p = link_to 'named route', goodbye_path
+
+  h4 button
+  a.waves-effect.waves-light.btn button
 
 = javascript_include_tag 'hello/materialize.js'
