@@ -121,3 +121,4 @@ gem 'capistrano3-unicorn'
 gem 'faraday'
 gem "shrine"
 gem 'smarter_csv'
+gem 'twitter'
