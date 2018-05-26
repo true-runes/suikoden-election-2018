@@ -544,6 +544,7 @@ GEM
       equalizer (~> 0.0.9)
       parser (>= 2.3.1.2, < 2.6)
       procto (~> 0.0.2)
+    upsert (2.2.1)
     vcr (4.0.0)
     warden (1.2.7)
       rack (>= 1.0)
@@ -647,6 +648,7 @@ DEPENDENCIES
   twitter
   uglifier
   unicorn
+  upsert
   vcr
   web-console
   webmock

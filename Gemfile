@@ -122,3 +122,4 @@ gem 'faraday'
 gem "shrine"
 gem 'smarter_csv'
 gem 'twitter'
+gem 'upsert'

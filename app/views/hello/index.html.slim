@@ -1,30 +1,64 @@
 .container
   h3 幻水総選挙2018.dev
 
-  h5 ツイート一覧
-  table.highlight.responsive-table
-    thead
-      - headers = ['screen_name', 'tweet_text', 'tweet_id' ,'created_at']
-      tr
-      - headers.each do |header|
-        th = header
+  h4 debug
+  - @tweets.each do |tweet|
+    - if !tweet.retweet?
+      p = '----------------------------------------'
+      p = "id: #{tweet.user.id}"
+      / nil
+      p = "connections: #{tweet.user.connections}"
+      / 説明文
+      p = "desc: #{tweet.user.description}"
+      / nil
+      p = "email: #{tweet.user.email}"
+      p = "fav: #{tweet.user.favorites_count}"
+      p = "followers: #{tweet.user.followers_count}"
+      p = "followees: #{tweet.user.friends_count}"
+      p = "lang: #{tweet.user.lang}"
+      p = "listed: #{tweet.user.listed_count}"
+      p = "location: #{tweet.user.location}"
+      p = "screen_name: #{tweet.user.screen_name}"
+      p = "name: #{tweet.user.name}"
+      p = "bg_color: #{tweet.user.profile_background_color}"
+      p = "link_color: #{tweet.user.profile_link_color}"
+      p = "border_color: #{tweet.user.profile_sidebar_border_color}"
+      p = "side_color: #{tweet.user.profile_sidebar_fill_color}"
+      p = "text_color: #{tweet.user.profile_text_color}"
+      p = "statuses_count: #{tweet.user.statuses_count}"
+      p = "time_zone: #{tweet.user.time_zone}"
+      p = "utc_offset: #{tweet.user.utc_offset}"
+      p = "uri: #{tweet.user.uri}"
+      p = "website?: #{tweet.user.website?}"
+      p = "website: #{tweet.user.website}"
+      p = "prof_banner_uri: #{tweet.user.profile_banner_uri_https('1500x500')}"
+      p = "profile_image_uri: #{tweet.user.profile_image_uri_https('400x400')}"
+      p = "created_at: #{tweet.user.created_at}"
 
-    tbody
-      - tweets_by_hashtag.each do |tweet|
-        tr
-          td = tweet.user.screen_name
-          td = tweet.attrs[:full_text]
-          td
-            = link_to 'ツイートへのリンク', "https://twitter.com/statuses/#{tweet.id}", target: '_blank'
-          td = tweet.created_at.in_time_zone
+  / h5 ツイート一覧
+  / table.highlight.responsive-table
+  /   thead
+  /     tr
+  /     - @headers.each do |header|
+  /       th = header
+  /
+  /   tbody
+  /     - @tweets.each do |tweet|
+  /       - if !tweet.retweet?
+  /         tr
+  /           td = tweet.user.screen_name
+  /           td = tweet.attrs[:full_text]
+  /           td
+  /             = link_to 'ツイートへのリンク', "https://twitter.com/statuses/#{tweet.id}", target: '_blank'
+  /           td = tweet.created_at.in_time_zone
 
   h4 Carousel
-  - @images = ['hello/nature_01.jpg', 'hello/nature_02.jpg', 'hello/nature_03.jpg', 'hello/nature_04.jpg', 'hello/nature_05.jpg']
-  - @carousel_class_name = 'carousel-item'
+  - images = ['hello/nature_01.jpg', 'hello/nature_02.jpg', 'hello/nature_03.jpg', 'hello/nature_04.jpg', 'hello/nature_05.jpg']
+  - carousel_class_name = 'carousel-item'
 
   .carousel
-    - @images.each do |image|
-      = link_to '', class: @carousel_class_name
+    - images.each do |image|
+      = link_to '', class: carousel_class_name
         = image_tag image
 
   h4 collapsible
