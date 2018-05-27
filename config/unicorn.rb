@@ -1,12 +1,13 @@
 worker_processes 2
 
-pid     'tmp/unicorn.pid'
+pid 'tmp/unicorn.pid'
 listen 10842
 
 stderr_path 'log/unicorn_stderr.log'
 stdout_path 'log/unicorn_stdout.log'
 
-timeout 30
+# timeout 30
+timeout 120 # for updating User
 
 preload_app true # ダウンタイムをなしにする
 

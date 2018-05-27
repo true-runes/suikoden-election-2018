@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get '/hello/index'
   get '/goodbye', to: 'application#goodbye'
   get '/upsert', to: 'hello#upsert'
+  get '/debug', to: 'hello#debug'
 
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  # require 'sidekiq/web'
+  # mount Sidekiq::Web => '/sidekiq'
 end

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  acts_as_paranoid
+
   has_many :tweets
   after_create :user_model_done
 
