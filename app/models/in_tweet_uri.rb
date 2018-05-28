@@ -1,0 +1,2 @@
+class InTweetUri < ApplicationRecord
+end
