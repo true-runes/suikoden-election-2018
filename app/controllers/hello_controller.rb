@@ -3,6 +3,11 @@ require 'upsert/active_record_upsert'
 class HelloController < ApplicationController
   include Collection
 
+  def ajax
+
+  end
+
+
   def debug
     client
 

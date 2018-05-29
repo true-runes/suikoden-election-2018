@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/upsert', to: 'hello#upsert'
   get '/debug', to: 'hello#debug'
 
+  resources :ajax
+
   # require 'sidekiq/web'
   # mount Sidekiq::Web => '/sidekiq'
 end

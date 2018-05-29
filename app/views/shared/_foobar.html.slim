@@ -1,0 +1,34 @@
+.container
+  .s12
+    = "Hello, Partial Template!"
+  #my-my-ajax
+    = "0"
+  .s6
+    #my-my-my-ajax
+      = "0"
+  .s6
+    #my-my-my-my-ajax
+      = "0"
+
+javascript:
+  axios.get('/ajax/12345')
+    .then(function(response) {
+      setInterval(function () {
+        document.getElementById('my-my-my-ajax').innerHTML = response.data['ufufu'];
+      }, 1000);
+
+      console.log(response);
+    });
+
+  // let i = 0;
+  // let myShowInterval = function() {
+  //   setInterval(function () {
+  //     i = i + 1;
+      // document.getElementById('my-my-ajax').innerHTML = get('/ajax');
+      // document.getElementById('my-my-my-ajax').innerHTML = data;
+      // document.getElementById('my-my-my-my-ajax').innerHTML = i;
+      // document.getElementById('my-my-my-my-my-ajax').innerHTML = i;
+    // }, 1000)
+  // };
+
+  // myShowInterval();

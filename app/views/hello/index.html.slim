@@ -5,7 +5,7 @@
   - @tweets.each do |tweet|
     - if !tweet.retweet?
       p = '----------------------------------------'
-      p = "id: #{tweet.user.id}"
+      p = "user_id: #{tweet.user.id}"
       / nil
       p = "connections: #{tweet.user.connections}"
       / 説明文
@@ -90,4 +90,4 @@
   h4 button
   a.waves-effect.waves-light.btn button
 
-= javascript_include_tag 'hello/materialize.js'
+/ = javascript_include_tag 'hello/initialize.js'
