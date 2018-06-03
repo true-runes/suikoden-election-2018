@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_28_134346) do
+ActiveRecord::Schema.define(version: 2018_06_03_123804) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_05_28_134346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_media_on_tweet_id"
+  end
+
+  create_table "search_words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "tweet_id"
+    t.string "word"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_search_words_on_tweet_id"
+    t.index ["word"], name: "index_search_words_on_word", unique: true
   end
 
   create_table "tweet_symbols", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -105,7 +114,7 @@ ActiveRecord::Schema.define(version: 2018_05_28_134346) do
     t.string "text_color", default: "", null: false
     t.string "time_zone", default: "", null: false
     t.string "utc_offset", default: "", null: false
-    t.datetime "account_created_at", default: "1980-01-01 21:00:00", null: false
+    t.datetime "account_created_at", default: "1980-01-01 12:00:00", null: false
     t.string "connections", default: "", null: false
     t.string "email", default: "", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
@@ -115,6 +124,7 @@ ActiveRecord::Schema.define(version: 2018_05_28_134346) do
   add_foreign_key "hashtags", "tweets"
   add_foreign_key "in_tweet_uris", "tweets"
   add_foreign_key "media", "tweets"
+  add_foreign_key "search_words", "tweets"
   add_foreign_key "tweet_symbols", "tweets"
   add_foreign_key "tweets", "users"
   add_foreign_key "user_mentions", "tweets"
