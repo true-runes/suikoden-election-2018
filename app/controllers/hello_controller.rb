@@ -3,10 +3,15 @@ require 'upsert/active_record_upsert'
 class HelloController < ApplicationController
   include Collection
 
-  def ajax
+  def insert
+    obj = StoreTweets.new
+    @foooo = obj
 
+    obj.insert_to_search_words('刀剣乱舞')
   end
 
+  def ajax
+  end
 
   def debug
     client

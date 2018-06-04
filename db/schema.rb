@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_123804) do
+ActiveRecord::Schema.define(version: 2018_06_04_134805) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -37,11 +37,9 @@ ActiveRecord::Schema.define(version: 2018_06_03_123804) do
   end
 
   create_table "search_words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "tweet_id"
     t.string "word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_search_words_on_tweet_id"
     t.index ["word"], name: "index_search_words_on_word", unique: true
   end
 
@@ -75,7 +73,9 @@ ActiveRecord::Schema.define(version: 2018_06_03_123804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "search_words_id"
     t.index ["deleted_at"], name: "index_tweets_on_deleted_at"
+    t.index ["search_words_id"], name: "index_tweets_on_search_words_id"
     t.index ["tweet_number"], name: "index_tweets_on_tweet_number", unique: true
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(version: 2018_06_03_123804) do
   add_foreign_key "hashtags", "tweets"
   add_foreign_key "in_tweet_uris", "tweets"
   add_foreign_key "media", "tweets"
-  add_foreign_key "search_words", "tweets"
   add_foreign_key "tweet_symbols", "tweets"
+  add_foreign_key "tweets", "search_words", column: "search_words_id"
   add_foreign_key "tweets", "users"
   add_foreign_key "user_mentions", "tweets"
 end

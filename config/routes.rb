@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/goodbye', to: 'application#goodbye'
   get '/upsert', to: 'hello#upsert'
   get '/debug', to: 'hello#debug'
+  get '/insert', to: 'hello#insert'
 
   resources :ajax
 
