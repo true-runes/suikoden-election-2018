@@ -16,7 +16,8 @@ module Collection
 
   def tweets_by_hashtag
     client
-    @client.search('#幻水総選挙運動', { tweet_mode: "extended" }).take(200)
+    # @client.search('幻水総選挙', { tweet_mode: "extended" }).take(200)
+    @client.user_timeline('gensosenkyo', { count: 100, tweet_mode: "extended" })
   end
 
   # debug
