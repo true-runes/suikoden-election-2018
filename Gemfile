@@ -35,17 +35,19 @@ gem 'money-rails' # お金のケタ区切り https://qiita.com/kento1218@github/
 gem 'whenever'
 gem 'rubocop'
 gem 'guard-rubocop'
+gem 'rufo' # Rubocop の超簡易版
 gem 'webpacker' # bundle exec rails webpacker:install
 
 # Controller
-# gem 'retryable' # 例外処理の回数を指定した処理が書ける https://qiita.com/giiko_/items/311a9d3869912daa9128
-# gem 'draper'
+gem 'retryable' # 例外処理の回数を指定した処理が書ける https://qiita.com/giiko_/items/311a9d3869912daa9128
+gem 'draper' # ビューのロジックをプレゼンテーション層へ委譲する
 
 # Middleware
 gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'sidekiq-scheduler'
+gem 'redis-namespace'
 gem 'unicorn'
-# gem 'rufo'
 gem 'redis'
 gem 'active_model_serializers' # Web API
 
@@ -62,24 +64,24 @@ gem 'devise'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'bullet' # N+1問題の検出 https://maetoo11.hatenablog.com/entry/2016/03/14/212524
+gem 'paranoia' # 論理削除支援 https://github.com/rubysherpas/paranoia
 gem 'annotate' # schemaをmodelに書き出してくれる https://techracho.bpsinc.jp/ikeda-kazuyuki/2014_08_29/18876
 gem 'groupdate' # モデルの日時を簡単にグルーピングできる https://github.com/ankane/groupdate
 gem 'activerecord-import' # BULK INSERT をするための gem https://qiita.com/xend/items/79184ded56158ea1b97a
 # gem 'hirb'          # モデルの出力結果を表形式で表示するGem
 # gem 'hirb-unicode'  # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
-# gem 'paranoia' # 2018年にもなって論理削除はあり得ない
 
 # View
 gem 'slim-rails'
 gem 'sass-rails'
+gem 'simple_form'
 gem 'uglifier' # UglifyJS2 という JavaScript のコード軽量化ライブラリを、Ruby で簡単に使えるようにした gem
 gem 'jbuilder'
 # gem 'active_model_serializers'
-gem 'ransack'
+# gem 'ransack'
+gem 'search_cop'
 # gem 'chartkick'
 gem 'kaminari'
-# gem 'materialize-sass'
-# gem 'material_icons'
 gem 'activeadmin' # いい感じのAdmin画面を作る https://qiita.com/hkusu/items/3b0fb7f94a254e2ed6fd
 # gem 'view_source_map' # (by r7kamura) Rails、レンダリングされたHTMLのどこがどのpartialから来たのかをコメントとして埋める http://r7kamura.hatenablog.com/entry/2012/12/04/141911
 # gem 'sitemap_generator' # https://qiita.com/hirotakasasaki/items/2c183dee5d890d5ab57a
@@ -110,10 +112,10 @@ end
 
 # Deploy
 gem 'capistrano'
+gem 'capistrano-rbenv'
 gem 'capistrano-rails'
 gem 'capistrano-rails-console', require: false
 gem 'capistrano-bundler'
-gem 'capistrano-rbenv'
 gem 'capistrano3-unicorn'
 gem 'capistrano-yarn'
 
@@ -122,3 +124,7 @@ gem 'faraday'
 gem "shrine"
 gem 'smarter_csv'
 gem 'simple_form'
+gem 'twitter'
+gem 'upsert'
+# gem 'gon'
+gem 'simplecov'
