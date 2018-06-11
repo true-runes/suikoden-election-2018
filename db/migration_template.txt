@@ -1,0 +1,9 @@
+bundle exec rails generate model TweetHashtag
+bundle exec rails generate model TweetInnerUri
+bundle exec rails generate model TweetMedium
+bundle exec rails generate model TweetSearchWord
+bundle exec rails generate model TweetSymbol
+bundle exec rails generate model Tweet
+bundle exec rails generate model TweetUser
+bundle exec rails generate model TweetMention
+
