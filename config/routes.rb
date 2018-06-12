@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'hello#index'
 
@@ -9,6 +11,5 @@ Rails.application.routes.draw do
 
   resources :ajax
 
-  # require 'sidekiq/web'
-  # mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/sidekiq'
 end
