@@ -4,6 +4,8 @@ class HardWorker
 
   def perform(name, count)
     sleep(10)
-    puts "Hello #{name}! You have #{count}!"
+    # puts "Hello #{name}! You have #{count}!"
+    obj = WorldHello.new
+    puts obj.greet
   end
 end

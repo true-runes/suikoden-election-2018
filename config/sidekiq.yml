@@ -1,6 +1,6 @@
 :schedule:
   hard_worker:
-    every: '1m'
+    every: '5m'
     class: HardWorker
     args: ['foobar', '10000']
-    description: "sidkeiq-scheduler test!"
+    description: "sidkeiq-scheduler test?!"
