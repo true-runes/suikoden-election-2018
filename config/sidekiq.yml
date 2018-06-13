@@ -1,4 +1,6 @@
-#:schedule:
-#  hello_world_worker:
-#    cron: '0 * * * * *'
-#    class: HelloWorldWorker
+:schedule:
+  hard_worker:
+    every: '1m'
+    class: HardWorker
+    args: ['foobar', '10000']
+    description: "sidkeiq-scheduler test!"

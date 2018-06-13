@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/upsert', to: 'hello#upsert'
   get '/debug', to: 'hello#debug'
   get '/insert', to: 'hello#insert'
+  get '/kiq', to: 'hello#kiq'
 
   resources :ajax
 

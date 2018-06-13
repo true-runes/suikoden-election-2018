@@ -3,6 +3,11 @@ require 'upsert/active_record_upsert'
 class HelloController < ApplicationController
   include Collection
 
+  def kiq
+    HardWorker.perform_async
+    @message = 'Hello, Sidekiq!'
+  end
+
   def insert
     obj = StoreTweets.new
     @foooo = obj
