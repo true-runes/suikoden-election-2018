@@ -1,6 +1,31 @@
-:schedule:
-  hard_worker:
-    every: '5m'
-    class: HardWorker
-    args: ['foobar', '10000']
-    description: "sidkeiq-scheduler test?!"
+# :verbose: false
+# :pidfile: ./tmp/pids/sidekiq.pid
+# :logfile: ./log/sidekiq.log
+# :concurrency:  25
+# :queues:
+#   - default
+#   - upsert_to_fm_product_webkoshin_yo_updatesites
+#   - upsert_to_fm_product_gazo_shohin_gazos
+#   - upsert_to_fm_products_data_karisakusei_yo_tests
+#   - upsert_to_fm_products_shutsuryoku_yo_others_worker
+
+# :schedule:
+#   upsert_to_fm_product_webkoshin_yo_updatesites:
+#     every: 3m
+#     class: UpsertToFmProductWebkoshinYoUpdatesitesWorker
+#   upsert_to_fm_product_gazo_shohin_gazos:
+#     every: 10m
+#     class: UpsertToFmProductGazoShohinGazosWorker
+#   upsert_to_fm_products_data_karisakusei_yo_tests:
+#     every: 7m
+#     class: UpsertToFmProductsDataKarisakuseiYoTestsWorker
+#   upsert_to_fm_products_shutsuryoku_yo_others_worker:
+#     every: 4m
+#     class: UpsertToFmProductsShutsuryokuYoOthersWorker
+
+# :schedule:
+#   hard_worker:
+#     every: '5m'
+#     class: HardWorker
+#     args: ['foobar', '10000']
+#     description: "sidkeiq-scheduler test?!"
