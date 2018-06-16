@@ -38,15 +38,15 @@ class HelloController < ApplicationController
                 user_number: user.id,
 
                 # TODO: if description is empty, twitter api returns nil
-                description: user.description.nil? ? 'NO DESCRIPTION' : user.description,
+                description: user.description.nil? ? 'NO DESCRIPTION'  = .description,
                 uri: "#{user.uri}",
 
-                tweet_count: user.statuses_count,
+                tweet_count = .statuses_count,
 
                 profile_banner_uri: "#{user.profile_banner_uri_https('1500x500')}".nil? ? 'NO PROFILE BANNER' : "#{user.profile_banner_uri_https('1500x500')}",
                 profile_image_uri: "#{user.profile_image_uri_https('400x400')}".nil? ? 'NO PROFILE IMAGE' : "#{user.profile_image_uri_https('400x400')}",
 
-                favorite: user.favorites_count,
+                favorite = .favorites_count,
                 followers: user.followers_count,
                 followee: user.friends_count,
                 listed: user.listed_count,

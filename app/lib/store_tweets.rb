@@ -2,7 +2,7 @@ class StoreTweets
   attr_reader :store_tweets
 
   def initialize
-    @store_tweets = 'Hello, StoreTweets class!'
+    @message = 'Hello, StoreTweets class!'
   end
 
   def insert_to_search_words(search_word)
@@ -16,12 +16,12 @@ class StoreTweets
     #   @ret_message = 'save failed'
     # end
 
-    insert_words = [
-      '幻水',
-      '#幻水',
-      '#幻水総選挙',
-      '#幻想水滸伝',
-    ]
+    # insert_words = [
+    #   '幻水',
+    #   '#幻水',
+    #   '#幻水総選挙',
+    #   '#幻想水滸伝',
+    # ]
 
     begin
       ActiveRecord::Base.connection_pool.with_connection do |c| # 決まり文句

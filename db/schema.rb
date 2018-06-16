@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_07_210326) do
+ActiveRecord::Schema.define(version: 2018_06_16_122052) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -23,14 +23,24 @@ ActiveRecord::Schema.define(version: 2018_06_07_210326) do
   create_table "in_tweet_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "uri", default: "UNKNOWN", null: false
+    t.string "uri_t_co", default: "UNKNOWN", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_in_tweet_uris_on_tweet_id"
   end
 
+  create_table "in_user_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "uri", default: "UNKNOWN", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_in_user_uris_on_user_id"
+  end
+
   create_table "media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "uri", default: "UNKNOWN", null: false
+    t.string "uri_t_co", default: "UNKNOWN", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_media_on_tweet_id"
@@ -74,19 +84,20 @@ ActiveRecord::Schema.define(version: 2018_06_07_210326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.bigint "search_words_id"
+    t.bigint "search_word_id"
     t.index ["deleted_at"], name: "index_tweets_on_deleted_at"
-    t.index ["search_words_id"], name: "index_tweets_on_search_words_id"
+    t.index ["search_word_id"], name: "index_tweets_on_search_word_id"
     t.index ["tweet_number"], name: "index_tweets_on_tweet_number", unique: true
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
   create_table "user_mentions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
-    t.string "name", default: "UNKNOWN", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_user_mentions_on_tweet_id"
+    t.index ["user_id"], name: "index_user_mentions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -95,6 +106,7 @@ ActiveRecord::Schema.define(version: 2018_06_07_210326) do
     t.string "user_number", null: false
     t.string "description", default: "", null: false
     t.string "uri", default: "", null: false
+    t.string "uri_t_co", default: "UNKNOWN", null: false
     t.integer "tweet_count", default: -1, null: false
     t.string "profile_banner_uri", default: "", null: false
     t.string "profile_image_uri", default: "", null: false
@@ -124,9 +136,11 @@ ActiveRecord::Schema.define(version: 2018_06_07_210326) do
 
   add_foreign_key "hashtags", "tweets"
   add_foreign_key "in_tweet_uris", "tweets"
+  add_foreign_key "in_user_uris", "users"
   add_foreign_key "media", "tweets"
   add_foreign_key "tweet_symbols", "tweets"
-  add_foreign_key "tweets", "search_words", column: "search_words_id"
+  add_foreign_key "tweets", "search_words"
   add_foreign_key "tweets", "users"
   add_foreign_key "user_mentions", "tweets"
+  add_foreign_key "user_mentions", "users"
 end

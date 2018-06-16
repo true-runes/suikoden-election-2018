@@ -10,4 +10,5 @@
 #
 
 class InTweetUri < ApplicationRecord
+  belongs_to :tweet
 end

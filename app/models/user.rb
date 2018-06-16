@@ -36,6 +36,8 @@
 class User < ApplicationRecord
   acts_as_paranoid
 
+  has_many :in_user_uris
+  has_many :user_mentions
   has_many :tweets
   after_create :user_model_done
 

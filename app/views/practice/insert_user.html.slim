@@ -1,0 +1,14 @@
+.container
+  h5
+    = 'hello, practice!'
+  / h5
+  /   = @message[:screen_name]
+  / h5
+  /   = @message[:name]
+  / h5
+  /   - @target_tweets.each do |target_tweet|
+  /     p
+  /       = target_tweet.text
+  h5
+    / = @message.text
+    = @message

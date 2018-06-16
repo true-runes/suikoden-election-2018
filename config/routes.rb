@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/debug', to: 'hello#debug'
   get '/insert', to: 'hello#insert'
   get '/kiq', to: 'hello#kiq'
+  get '/practice', to: 'practice#insert_user'
 
   resources :ajax
 

@@ -71,6 +71,7 @@ gem 'groupdate' # モデルの日時を簡単にグルーピングできる http
 gem 'activerecord-import' # BULK INSERT をするための gem https://qiita.com/xend/items/79184ded56158ea1b97a
 # gem 'hirb'          # モデルの出力結果を表形式で表示するGem
 # gem 'hirb-unicode'  # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
+gem 'default_value_for'
 
 # View
 gem 'slim-rails'
