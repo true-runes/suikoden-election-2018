@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_122052) do
+ActiveRecord::Schema.define(version: 2018_06_16_124049) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2018_06_16_122052) do
   create_table "in_tweet_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "uri", default: "UNKNOWN", null: false
-    t.string "uri_t_co", default: "UNKNOWN", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_in_tweet_uris_on_tweet_id"
@@ -40,7 +39,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_122052) do
   create_table "media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "uri", default: "UNKNOWN", null: false
-    t.string "uri_t_co", default: "UNKNOWN", null: false
+    t.string "thumbnail_uri", default: "UNKNOWN", null: false
+    t.string "type", default: "UNKNOWN", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_media_on_tweet_id"
