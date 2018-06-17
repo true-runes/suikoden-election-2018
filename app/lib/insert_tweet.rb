@@ -82,11 +82,14 @@ class InsertTweet
       Upsert.batch(c, :tweets) do |upsert|
         # TODO: ↓長いので外に出す
         tweet_objects.each do |tweet_object|
+          fk_user_id = User.where(user_number: tweet_object.user.id).first.id
+
           upsert.row(
             {
               tweet_number: kill_nil(tweet_object.id),
             },
             {
+              user_id: fk_user_id,
               has_user_mentions: kill_nil(tweet_object.user_mentions?),
               has_uris: kill_nil(tweet_object.uris?),
               has_symbols: kill_nil(tweet_object.symbols?),
