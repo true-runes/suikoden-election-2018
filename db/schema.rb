@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_071416) do
+ActiveRecord::Schema.define(version: 2018_06_17_081932) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 2018_06_17_071416) do
   create_table "in_user_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.string "uri", default: "UNKNOWN", null: false
+    t.string "expanded_uri", default: "UNKNOWN", null: false
     t.string "indices", default: "UNKNOWN", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "uri", "indices"], name: "index_in_user_uris_on_user_id_and_uri_and_indices", unique: true
-    t.index ["user_id", "uri"], name: "index_in_user_uris_on_user_id_and_uri", unique: true
     t.index ["user_id"], name: "index_in_user_uris_on_user_id"
   end
 

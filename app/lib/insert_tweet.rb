@@ -9,14 +9,6 @@ class InsertTweet
     end
   end
 
-  def as_insert
-    Tweet.find_by(id: 430)
-  end
-
-  def search_user(search_user:, options:)
-
-  end
-
   def search_tweet(search_word:, options: nil) # options
     ActiveRecord::Base.connection_pool.with_connection do |c|
       Upsert.batch(c, :search_words) do |upsert|
@@ -36,8 +28,17 @@ class InsertTweet
     # TODO: 検索以外の手段での取得にも対応する（特定ユーザタイムライン、自分のタイムライン）
     # TODO: since_id や max_id を手動で設定（フォーム）
     latest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number DESC').first[:tweet_number].to_s
+    # oldest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number ASC').first[:tweet_number].to_s
 
-    @client.search(search_word, { tweet_mode: 'extended', result_type: 'recent', count: 100, since_id: latest_tweet_id }).take(100)
+    @client.search(
+      search_word,
+      {
+        tweet_mode: 'extended',
+        result_type: 'recent',
+        count: 100,
+        # since_id: latest_tweet_id
+      }
+    ).take(100)
   end
 
   def mazu_upsert_users(tweet_objects, search_word: nil, user_name: nil)
@@ -45,14 +46,32 @@ class InsertTweet
       Upsert.batch(c, :users) do |upsert|
         # TODO: ↓長いので外に出す
         tweet_objects.each do |tweet_object|
+
           user_object = tweet_object.user
 
+          # users のところ
           upsert.row(
             {
               user_number: user_object.id,
             },
             upsert_user_hash(user_object),
           )
+
+          # in_user_uriのところ
+          user_attrs = user_object.attrs
+          in_user_uri_object = user_attrs[:entities][:description][:urls]
+
+          unless in_user_uri_object.empty?
+            @bulk_insert_objects = []
+            in_user_uri_object.each do |in_user_uri|
+              @bulk_insert_objects << User.find_by(user_number: user_object.id).in_user_uris.new(
+                uri: in_user_uri[:url],
+                expanded_uri: in_user_uri[:expanded_url],
+                indices: in_user_uri[:indices].to_s, # 一意性確保のためなので、正規化は考えない
+              )
+            end
+            InUserUri.import @bulk_insert_objects
+          end
         end
       end
     end
@@ -93,8 +112,8 @@ class InsertTweet
 
           # hashtags
           if tweet_object.hashtags?
+            @bulk_insert_objects = []
             tweet_object.hashtags.each do |hashtag|
-              @bulk_insert_objects = []
               @bulk_insert_objects << Tweet.find_by(tweet_number: tweet_object.id).hashtags.new(
                 name: hashtag.text,
                 indices: hashtag.indices.to_s, # 一意性確保のためなので、正規化は考えない
@@ -110,9 +129,9 @@ class InsertTweet
 
           # has_uris
           if tweet_object.uris?
+            @bulk_insert_objects = []
             tweet_object.uris.each do |uri|
-              @bulk_insert_objects = []
-              @bulk_insert_objects << Tweet.find_by(tweet_number: tweet_object.id).in_tweet_uris.create(
+              @bulk_insert_objects << Tweet.find_by(tweet_number: tweet_object.id).in_tweet_uris.new(
                 uri: uri.expanded_url.to_s,
                 indices: uri.indices.to_s, # 一意性確保のためなので、正規化は考えない
               )
@@ -122,15 +141,15 @@ class InsertTweet
 
           # has_media
           if tweet_object.media?
+            @bulk_insert_objects = []
             tweet_object.media.each do |medium|
-              @bulk_insert_objects = []
 
               # TODO: 切り出し
               if medium.type == 'photo'
                 @thumbnail_uri = "#{medium.media_uri_https.to_s}:thumb"
               end
 
-              @bulk_insert_objects << Tweet.find_by(tweet_number: tweet_object.id).media.create(
+              @bulk_insert_objects << Tweet.find_by(tweet_number: tweet_object.id).media.new(
                 medium_own_id: medium.id,
                 uri: medium.media_uri_https.to_s,
                 thumbnail_uri: @thumbnail_uri,
@@ -182,7 +201,7 @@ class InsertTweet
       screen_name: kill_nil(user_object.screen_name),
       name: kill_nil(user_object.name),
       description: kill_nil(user_object.description, default_value: 'description is dead'),
-      uri: kill_nil(user_object.uri.to_s), # to_s は nil 判定できないような……
+      uri: kill_nil(user_object.uri.to_s), # to_s は nil 判定できないような……その一段上で判別する ?メソッド
       uri_t_co: kill_nil(user_object.attrs[:url], default_value: 't.co.is.dead'), # 場合によってnilになる……
       tweet_count: kill_nil(user_object.statuses_count),
       profile_banner_uri: kill_nil(user_object.profile_banner_uri_https('1500x500').to_s),
@@ -193,7 +212,7 @@ class InsertTweet
       listed: kill_nil(user_object.listed_count),
       language: kill_nil(user_object.lang),
       location: kill_nil(user_object.location, default_value: 'location is dead'),
-      website: kill_nil(user_object.connections, default_value: 'Web'),
+      website: kill_nil(user_object.website.to_s, default_value: 'Web'),
       bg_color: kill_nil(user_object.profile_background_color),
       link_color: kill_nil(user_object.profile_link_color),
       border_color: kill_nil(user_object.profile_sidebar_border_color),
@@ -205,32 +224,33 @@ class InsertTweet
       connections: kill_nil(user_object.connections, default_value: 'AAA'),
       email: kill_nil(user_object.email, default_value: 'BBB'),
 
-      created_at: Time.now.utc, # created_at は UPDATE されないようだ（うまくできてるが、ちゃんとドキュメントを読んで確信を得る）
-      updated_at: Time.now.utc, # updated_at は UPSERT の datetime に更新される
+      created_at: Time.now.utc,
+      updated_at: Time.now.utc,
     }
   end
-
-  def upsert
-
-    # user_attrs = user
-
-    user_id_list.each do |user_id_array_as_max_request|
-      user_objects = users(user_id_array_as_max_request)
-
-      ActiveRecord::Base.connection_pool.with_connection do |c|
-        Upsert.batch(c, :users) do |upsert|
-          user_objects.each do |user_object|
-            upsert.row(
-              {
-                user_number: user_object.id, # INSERTをする際にここで指定されたカラムがすでに存在するならUPSERT扱いになる
-              },
-              upsert_user_hash(user_object),
-            )
-          end
-        end
-      end
-
-      @message = 'FOOBAR'
-    end
-  end
 end
+
+#   def upsert
+#
+#     # user_attrs = user
+#
+#     user_id_list.each do |user_id_array_as_max_request|
+#       user_objects = users(user_id_array_as_max_request)
+#
+#       ActiveRecord::Base.connection_pool.with_connection do |c|
+#         Upsert.batch(c, :users) do |upsert|
+#           user_objects.each do |user_object|
+#             upsert.row(
+#               {
+#                 user_number: user_object.id, # INSERTをする際にここで指定されたカラムがすでに存在するならUPSERT扱いになる
+#               },
+#               upsert_user_hash(user_object),
+#             )
+#           end
+#         end
+#       end
+#
+#       @message = 'FOOBAR'
+#     end
+#   end
+# end
