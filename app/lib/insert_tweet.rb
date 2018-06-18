@@ -27,6 +27,8 @@ class InsertTweet
     # TODO: exception 対策（初回取得時）
     # TODO: 検索以外の手段での取得にも対応する（特定ユーザタイムライン、自分のタイムライン）
     # TODO: since_id や max_id を手動で設定（フォーム）
+
+    # TODO: はじめての検索ワードだったときに例外を吐いてしまう
     latest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number DESC').first[:tweet_number].to_s
     # oldest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number ASC').first[:tweet_number].to_s
 
