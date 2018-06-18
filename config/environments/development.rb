@@ -62,4 +62,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   BetterErrors::Middleware.allow_ip! '133.130.100.0/24'
+  BetterErrors::Middleware.allow_ip! '192.168.0.0/16'
 end
