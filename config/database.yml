@@ -1,21 +1,21 @@
 default: &default
-  adapter: <%= Rails.application.credentials.mysql[:default][:adapter] %>
+  adapter: <%= Rails.application.credentials.mysql_sub[:default][:adapter] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  encoding: <%= Rails.application.credentials.mysql[:default][:encoding] %>
+  encoding: <%= Rails.application.credentials.mysql_sub[:default][:encoding] %>
 
 development:
   <<: *default
-  host: <%= Rails.application.credentials.mysql[:development][:host] %>
-  port: <%= Rails.application.credentials.mysql[:development][:port] %>
-  username: <%= Rails.application.credentials.mysql[:development][:username] %>
-  password: <%= Rails.application.credentials.mysql[:development][:password] %>
-  database: <%= Rails.application.credentials.mysql[:development][:database] %>
+  host: <%= Rails.application.credentials.mysql_sub[:development][:host] %>
+  port: <%= Rails.application.credentials.mysql_sub[:development][:port] %>
+  username: <%= Rails.application.credentials.mysql_sub[:development][:username] %>
+  password: <%= Rails.application.credentials.mysql_sub[:development][:password] %>
+  database: <%= Rails.application.credentials.mysql_sub[:development][:database] %>
 
 test:
   <<: *default
-  database: sosenkyo_2018_test
+  database: gss48_test
 
 production:
   <<: *default
-  database: sosenkyo_2018_production
+  database: gss48_production

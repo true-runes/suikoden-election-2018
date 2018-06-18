@@ -80,10 +80,10 @@ ActiveRecord::Schema.define(version: 2018_06_17_081932) do
     t.string "in_reply_to_status_id", default: "NO STATUS ID", null: false
     t.string "in_reply_to_screen_name", default: "NO SCREEN NAME", null: false
     t.integer "favorite_count", default: -1, null: false
-    t.string "text", limit: 320, default: "NOTHING", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "text", limit: 320, default: "NOTHING", null: false
     t.bigint "search_word_id"
     t.index ["deleted_at"], name: "index_tweets_on_deleted_at"
     t.index ["search_word_id"], name: "index_tweets_on_search_word_id"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_081932) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "screen_name", default: "", null: false
     t.string "name", default: "", null: false
-    t.string "user_number", null: false
+    t.string "user_number", default: "", null: false
     t.string "description", default: "", null: false
     t.string "uri", default: "", null: false
     t.string "uri_t_co", default: "UNKNOWN", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_081932) do
     t.string "text_color", default: "", null: false
     t.string "time_zone", default: "", null: false
     t.string "utc_offset", default: "", null: false
-    t.datetime "account_created_at", default: "1980-01-01 12:00:00", null: false
+    t.datetime "account_created_at", default: "1980-01-01 03:00:00", null: false
     t.string "connections", default: "", null: false
     t.string "email", default: "", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
