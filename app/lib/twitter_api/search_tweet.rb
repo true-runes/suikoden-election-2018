@@ -24,7 +24,7 @@ class TwitterApi::SearchTweet
     # TODO: 汚い……
     if SearchWord.where(word: search_word).first.nil?
       return false
-    elsif SearchWord.where(word: search_word).first.tweets.nil?
+    elsif SearchWord.where(word: search_word).first.tweets.empty?
       return false
     else
       true
@@ -32,11 +32,11 @@ class TwitterApi::SearchTweet
   end
 
   def latest_tweet_number(search_word:)
-    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order('tweet_number DESC').first[:tweet_number].to_s : 0
+    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :desc).first[:tweet_number].to_s : 0
   end
 
   def oldest_tweet_number(search_word:)
-    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order('tweet_number ASC').first[:tweet_number].to_s : 0
+    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :asc).first[:tweet_number].to_s : 0
   end
 
   # HACK: 検索以外の手段での取得にも対応する（特定ユーザタイムライン、自分のタイムライン）
