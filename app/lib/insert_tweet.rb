@@ -1,48 +1,4 @@
 class InsertTweet
-  def initialize
-    @client = Twitter::REST::Client.new do |config|
-      # 幻想水滸伝ってゲームが狂気的に面白いらしいよ？ (@tmy_development)
-      config.consumer_key        = Rails.application.credentials.twitter_api[:consumer_key]
-      config.consumer_secret     = Rails.application.credentials.twitter_api[:consumer_secret]
-      config.access_token        = Rails.application.credentials.twitter_api[:access_token]
-      config.access_token_secret = Rails.application.credentials.twitter_api[:access_token_secret]
-    end
-  end
-
-  def search_tweet(search_word:, options: nil) # options
-    ActiveRecord::Base.connection_pool.with_connection do |c|
-      Upsert.batch(c, :search_words) do |upsert|
-        upsert.row(
-          {
-            word: search_word,
-          },
-          {
-            created_at: Time.now.utc,
-            updated_at: Time.now.utc,
-          },
-        )
-      end
-    end
-
-    # TODO: exception 対策（初回取得時）
-    # TODO: 検索以外の手段での取得にも対応する（特定ユーザタイムライン、自分のタイムライン）
-    # TODO: since_id や max_id を手動で設定（フォーム）
-
-    # TODO: はじめての検索ワードだったときに例外を吐いてしまう
-    latest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number DESC').first[:tweet_number].to_s
-    # oldest_tweet_id = SearchWord.where(word: search_word).first.tweets.order('tweet_number ASC').first[:tweet_number].to_s
-
-    @client.search(
-      search_word,
-      {
-        tweet_mode: 'extended',
-        result_type: 'recent',
-        count: 100,
-        # since_id: latest_tweet_id
-      }
-    ).take(100)
-  end
-
   def mazu_upsert_users(tweet_objects, search_word: nil, user_name: nil)
     ActiveRecord::Base.connection_pool.with_connection do |c|
       Upsert.batch(c, :users) do |upsert|
