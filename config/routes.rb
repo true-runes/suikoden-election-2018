@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root 'hello#index'
+  root 'pages#index'
 
   get '/hello/index'
   get '/goodbye', to: 'application#goodbye'
