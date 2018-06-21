@@ -1,7 +1,7 @@
 require 'upsert/active_record_upsert'
 
 class HelloController < ApplicationController
-  include Collection
+  # include Collection
 
   def kiq
     HardWorker.perform_async
@@ -169,6 +169,6 @@ class HelloController < ApplicationController
 
     @headers = ['screen_name', 'tweet_text', 'tweet_id' ,'created_at']
     @return_value = rows
-    @tweets = tweets_by_hashtag
+    # @tweets = tweets_by_hashtag
   end
 end
