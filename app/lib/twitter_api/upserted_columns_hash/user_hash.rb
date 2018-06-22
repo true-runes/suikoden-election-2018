@@ -1,9 +1,5 @@
 class TwitterApi::UpsertedColumnsHash::UserHash
-  include KillNil
-
-  def judge_nil
-    # TODO: {} で返して merge する
-  end
+  include TwitterApi::UpsertedColumnsHash::KillNil
 
   def all_columns(user_object)
     # TODO: 切り出す

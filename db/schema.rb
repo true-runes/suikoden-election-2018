@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_081932) do
+ActiveRecord::Schema.define(version: 2018_06_22_045747) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_081932) do
     t.string "in_reply_to_status_id", default: "NO STATUS ID", null: false
     t.string "in_reply_to_screen_name", default: "NO SCREEN NAME", null: false
     t.integer "favorite_count", default: -1, null: false
-    t.string "text", limit: 320, default: "NOTHING", null: false
+    t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

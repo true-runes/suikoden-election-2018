@@ -12,7 +12,7 @@ class TwitterApi::SearchTweet
         tweet_mode: 'extended',
         result_type: 'recent',
         count: 100,
-        since_id: search_tweet.latest_tweet_number(search_word: search_word),
+        # since_id: search_tweet.latest_tweet_number(search_word: search_word),
         # max_id: search_tweet.oldest_tweet_number(search_word: search_word),
       }
     ).take(TAKE_TWEETS_NUMBER)

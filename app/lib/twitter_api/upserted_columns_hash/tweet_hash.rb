@@ -1,5 +1,5 @@
 class TwitterApi::UpsertedColumnsHash::TweetHash
-  include KillNil
+  include TwitterApi::UpsertedColumnsHash::KillNil
 
   def all_columns(tweet_object, search_word:)
     user_id = User.where(user_number: tweet_object.user.id).first.id
