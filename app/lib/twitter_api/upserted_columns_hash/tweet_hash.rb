@@ -1,11 +1,19 @@
 class TwitterApi::UpsertedColumnsHash::TweetHash
   include TwitterApi::UpsertedColumnsHash::KillNil
 
-  def all_columns(tweet_object, search_word:)
+  def all_columns(tweet_object, search_word: nil)
     user_id = User.where(user_number: tweet_object.user.id).first.id
 
-    # TODO: 検索経由ではないツイート取得の場合は？あとnil対策は？
-    search_word_id = SearchWord.where(word: search_word).first.id
+    # TODO: ちょっと分かりにくい
+    if search_word.nil?
+      search_word_id = SearchWord.where(word: '検索語なし').first.id # seedを忘れずにいれること（マジックワードなので危険みがある）
+    else
+      if SearchWord.where(word: search_word).blank?
+        search_word_id = SearchWord.where(word: '検索語なし').first.id
+      else
+        search_word_id = SearchWord.where(word: search_word).first.id
+      end
+    end
 
     {
       user_id: user_id,

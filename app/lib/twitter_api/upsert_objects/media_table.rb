@@ -5,10 +5,8 @@ class TwitterApi::UpsertObjects::MediaTable
         @bulk_upsert_objects = []
 
         tweet_object.media.each do |medium|
-          # TODO: mp4, gif...
-          if medium.type == 'photo'
-            @thumbnail_uri = "#{medium.media_uri_https.to_s}:thumb"
-          end
+          # TODO: 動画URIは全く別のカラムを用意する必要がある
+          @thumbnail_uri = "#{medium.media_uri_https.to_s}:thumb"
 
           @bulk_upsert_objects << Tweet.find_by(tweet_number: tweet_object.id).media.new(
             medium_own_id: medium.id,
@@ -18,7 +16,7 @@ class TwitterApi::UpsertObjects::MediaTable
           )
         end
 
-        Medium.import @bulk_upsert_objects
+        Medium.import @bulk_upsert_objects, on_duplicate_key_update: [:deleted_at, :updated_at]
       end
     end
   end

@@ -11,7 +11,7 @@ class TwitterApi::UpsertObjects::HashtagsTable
           )
         end
 
-        Hashtag.import @bulk_upsert_objects
+        Hashtag.import @bulk_upsert_objects, on_duplicate_key_update: [:updated_at]
       end
     end
   end

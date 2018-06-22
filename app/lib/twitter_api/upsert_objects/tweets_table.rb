@@ -1,5 +1,5 @@
 class TwitterApi::UpsertObjects::TweetsTable
-  def self.upsert(tweet_objects, search_word:)
+  def self.upsert(tweet_objects, search_word: nil)
     ActiveRecord::Base.connection_pool.with_connection do |c|
       Upsert.batch(c, :tweets) do |upsert|
         tweet_objects.each do |tweet_object|

@@ -2,15 +2,11 @@ class TwitterApi::SearchTweet
   extend TwitterApi::Client
   TAKE_TWEETS_NUMBER = 100
 
-  # TODO: since_id や max_id を柔軟に変更できるように options をマージする
   def self.search(search_word:, options: nil)
-    search_tweet = TwitterApi::SearchTweet.new
     default_options = {
       tweet_mode: 'extended',
       result_type: 'recent',
       count: 100,
-      # since_id: search_tweet.latest_tweet_number(search_word: search_word),
-      # max_id: search_tweet.oldest_tweet_number(search_word: search_word),
     }
     options = default_options.update(options)
 
