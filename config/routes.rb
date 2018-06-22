@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   resources :pages do
     collection do
       get :how_to_vote
-      get :check_vote
+      get :thanks
     end
   end
+
+  resources :votes, only: [:index, :create]
+  resources :check_vote, only: [:index, :create]
 
   # get '/hello/index'
   # get '/goodbye', to: 'application#goodbye'
