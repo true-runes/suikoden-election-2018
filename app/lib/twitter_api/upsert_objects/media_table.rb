@@ -16,7 +16,7 @@ class TwitterApi::UpsertObjects::MediaTable
           )
         end
 
-        Medium.import @bulk_upsert_objects, on_duplicate_key_update: [:deleted_at, :updated_at]
+        Medium.import @bulk_upsert_objects, on_duplicate_key_update: [:updated_at]
       end
     end
   end
