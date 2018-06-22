@@ -1,8 +1,22 @@
 .container
   .row
     .col.s12
-      h4
-        = '準備中……'
-    .col.s12
       h5
-        = '🙇🏻もう少々お待ちください🙇🏻'
+        = '投票チェック'
+      = form_tag('check_vote', methpd: :get, multipart: true, class: 'file-field input-field') do
+        .col.s12
+          = text_field_tag :submit_string, 'スクリーンネームをどうぞ'
+        .col.s12
+          br
+          = button_tag type: :submit, class: 'btn waves-effect waves-light', id: 'check-ga-conversion-by-tweet' do
+            = '調べる！'
+            = content_tag :i, 'search', class: "material-icons right"
+
+
+
+
+      / = form_with(url: '/check_vote', local: true, method: :get) do |f|
+      /   .input-field
+      /     = f.text_field(:q)
+      /     .btn
+      /       = f.submit('検索')
