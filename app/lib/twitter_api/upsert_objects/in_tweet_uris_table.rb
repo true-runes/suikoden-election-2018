@@ -11,7 +11,7 @@ class TwitterApi::UpsertObjects::InTweetUrisTable
           )
         end
 
-        InTweetUri.import @bulk_upsert_objects
+        InTweetUri.import @bulk_upsert_objects, on_duplicate_key_update: [:updated_at]
       end
     end
   end
