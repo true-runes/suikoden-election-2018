@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+    title 幻水総選挙2018
+    = favicon_link_tag
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    / TODO: Materialize が仕方なく使っているからで本来 jQuery は使うべきではない
+    script src="https://code.jquery.com/jquery-2.1.1.min.js"
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+
+    link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+
+  body data-controller="#{params[:controller]}"
+    = render 'shared/navbar'
+    = yield
+    = render 'shared/footer'
