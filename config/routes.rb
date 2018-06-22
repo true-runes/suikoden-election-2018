@@ -1,17 +1,23 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
   root 'pages#home'
 
-  get '/hello/index'
-  get '/goodbye', to: 'application#goodbye'
-  get '/upsert', to: 'hello#upsert'
-  get '/debug', to: 'hello#debug'
-  get '/insert', to: 'hello#insert'
-  get '/kiq', to: 'hello#kiq'
-  get '/practice', to: 'practice#insert_user'
+  resources :pages do
+    collection do
+      get :how_to_vote
+      get :check_vote
+    end
+  end
 
-  resources :ajax
+  # get '/hello/index'
+  # get '/goodbye', to: 'application#goodbye'
+  # get '/upsert', to: 'hello#upsert'
+  # get '/debug', to: 'hello#debug'
+  # get '/insert', to: 'hello#insert'
+  # get '/kiq', to: 'hello#kiq'
+  # get '/practice', to: 'practice#insert_user'
 
-  mount Sidekiq::Web => '/sidekiq'
+  # resources :ajax
+
+  # require 'sidekiq/web'
+  # mount Sidekiq::Web => '/sidekiq'
 end
