@@ -24,8 +24,6 @@ rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
 set :output, "#{Rails.root}/log/whenever.log"
 
-
-
-# every 1.minute do
-#   runner 'CollectTweet::Gensui.suikoden'
-# end
+every 1.minute do
+  runner "TwitterApi::Tasks::SearchAndUpsertTweets.execute(search_word: '#ネコ')"
+end
