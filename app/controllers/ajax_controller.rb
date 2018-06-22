@@ -1,3 +1,4 @@
+# TODO: あとで消すやつ
 class AjaxController < ApplicationController
   def index
     @message = "Hello, Ajax World!"

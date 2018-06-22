@@ -1,27 +1,31 @@
-class TwitterApi::SearchTweet
-  extend TwitterApi::Client
+# USAGE
+# TwitterApi::SearchTweet.insert(TwitterApi::SearchTweet.search(search_word: '#幻水総選挙2018'), search_word: '#幻水総選挙2018')
 
-  # 昨年の実績から、毎分100ツイートを超えることは考えにくい
+class TwitterApi::SearchTweet
+  include TwitterApi::Client
   TAKE_TWEETS_NUMBER = 100
 
-  def self.insert(search_word:, options: nil)
+  # TODO: search_word は冗長なので削除する方向でリファクタリングする
+  def self.insert(tweet_objects, search_word:)
     ActiveRecord::Base.connection_pool.with_connection do |c|
       Upsert.batch(c, :search_words) do |upsert|
-        upsert.row(
-          {
-            word: search_word,
-          },
-          {
-            created_at: Time.now,
-            updated_at: Time.now,
-          },
-        )
+        tweet_objects.each do |tweet_object|
+          upsert.row(
+            {
+              word: search_word,
+            },
+            {
+              created_at: Time.now,
+              updated_at: Time.now,
+            },
+          )
+        end
       end
     end
   end
 
-  def tweet_number_exists?(search_word:)
-    # TODO: 汚い……
+  def search_word_tweet_exists?(search_word:)
+    # TODO: 汚い
     if SearchWord.where(word: search_word).first.nil?
       return false
     elsif SearchWord.where(word: search_word).first.tweets.empty?
@@ -32,26 +36,26 @@ class TwitterApi::SearchTweet
   end
 
   def latest_tweet_number(search_word:)
-    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :desc).first[:tweet_number].to_s : 0
+    search_word_tweet_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :desc).first[:tweet_number].to_s : 0
   end
 
   def oldest_tweet_number(search_word:)
-    tweet_number_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :asc).first[:tweet_number].to_s : 0
+    search_word_tweet_exists?(search_word: search_word) ? SearchWord.where(word: search_word).first.tweets.order(tweet_number: :asc).first[:tweet_number].to_s : 0
   end
 
-  # HACK: 検索以外の手段での取得にも対応する（特定ユーザタイムライン、自分のタイムライン）
-  # HACK: since_id や max_id を手動で設定（フォーム）
+  # TODO: since_id や max_id を柔軟に変更できるように options をマージする
   def self.search(search_word:, options: nil)
     search_tweet = TwitterApi::SearchTweet.new
 
-    twitter_api_client.search(
+    search_tweet.twitter_api_client.search(
       search_word,
       {
         tweet_mode: 'extended',
         result_type: 'recent',
         count: 100,
         since_id: search_tweet.latest_tweet_number(search_word: search_word),
+        # max_id: search_tweet.oldest_tweet_number(search_word: search_word),
       }
-    ).take(100)
+    ).take(TAKE_TWEETS_NUMBER)
   end
 end
