@@ -1,0 +1,48 @@
+class TwitterApi::UpsertedColumnsHash::UserHash
+  include KillNil
+
+  def judge_nil
+    # TODO: {} で返して merge する
+  end
+
+  def all_columns(user_object)
+    # TODO: 切り出す
+    if user_object.uri.nil?
+      uri = 'NOTHING'
+    else
+      uri = user_object.uri.to_s
+    end
+
+    # TODO: ハードコードは切り出す
+    {
+      screen_name: kill_nil(user_object.screen_name),
+      name: kill_nil(user_object.name),
+      description: kill_nil(user_object.description, default_value: 'NOTHING'),
+      uri: kill_nil(uri),
+      uri_t_co: kill_nil(user_object.attrs[:url], default_value: 'NOTHING'), # 場合によってnilになる……
+      tweet_count: kill_nil(user_object.statuses_count),
+      profile_banner_uri: kill_nil(user_object.profile_banner_uri_https('1500x500').to_s),
+      profile_image_uri: kill_nil(user_object.profile_image_uri_https('400x400').to_s),
+      favorite: kill_nil(user_object.favourites_count),
+      followers: kill_nil(user_object.followers_count),
+      followee: kill_nil(user_object.friends_count),
+      listed: kill_nil(user_object.listed_count),
+      language: kill_nil(user_object.lang),
+      location: kill_nil(user_object.location, default_value: 'NOTHING'),
+      website: kill_nil(user_object.website.to_s, default_value: 'NOTHING'),
+      bg_color: kill_nil(user_object.profile_background_color),
+      link_color: kill_nil(user_object.profile_link_color),
+      border_color: kill_nil(user_object.profile_sidebar_border_color),
+      side_color: kill_nil(user_object.profile_sidebar_fill_color),
+      text_color: kill_nil(user_object.profile_text_color),
+      time_zone: kill_nil(user_object.time_zone, default_value: 'NOTHING'),
+      utc_offset: kill_nil(user_object.utc_offset, default_value: 'NOTHING'),
+      account_created_at: kill_nil(user_object.created_at),
+      connections: kill_nil(user_object.connections, default_value: 'NOTHING'),
+      email: kill_nil(user_object.email, default_value: 'NOTHING'),
+
+      created_at: Time.now,
+      updated_at: Time.now,
+    }
+  end
+end

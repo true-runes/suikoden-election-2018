@@ -44,6 +44,16 @@ class User < ApplicationRecord
   validates :screen_name, presence: true
   validates :user_number, uniqueness: true, presence: true
 
+  # TODO: 定期的に情報更新するために、対象の user_id を取得しようとしている
+  # def user_id_list
+  #   max_users_per_request = 100
+  #   # Rate Limits に注意……
+  #   user_ids_str = User.order(user_number: :desc).pluck(:user_number)
+  #   user_ids_int_array = user_ids_str.map { |user_id_str| user_id_str.to_i }
+  #
+  #   divided_array = user_ids_int_array.each_slice(max_users_per_request).to_a
+  # end
+
   private
   def user_model_done
     @done_message = "UPSERT IS OK!"
