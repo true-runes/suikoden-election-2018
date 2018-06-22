@@ -7,7 +7,11 @@ default: &default
 
 test:
   <<: *default
-  database: gss48_test
+  host: <%= Rails.application.credentials.mysql[:test][:host] %>
+  port: <%= Rails.application.credentials.mysql[:test][:port] %>
+  username: <%= Rails.application.credentials.mysql[:test][:username] %>
+  password: <%= Rails.application.credentials.mysql[:test][:password] %>
+  database: <%= Rails.application.credentials.mysql[:test][:database] %>
 
 development:
   <<: *default
