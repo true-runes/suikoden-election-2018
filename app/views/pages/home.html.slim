@@ -8,7 +8,13 @@
         = '投票開始まで あと'
       h4
         .center-align.red-text#countdown-timer
-    / 現在の投票数 時間ごと など by Ajax
+    .col.s12
+      h4.center-align
+        = '現在の投票数'
+      h4.center-align
+        = @vote_number
+      #user-status
+        = 'rails'
   .divider
   .row
     .col.s12
