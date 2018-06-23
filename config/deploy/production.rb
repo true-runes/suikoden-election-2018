@@ -4,7 +4,7 @@ set :stage, :production
 set :branch, :master
 set :deploy_to, ENV["DEPLOY_DIR_FOR_PRODUCTION"]
 set :rails_env, 'production'
-server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_FOR_PRODUCTION"], roles: %w{web app db} # wheneverは無効化
+server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_FOR_PRODUCTION"], roles: %w{web app db batch}
 
 set :ssh_options, {
   port: ENV["DEPLOY_SERVER_PORT"],
