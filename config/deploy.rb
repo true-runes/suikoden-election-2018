@@ -7,6 +7,7 @@ set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets bundle)
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
+set :ndenv_node, '10.5.0'
 
 # master.key を初回時に手動で置かないと ERROR になる
 set :linked_files, ['config/master.key']
