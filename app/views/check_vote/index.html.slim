@@ -40,7 +40,7 @@
         ul.collection
           - @target_tweets.each do |tweet|
             li.collection-item.avatar
-              = image_tag @bigger_profile_image_uri, class: 'circle'
+              = link_to image_tag(@bigger_profile_image_uri, class: 'circle'), @user_uri
               span.title
                 = "#{@user_name} (@#{@screen_name}) / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
               br
