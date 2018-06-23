@@ -62,6 +62,5 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
 
     only_deleted_tweet_ids = Tweet.only_deleted.pluck(:id)
     Tweet.restore(only_deleted_tweet_ids)
-    end
   end
 end
