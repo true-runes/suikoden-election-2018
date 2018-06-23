@@ -2,8 +2,6 @@
   .row
     .col.s12
       h5
-        = @debug_value
-      h5
         = '投票チェック'
       = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
         = f.label(:screen_name_label, 'アカウント名を入れて下さい')
@@ -17,6 +15,8 @@
         = "screen_name: @#{@screen_name}"
       .col.s12
         = "user_name: #{@user_name}"
+      .col.s12
+        = "vote_number: #{@vote_number}"
       .col.s12
         - if @vote_number == 0
           = "ツイートなし"
