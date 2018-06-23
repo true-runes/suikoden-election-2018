@@ -124,7 +124,6 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-yarn'
 gem 'capistrano-sidekiq'
 gem 'capistrano-ndenv'
-gem 'capistrano-yarn'
 
 # Others
 gem 'faraday'
