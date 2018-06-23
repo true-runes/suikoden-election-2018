@@ -26,6 +26,7 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
     all_tweet_numbers = Tweet.new.tweet_numbers_of_valid_vote_tweets
     divided_tweet_numbers = all_tweet_numbers.each_slice(100).to_a # 要素は Integer
 
+    debug_result = []
     divided_tweet_numbers.each do |tweet_numbers|
       alive_tweet_objects = twitter_api_client.statuses(tweet_numbers)
 
@@ -34,9 +35,10 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
 
       # soft delete by paranoia
       not_alive_tweet_records = Tweet.where(tweet_number: not_alive_tweet_numbers)
+      debug_result << not_alive_tweet_records
     end
 
-    not_alive_tweet_records
+    debug_result
   end
 
   def self.execute_with_argument(all_tweet_numbers)
