@@ -11,11 +11,11 @@ class TwitterApi::UpsertedColumnsHash::UserHash
 
     # TODO: ハードコードは切り出す
     {
-      screen_name: kill_nil(user_object.screen_name),
-      name: kill_nil(user_object.name),
-      description: kill_nil(user_object.description, default_value: 'NOTHING'),
-      uri: kill_nil(uri),
-      uri_t_co: kill_nil(user_object.attrs[:url], default_value: 'NOTHING'), # 場合によってnilになる……
+      screen_name: kill_nil(user_object.screen_name.to_s),
+      name: kill_nil(user_object.name.to_s),
+      description: kill_nil(user_object.description.to_s, default_value: 'NOTHING'),
+      uri: kill_nil(uri.to_s),
+      uri_t_co: kill_nil(user_object.attrs[:url].to_s, default_value: 'NOTHING'), # 場合によってnilになる……
       tweet_count: kill_nil(user_object.statuses_count),
       profile_banner_uri: kill_nil(user_object.profile_banner_uri_https('1500x500').to_s),
       profile_image_uri: kill_nil(user_object.profile_image_uri_https('400x400').to_s),
