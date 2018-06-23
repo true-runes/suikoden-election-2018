@@ -54,6 +54,10 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
       not_alive_tweet_records.each do |record|
         record.destroy
       end
+
+      p alive_tweet_numbers
+      p not_alive_tweet_numbers
+      p not_alive_tweet_records
     end
   end
 end
