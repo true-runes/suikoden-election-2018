@@ -28,7 +28,7 @@
                   p
                     = '※チェックの対象となるタグは「#幻水総選挙2018」です。'
                   p
-                    = '※チェックができるのはツイート（呟き）での投票のみです。'
+                    = '※チェックができるのは「公開アカウント」の「ツイート（呟き）」での投票のみです。'
                   p
                     = '※投票が見つからなかった場合、集計に反映されない可能性があります。投票内容を書いて '
                     = link_to '@gensosenkyo', 'https://twitter.com/gensosenkyo', target: '_new'
@@ -42,7 +42,7 @@
             li.collection-item.avatar
               = image_tag @bigger_profile_image_uri, class: 'circle'
               span.title
-                = "#{@user_name} (@#{@screen_name}) #{tweet.tweeted_at}"
+                = "#{@user_name} (@#{@screen_name}) [#{tweet.tweeted_at}]"
               br
               br
               p
