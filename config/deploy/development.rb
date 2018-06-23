@@ -2,14 +2,14 @@ require 'dotenv/load'
 
 set :stage, :development
 set :branch, :development
-set :deploy_to, '/home/deploy_gss_2018_development/deploy/suikoden-election-2018' # ここも隠したい
+set :deploy_to, ENV["DEPLOY_DIR_FOR_DEV"]
 set :rails_env, 'development'
-server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_DEV"], roles: %w{web app db} # wheneverは無効化
+server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_FOR_DEV"], roles: %w{web app db} # wheneverは無効化
 
 set :ssh_options, {
   port: ENV["DEPLOY_SERVER_PORT"],
   forward_agent: true,
-  keys: [File.expand_path(ENV["DEPLOY_KEYS_DEV"])],
+  keys: [File.expand_path(ENV["DEPLOY_KEYS_FOR_DEV"])],
 }
 
 set :whenever_roles, :batch

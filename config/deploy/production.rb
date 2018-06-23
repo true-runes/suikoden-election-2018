@@ -1,13 +1,15 @@
+require 'dotenv/load'
+
 set :stage, :production
 set :branch, :master
-set :deploy_to, '/home/deploy_gss_2018_production/deploy/suikoden-election-2018' # ここも隠したい
+set :deploy_to, ENV["DEPLOY_DIR_FOR_PRODUCTION"]
 set :rails_env, 'production'
-server Rails.application.credentials.deploy[:production][:server], user: Rails.application.credentials.deploy[:production][:user], roles: %w{web app db batch}
+server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_FOR_PRODUCTION"], roles: %w{web app db} # wheneverは無効化
 
 set :ssh_options, {
-  port: Rails.application.credentials.deploy[:production][:port],
+  port: ENV["DEPLOY_SERVER_PORT"],
   forward_agent: true,
-  keys: [File.expand_path(Rails.application.credentials.deploy[:production][:keys])],
+  keys: [File.expand_path(ENV["DEPLOY_KEYS_FOR_PRODUCTION"])],
 }
 
 set :whenever_roles, :batch

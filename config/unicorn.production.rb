@@ -1,5 +1,5 @@
 worker_processes 2
-listen 61085
+listen 11080
 timeout 30
 pid 'tmp/pids/unicorn.development.pid'
 stderr_path 'log/unicorn_development_stderr.log'
@@ -20,10 +20,6 @@ before_fork do |server, worker|
     end
   end
 end
-
-# before_exec do |server|
-#   ENV['BUNDLE_GEMFILE'] = "Gemfile"
-# end
 
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
