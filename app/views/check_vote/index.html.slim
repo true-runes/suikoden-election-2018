@@ -48,7 +48,8 @@
               p
                 = "#{tweet.text}"
               .secondary-content
-                = link_to 'ツイートへ', "#{tweet.uri}"
-    .center-align
-      = link_to 'トップへ戻る', root_path
-
+                = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}"
+    .col.s12
+      .center-align
+        br
+        = link_to 'トップへ戻る', root_path
