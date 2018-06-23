@@ -20,7 +20,7 @@
       .col.s12
         - if @vote_number == 0
           h6
-            = "@#{@screen_name} のアカウントによる投票は見つかりませんでした。"
+            = "@#{@screen_name} による投票は見つかりませんでした。"
           .row
             .col.s12
               .card-panel.red.lighten-1
@@ -45,8 +45,8 @@
                 = "#{@user_name} (@#{@screen_name}) / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
               br
               br
-              p
-                = "#{simple_format(normalize_tweet_text(tweet.text))}"
+              p.pre-tag-with-font
+                = "#{normalize_tweet_text(tweet.text)}"
               .secondary-content
                 = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}", target: '_new'
     .col.s12
