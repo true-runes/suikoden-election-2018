@@ -8,9 +8,6 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 set :ndenv_type, :user
 set :ndenv_node, '10.5.0'
-set :ndenv_prefix, "NDENV_ROOT=#{fetch(:ndenv_path)} NDENV_VERSION=#{fetch(:ndenv_node)} #{fetch(:ndenv_path)}/bin/ndenv exec"
-set :ndenv_map_bins, %w{npm node} # default
-set :ndenv_roles, :all # default value
 
 # set :yarn_target_path, -> { release_path.join('bin') } #=> なぜ /usr/bin/env になるのだ……
 # 00:05 yarn:install
