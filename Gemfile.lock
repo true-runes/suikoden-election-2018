@@ -306,6 +306,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kgio (2.11.2)
+    libv8 (6.3.292.48.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -341,6 +342,8 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
+    mini_racer (0.1.15)
+      libv8 (~> 6.3)
     minitest (5.11.3)
     monetize (1.7.0)
       money (~> 6.9)
@@ -719,6 +722,7 @@ DEPENDENCIES
   kaminari
   listen
   mechanize
+  mini_racer
   money-rails
   mysql2
   paranoia
