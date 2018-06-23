@@ -21,6 +21,6 @@
         - if @vote_number == 0
           = "ツイートなし"
         - else
-          = @target_tweets.each.with_index(1) do |tweet, i|
+          - @target_tweets.each.with_index(1) do |tweet, i|
             = "#{i}: #{tweet.text}"
             = "-------------------"
