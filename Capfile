@@ -5,12 +5,13 @@ install_plugin Capistrano::SCM::Git
 
 require "capistrano/rails"
 require "capistrano/rails/console"
-require "capistrano/rbenv"
 require "capistrano3/unicorn"
-require 'capistrano/yarn'
 require 'capistrano/sidekiq'
-require 'whenever/capistrano'
+
+require "capistrano/rbenv"
 require 'capistrano/ndenv'
 require 'capistrano/yarn'
+
+require 'whenever/capistrano'
 
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
