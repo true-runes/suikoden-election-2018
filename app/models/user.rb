@@ -55,6 +55,7 @@ class User < ApplicationRecord
     User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).first
   end
 
+  # TODO: メソッド名なんか違う
   def user_name_in_db(screen_name)
     User.where(screen_name: screen_name).first
   end

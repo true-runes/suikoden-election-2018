@@ -1,5 +1,11 @@
 .container
   .row
+    - if Rails.env == 'development'
+      ul.collection
+        li.collection-item.red
+          = 'こちらはテスト用サイトのため、正しいチェックができません。'
+          = link_to '本番サイト', 'https://election.suikoden.info/check_vote'
+          = 'をご利用下さい。'
     / TODO: ファットコントローラ（アンチパターン）
     - if @screen_name.blank?
       .col.s12
