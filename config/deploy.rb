@@ -8,6 +8,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :bundle_without, 'production' # Better Errors 対策
 
 # master.key を初回時に手動で置かないと ERROR になる
 set :linked_files, ['config/master.key']
