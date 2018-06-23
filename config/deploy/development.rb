@@ -2,7 +2,7 @@ set :stage, :development
 set :branch, :development
 set :deploy_to, '/home/deploy_gss_2018_development/deploy/suikoden-election-2018' # ここも隠したい
 set :rails_env, 'development'
-Rails.application.credentials.deploy[:development][:server], user: Rails.application.credentials.deploy[:development][:user], roles: %w{web app db batch}
+server Rails.application.credentials.deploy[:development][:server], user: Rails.application.credentials.deploy[:development][:user], roles: %w{web app db batch}
 
 set :ssh_options, {
   port: Rails.application.credentials.deploy[:development][:port],
