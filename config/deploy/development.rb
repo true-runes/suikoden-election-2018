@@ -1,5 +1,5 @@
-# require 'dotenv'
-# Dotenv.load
+require 'dotenv'
+Dotenv.load
 
 set :stage, :development
 set :branch, :development
