@@ -14,6 +14,6 @@ class Tweet < ApplicationRecord
   end
 
   def tweet_numbers_of_valid_vote_tweets
-    valid_vote_tweets.map { |tweet| tweet.tweet_number }
+    valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i } # TODO: to_i は全てのロジックで共通にしたほうがいい
   end
 end
