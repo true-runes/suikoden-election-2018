@@ -63,6 +63,7 @@ gem 'brakeman' # Railsのセキュリティチェックを行う
 gem 'global' # config/global/ に設定ファイルを書くためのgem https://doruby.jp/users/maya/entries/%E3%80%90Rails%E3%80%91gem--global-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%E3%80%90global%E3%80%91
 # gem 'pundit' # ユーザにより動作を分けたいときに便利なgem
 gem 'devise'
+gem 'therubyracer', platforms: :ruby
 
 # Model
 gem 'sqlite3'
