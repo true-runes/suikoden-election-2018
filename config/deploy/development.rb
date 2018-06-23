@@ -5,7 +5,7 @@ set :branch, :development
 set :deploy_to, ENV["DEPLOY_DIR_FOR_DEV"]
 set :rails_env, 'development'
 server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_FOR_DEV"], roles: %w{web app db} # wheneverは無効化
-set :linked_dirs, %w(log bundle)
+set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets bundle)
 
 set :ssh_options, {
   port: ENV["DEPLOY_SERVER_PORT"],
