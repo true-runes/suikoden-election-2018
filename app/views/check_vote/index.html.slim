@@ -42,13 +42,13 @@
             li.collection-item.avatar
               = image_tag @bigger_profile_image_uri, class: 'circle'
               span.title
-                = "#{@user_name} (@#{@screen_name}) [#{tweet.tweeted_at}]"
+                = "#{@user_name} (@#{@screen_name}) [#{time_type_to_japanese_datetime_str(tweet.tweeted_at)}]"
               br
               br
               p
                 = "#{tweet.text}"
               .secondary-content
-                = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}"
+                = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}", target: '_new'
     .col.s12
       .center-align
         br
