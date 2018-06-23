@@ -21,7 +21,7 @@ class CheckVoteController < ApplicationController
         @bigger_profile_image_uri = bigger_profile_image_uri(user_name_in_db.profile_image_uri)
       end
 
-      @user_uri = user_object.uri
+      @user_uri = user_name_in_db.uri
     end
   end
 
