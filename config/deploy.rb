@@ -8,7 +8,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 set :ndenv_type, :user
 set :ndenv_node, '10.5.0'
-# set :yarn_target_path, -> { release_path.join('bin') } #=> なぜ /usr/bin/env になるのだ……
+set :yarn_target_path, -> { release_path.join('bin') } #=> なぜ /usr/bin/env になるのだ……
 # 00:05 yarn:install
 #       01 yarn install --production
 #       01 /usr/bin/env: `yarn': そのようなファイルやディレクトリ⿮..
