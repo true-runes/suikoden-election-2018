@@ -8,7 +8,7 @@
       = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
         = f.label(:screen_name_label, 'アカウント名を入れて下さい')
         = f.text_field(:screen_name)
-        = f.submit('チェックする', name: nil)
+        = f.submit('チェックする！', name: nil)
 
     - unless @screen_name.empty?
       .col.s12
