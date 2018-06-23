@@ -21,6 +21,12 @@ before_fork do |server, worker|
   end
 end
 
+# 再起動失敗対策
+# https://qiita.com/zaru/items/ddbb0c029d6c5760dc54
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = '/current/Gemfile'
+end
+
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
