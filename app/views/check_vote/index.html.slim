@@ -10,7 +10,7 @@
           = 'TwitterのIDを入れて下さい'
         = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
           = f.text_field(:screen_name, placeholder: 'gensosenkyo')
-          = button_tag type: 'submit', class: 'btn waves-effect waves-light' do
+          = button_tag type: 'submit', class: 'btn waves-effect waves-light', name: nil do
             = 'チェックする！'
             = content_tag :i, 'search', class: "material-icons right"
     - else
