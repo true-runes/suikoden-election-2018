@@ -57,7 +57,7 @@ gem 'active_model_serializers' # Web API
 
 # System
 gem 'foreman'
-gem 'turbolinks'
+# gem 'turbolinks' # 慎重に使うこと
 gem 'bundler-audit' # gemの脆弱性をチェックする
 gem 'brakeman' # Railsのセキュリティチェックを行う
 gem 'global' # config/global/ に設定ファイルを書くためのgem https://doruby.jp/users/maya/entries/%E3%80%90Rails%E3%80%91gem--global-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%E3%80%90global%E3%80%91
@@ -83,9 +83,8 @@ gem 'simple_form'
 gem 'uglifier' # UglifyJS2 という JavaScript のコード軽量化ライブラリを、Ruby で簡単に使えるようにした gem
 gem 'jbuilder'
 # gem 'active_model_serializers'
-# gem 'ransack'
-gem 'search_cop'
-# gem 'chartkick'
+gem 'ransack'
+gem 'chartkick'
 gem 'kaminari'
 gem 'activeadmin' # いい感じのAdmin画面を作る https://qiita.com/hkusu/items/3b0fb7f94a254e2ed6fd
 # gem 'view_source_map' # (by r7kamura) Rails、レンダリングされたHTMLのどこがどのpartialから来たのかをコメントとして埋める http://r7kamura.hatenablog.com/entry/2012/12/04/141911
@@ -116,7 +115,7 @@ group :development do
 end
 
 # Deploy
-gem 'capistrano'
+gem 'capistrano', '~> 3.10.2'
 gem 'capistrano-rbenv'
 gem 'capistrano-rails'
 gem 'capistrano-rails-console', require: false
@@ -134,3 +133,6 @@ gem 'upsert'
 # gem 'gon'
 gem 'simplecov'
 gem 'google_drive'
+gem 'search_cop'
+gem 'rest-client'
+gem 'mechanize'
