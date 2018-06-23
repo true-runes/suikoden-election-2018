@@ -1,9 +1,9 @@
 worker_processes 2
 listen 11080
 timeout 30
-pid 'tmp/pids/unicorn.development.pid'
-stderr_path 'log/unicorn_development_stderr.log'
-stdout_path 'log/unicorn_development_stdout.log'
+pid 'tmp/pids/unicorn.production.pid'
+stderr_path 'log/unicorn_production_stderr.log'
+stdout_path 'log/unicorn_production_stdout.log'
 
 preload_app true
 
