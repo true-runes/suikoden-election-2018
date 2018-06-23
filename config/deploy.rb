@@ -9,8 +9,6 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 set :ndenv_node, '10.5.0'
 # set :yarn_target_path, -> { release_path.join('bin') }
-set :yarn_target_path, -> { '/home/deploy_gss_2018_development/.ndenv/shims' }
-set :yarn_flags, '--silent --no-progress'
 
 # master.key を初回時に手動で置かないと ERROR になる
 set :linked_files, ['config/master.key']
