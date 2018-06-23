@@ -10,7 +10,7 @@
         = f.text_field(:screen_name)
         = f.submit('チェックする！', name: nil)
 
-    - unless @screen_name.empty?
+    - unless @screen_name.blank?
       .col.s12
         = "投票チェック結果"
       .col.s12
