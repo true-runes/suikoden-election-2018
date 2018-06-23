@@ -16,12 +16,12 @@ class CheckVoteController < ApplicationController
       if user_name_in_db.nil?
         @user_name = nil
         @bigger_profile_image_uri = default_bigger_profile_image_uri
+        @user_uri = nil
       else
         @user_name = user_name_in_db.name
         @bigger_profile_image_uri = bigger_profile_image_uri(user_name_in_db.profile_image_uri)
+        @user_uri = user_name_in_db.uri
       end
-
-      @user_uri = user_name_in_db.uri
     end
   end
 
