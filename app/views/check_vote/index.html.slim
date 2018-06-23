@@ -2,21 +2,24 @@
   .row
     .col.s12
       h5
+        = @debug_value
+      h5
         = '投票チェック'
-      = form_tag('check_vote', methpd: :get, multipart: true, class: 'file-field input-field') do
-        .col.s12
-          = text_field_tag :submit_string, 'スクリーンネームをどうぞ'
-        .col.s12
-          br
-          = button_tag type: :submit, class: 'btn waves-effect waves-light', id: 'check-ga-conversion-by-tweet' do
-            = '調べる！'
-            = content_tag :i, 'search', class: "material-icons right"
+      = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
+        = f.label(:screen_name_label, 'アカウント名を入れて下さい')
+        = f.text_field(:screen_name)
+        = f.submit('チェックする', name: nil)
 
-
-
-
-      / = form_with(url: '/check_vote', local: true, method: :get) do |f|
-      /   .input-field
-      /     = f.text_field(:q)
-      /     .btn
-      /       = f.submit('検索')
+    - unless @screen_name.empty?
+      .col.s12
+        = "投票チェック結果"
+      .col.s12
+        = "screen_name: @#{@screen_name}"
+      .col.s12
+        = "user_name: #{@user_name}"
+      .col.s12
+        - if @vote_number == 0
+          = "ツイートなし"
+        - else
+          = @target_tweets.each.with_index(1) do |tweet, i|
+            = "#{i}: #{tweet.text}"
