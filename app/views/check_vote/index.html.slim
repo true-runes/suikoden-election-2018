@@ -11,16 +11,30 @@
     - unless @screen_name.blank?
       .col.s12
         = "投票チェック結果"
-      .col.s12
-        = "screen_name: @#{@screen_name}"
-      .col.s12
-        = "user_name: #{@user_name}"
-      .col.s12
-        = "vote_number: #{@vote_number}"
-      .col.s12
-        - if @vote_number == 0
-          = "ツイートなし"
-        - else
-          - @target_tweets.each.with_index(1) do |tweet, i|
-            = "#{i}: #{tweet.text}"
-            = "-------------------"
+      ul.collection
+        li.collection-item.avatar
+          = image_tag 'https://pbs.twimg.com/profile_images/1312105387/ROOTOTE_bigger.jpg', class: 'circle'
+          / @profile_image_uri
+          span.title
+            = "#{@user_name} (@#{@screen_name})"
+          br
+          br
+          p
+            - @target_tweets.each.with_index(1) do |tweet, i|
+              = "#{tweet.text}"
+          = link_to '<i class="small material-icons">link</i>'.html_safe, 'https://www.google.co.jp/', class: 'secondary-content'
+
+          / = link_to 'amiami.com<i class="tiny material-icons">link</i>'.html_safe, 'http://www.amiami.com', target: '_blank'
+      / .col.s12
+      /   = "screen_name: @#{@screen_name}"
+      / .col.s12
+      /   = "user_name: #{@user_name}"
+      / .col.s12
+      /   = "vote_number: #{@vote_number}"
+      / .col.s12
+      /   - if @vote_number == 0
+      /     = "ツイートなし"
+      /   - else
+      /     - @target_tweets.each.with_index(1) do |tweet, i|
+      /       = "#{i}: #{tweet.text}"
+      /       = "-------------------"
