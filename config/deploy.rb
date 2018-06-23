@@ -8,7 +8,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 set :ndenv_type, :user
 set :ndenv_node, '10.5.0'
-set :yarn_target_path, -> { "/home/deploy_gss_2018_production/.ndenv/shims/yarn" }
+set :yarn_target_path, -> { "/home/deploy_gss_2018_production/.ndenv/shims" }
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
