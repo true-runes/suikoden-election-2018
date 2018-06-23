@@ -43,4 +43,19 @@ class User < ApplicationRecord
 
   validates :screen_name, presence: true
   validates :user_number, uniqueness: true, presence: true
+
+  def valid_condition_for_vote
+    {
+      is_retweet: 0,
+      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')
+    }
+  end
+
+  def user_with_valid_votes(screen_name)
+    User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).first
+  end
+
+  def user_name_in_db(screen_name)
+    User.where(screen_name: screen_name).first
+  end
 end

@@ -1,40 +1,54 @@
 .container
   .row
-    .col.s12
-      h5
-        = '投票チェック'
-      = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
-        = f.label(:screen_name_label, 'アカウント名を入れて下さい')
-        = f.text_field(:screen_name)
-        = f.submit('チェックする！', name: nil)
-
-    - unless @screen_name.blank?
+    / TODO: ファットコントローラ（アンチパターン）
+    - if @screen_name.blank?
       .col.s12
-        = "投票チェック結果"
-      ul.collection
-        li.collection-item.avatar
-          = image_tag 'https://pbs.twimg.com/profile_images/1312105387/ROOTOTE_bigger.jpg', class: 'circle'
-          / @profile_image_uri
-          span.title
-            = "#{@user_name} (@#{@screen_name})"
-          br
-          br
-          p
-            - @target_tweets.each.with_index(1) do |tweet, i|
-              = "#{tweet.text}"
-          = link_to '<i class="small material-icons">link</i>'.html_safe, 'https://www.google.co.jp/', class: 'secondary-content'
+        h5
+          = '投票チェック'
+      .col.s12
+        h6
+          = 'TwitterのIDを入れて下さい'
+        = form_with(url: check_vote_index_path, local: true, method: :get) do |f|
+          = f.text_field(:screen_name, placeholder: 'gensosenkyo')
+          = button_tag type: 'submit', class: 'btn waves-effect waves-light' do
+            = 'チェックする！'
+            = content_tag :i, 'search', class: "material-icons right"
+    - else
+      .col.s12
+        h5
+          = "投票チェック結果"
+      .col.s12
+        - if @vote_number == 0
+          h6
+            = "@#{@screen_name} のアカウントによる投票は見つかりませんでした。"
+          .row
+            .col.s12
+              .card-panel.red.lighten-1
+                span.white-text
+                  p
+                    = '※チェックの対象となるタグは「#幻水総選挙2018」です。'
+                  p
+                    = '※チェックができるのはツイート（呟き）での投票のみです。'
+                  p
+                    = '※投票が見つからなかった場合、集計に反映されない可能性があります。投票内容を書いて '
+                    = link_to '@gensosenkyo', 'https://twitter.com/gensosenkyo', target: '_new'
+                    = ' までリプかDMでご連絡ください。'
+        - else
+          h6
+            = "ヒット件数 #{@vote_number} 件"
+      .col.s12
+        ul.collection
+          - @target_tweets.each do |tweet|
+            li.collection-item.avatar
+              = image_tag @bigger_profile_image_uri, class: 'circle'
+              span.title
+                = "#{@user_name} (@#{@screen_name})"
+              br
+              br
+              p
+                = "#{tweet.text}"
+              .secondary-content
+                = link_to 'ツイートへ', "#{tweet.uri}"
+    .center-align
+      = link_to 'トップへ戻る', root_path
 
-          / = link_to 'amiami.com<i class="tiny material-icons">link</i>'.html_safe, 'http://www.amiami.com', target: '_blank'
-      / .col.s12
-      /   = "screen_name: @#{@screen_name}"
-      / .col.s12
-      /   = "user_name: #{@user_name}"
-      / .col.s12
-      /   = "vote_number: #{@vote_number}"
-      / .col.s12
-      /   - if @vote_number == 0
-      /     = "ツイートなし"
-      /   - else
-      /     - @target_tweets.each.with_index(1) do |tweet, i|
-      /       = "#{i}: #{tweet.text}"
-      /       = "-------------------"
