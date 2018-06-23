@@ -27,12 +27,9 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
     divided_tweet_numbers = all_tweet_numbers.each_slice(100).to_a
 
     divided_tweet_numbers.each do |tweet_numbers|
-      alive_tweet_numbers = []
-      not_alive_tweet_numbers = []
-
       alive_tweet_objects = twitter_api_client.statuses(tweet_numbers)
 
-      alive_tweet_numbers = alive_tweet_objects.map { |alive_tweet_object| alive_tweet_object.id }
+      alive_tweet_numbers = alive_tweet_objects.map { |alive_tweet_object| alive_tweet_object.id.to_i }
       not_alive_tweet_numbers = tweet_numbers - alive_tweet_numbers
 
       # soft delete by paranoia
