@@ -3,14 +3,14 @@ require "capistrano/deploy"
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
+require "capistrano/rbenv"
+require 'capistrano/ndenv'
+require 'capistrano/yarn'
+
 require "capistrano/rails"
 require "capistrano/rails/console"
 require "capistrano3/unicorn"
 require 'capistrano/sidekiq'
-
-require "capistrano/rbenv"
-require 'capistrano/ndenv'
-require 'capistrano/yarn'
 
 require 'whenever/capistrano'
 
