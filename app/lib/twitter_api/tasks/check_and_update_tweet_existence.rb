@@ -57,6 +57,10 @@ class TwitterApi::Tasks::CheckAndUpdateTweetExistence
     end
   end
 
+  def self.alive_tweet_objects(tweet_numbers)
+    twitter_api_client.statuses(tweet_numbers) # 取得できない場合は戻り値として返ってこない
+  end
+
   def self.restore_all
     all_tweet_numbers = Tweet.new.tweet_numbers_of_valid_vote_tweets
 
