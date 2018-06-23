@@ -42,7 +42,7 @@
             li.collection-item.avatar
               = image_tag @bigger_profile_image_uri, class: 'circle'
               span.title
-                = "#{@user_name} (@#{@screen_name}) [#{time_type_to_japanese_datetime_str(tweet.tweeted_at)}]"
+                = "#{@user_name} (@#{@screen_name}) | #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
               br
               br
               p
