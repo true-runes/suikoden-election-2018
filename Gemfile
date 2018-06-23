@@ -64,7 +64,6 @@ gem 'global' # config/global/ に設定ファイルを書くためのgem https:/
 # gem 'pundit' # ユーザにより動作を分けたいときに便利なgem
 gem 'devise'
 gem 'mini_racer' # , platforms: :ruby
-gem 'capistrano-npm'
 
 # Model
 gem 'sqlite3'

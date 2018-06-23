@@ -6,7 +6,6 @@ install_plugin Capistrano::SCM::Git
 # require 'capistrano/yarn'
 require "capistrano/rbenv"
 require 'capistrano/ndenv'
-require 'capistrano/npm'
 
 require "capistrano/rails"
 require "capistrano/rails/console"
