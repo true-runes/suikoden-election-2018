@@ -17,10 +17,10 @@
         = "user_name: #{@user_name}"
       .col.s12
         = "vote_number: #{@vote_number}"
-      .col.s12
-        - if @vote_number == 0
-          = "ツイートなし"
-        - else
-          = @target_tweets.each.with_index(1) do |tweet, i|
-            = "#{i}: #{tweet.text}"
-            = "-------------------"
+      / .col.s12
+      /   - if @vote_number == 0
+      /     = "ツイートなし"
+      /   - else
+      /     = @target_tweets.each.with_index(1) do |tweet, i|
+      /       = "#{i}: #{tweet.text}"
+      /       = "-------------------"
