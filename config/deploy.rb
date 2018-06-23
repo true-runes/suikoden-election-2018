@@ -12,7 +12,8 @@ set :ndenv_node, '10.5.0'
 # 00:05 yarn:install
 #       01 yarn install --production
 #       01 /usr/bin/env: `yarn': そのようなファイルやディレクトリ⿮..
-set :yarn_target_path, -> { current_path.join('bin') } #=> なぜ /user/bin/env になるのだ……
+# set :yarn_target_path, -> { current_path.join('bin') } #=> なぜ /user/bin/env になるのだ……
+set :yarn_target_path, -> { "/home/deploy_gss_2018_development/deploy/suikoden-election-2018/current/bin" }
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
