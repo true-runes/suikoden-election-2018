@@ -1,13 +1,16 @@
+require 'dotenv'
+Dotenv.load
+
 set :stage, :development
 set :branch, :development
 set :deploy_to, '/home/deploy_gss_2018_development/deploy/suikoden-election-2018' # ここも隠したい
 set :rails_env, 'development'
-server Rails.application.credentials.deploy[:development][:server], user: Rails.application.credentials.deploy[:development][:user], roles: %w{web app db batch}
+server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_DEV"], roles: %w{web app db} # wheneverは無効化
 
 set :ssh_options, {
-  port: Rails.application.credentials.deploy[:development][:port],
+  port: ENV["DEPLOY_SERVER_PORT"],
   forward_agent: true,
-  keys: [File.expand_path(Rails.application.credentials.deploy[:development][:keys])],
+  keys: [File.expand_path(ENV["DEPLOY_KEYS_DEV"])],
 }
 
 set :whenever_roles, :batch

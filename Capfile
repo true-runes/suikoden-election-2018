@@ -10,5 +10,6 @@ require "capistrano3/unicorn"
 require 'capistrano/yarn'
 require 'capistrano/sidekiq'
 require 'whenever/capistrano'
+require 'capistrano/ndenv'
 
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }

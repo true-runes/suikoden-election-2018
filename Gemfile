@@ -123,6 +123,7 @@ gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
 gem 'capistrano-yarn'
 gem 'capistrano-sidekiq'
+gem 'capistrano-ndenv'
 
 # Others
 gem 'faraday'
