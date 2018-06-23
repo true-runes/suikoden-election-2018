@@ -3,7 +3,8 @@ class CheckVoteController < ApplicationController
     if params[:screen_name]
       @screen_name = normalize_screen_name(params[:screen_name])
       user_object = User.new
-      user_with_valid_votes = user_object.user_with_valid_votes(@screen_name)
+      # user_with_valid_votes = user_object.user_with_valid_votes(@screen_name)
+      user_with_valid_votes = User.new.debug_user_with_valid_votes('h6077ya')
 
       if user_with_valid_votes.nil?
         @target_tweets = []

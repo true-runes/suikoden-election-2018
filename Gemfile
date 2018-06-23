@@ -12,8 +12,8 @@ gem 'bootsnap' # config/boot.rb
 group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem 'better_errors' # エラー画面をデバッグしやすい形に整形してくれるGem
-  gem 'binding_of_caller' # メソッド呼び出し元の binding で eval することができる（better_errors用）
+  # gem 'better_errors' # エラー画面をデバッグしやすい形に整形してくれるGem
+  # gem 'binding_of_caller' # メソッド呼び出し元の binding で eval することができる（better_errors用）
   gem 'pry-rails' # https://qiita.com/silmisilon/items/8e08435204d8d08d09ff
   gem 'pry-byebug' # http://blog.toshimaru.net/rails-pry-byebug/
   gem 'pry-coolline'
