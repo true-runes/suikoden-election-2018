@@ -7,6 +7,7 @@ set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets bundle)
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
+set :ndenv_type, :user
 set :ndenv_node, '10.5.0'
 # set :yarn_target_path, -> { release_path.join('bin') }
 

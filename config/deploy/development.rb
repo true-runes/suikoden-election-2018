@@ -6,7 +6,6 @@ set :branch, :development
 set :deploy_to, '/home/deploy_gss_2018_development/deploy/suikoden-election-2018' # ここも隠したい
 set :rails_env, 'development'
 server ENV["DEPLOY_SERVER"], user: ENV["DEPLOY_USER_DEV"], roles: %w{web app db} # wheneverは無効化
-set :yarn_target_path, -> { '/home/deploy_gss_2018_development/.ndenv/shims' }
 
 set :ssh_options, {
   port: ENV["DEPLOY_SERVER_PORT"],
