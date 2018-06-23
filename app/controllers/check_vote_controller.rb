@@ -1,7 +1,7 @@
 class CheckVoteController < ApplicationController
   def index
     if params[:screen_name]
-      @screen_name = params[:screen_name]
+      @screen_name = normalize_screen_name(params[:screen_name])
       user_object = User.new
       user_with_valid_votes = user_object.user_with_valid_votes(@screen_name)
 
@@ -24,6 +24,10 @@ class CheckVoteController < ApplicationController
   end
 
   private
+  def normalize_screen_name(screen_name)
+    screen_name.gsub(/\A@(.*)\z/, '\1')
+  end
+
   def bigger_profile_image_uri(profile_image_uri)
     profile_image_uri.gsub(/_400x400\./, '_bigger.')
   end
