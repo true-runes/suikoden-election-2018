@@ -42,7 +42,7 @@
             li.collection-item.avatar
               = image_tag @bigger_profile_image_uri, class: 'circle'
               span.title
-                = "#{@user_name} (@#{@screen_name})"
+                = "#{@user_name} (@#{@screen_name}) #{tweet.tweeted_at}"
               br
               br
               p
