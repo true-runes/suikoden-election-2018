@@ -13,6 +13,50 @@ class OperateSpreadsheet
     GoogleDrive::Session.from_credentials(credentials)
   end
 
+  def self.master_data
+    spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
+    spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
+
+    tweet_text_column_index = 2 # B列
+    uri_column_index        = 15 # O列
+    tweet_id_index          = 17 # Q列
+    tweeted_at_index        = 18 # R列
+
+    worksheet = spreadsheet.worksheet_by_title('マスターデータ')
+
+    is_retweet_validation = {
+      is_retweet: 0,
+    }
+    tweeted_at_validation = {
+      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo'),
+    }
+    user_id_validation = {
+      user_id: 28,
+    }
+    tweets_ascending = Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: :asc)
+
+    tweets_ascending.each_with_index do |tweet, i|
+      user = User.find(tweet.user_id)
+      user_name = user.name
+      screen_name = user.screen_name
+
+      tweet_content = <<~TEXT
+        #{tweet.text}
+
+        #{user_name} (@#{screen_name})
+      TEXT
+      tweet_content.chomp!
+
+      worksheet[i + 2, tweet_text_column_index] = tweet_content
+      worksheet[i + 2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
+      worksheet[i + 2, tweet_id_index] = tweet.id
+      worksheet[i + 2, tweeted_at_index] = tweet.tweeted_at
+
+      # This version of the Google Sheets API has a limit of 500 requests per 100 seconds per project, and 100 requests per 100 seconds per user. Limits for reads and writes are tracked separately. There is no daily usage limit.
+      worksheet.save
+    end
+  end
+
   def self.debug
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
     spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
@@ -52,28 +96,32 @@ class OperateSpreadsheet
     # 100 ごとに分割
     worksheet = spreadsheet.worksheet_by_title('マスターデータ')
 
+    sheet_numbers = 20
+    # sheet_numbers.times do |sheet_index|
+    #   worksheet = target_worksheets[sheet_index]
+
     # 分割するときに index が 0 以外から始まると分かりにくいので、あえて 0 から始める
-    tweets_ascending.each_with_index do |tweet, i|
-      # break if i > 99
+    # tweets_ascending.each_with_index do |tweet, i|
+    #   # break if i > 99
 
-      user = User.find(tweet.user_id)
-      user_name = user.name
-      screen_name = user.screen_name
+    #   user = User.find(tweet.user_id)
+    #   user_name = user.name
+    #   screen_name = user.screen_name
 
-      tweet_content = <<~TEXT
-        #{tweet.text}
+    #   tweet_content = <<~TEXT
+    #     #{tweet.text}
 
-        #{user_name} (@#{screen_name})
-      TEXT
-      tweet_content.chomp!
+    #     #{user_name} (@#{screen_name})
+    #   TEXT
+    #   tweet_content.chomp!
 
-      worksheet[i + 2, tweet_text_column_index] = tweet_content
-      worksheet[i + 2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
-      worksheet[i + 2, tweet_id_index] = tweet.id
-      worksheet[i + 2, tweeted_at_index] = tweet.tweeted_at
+    #   worksheet[i + 2, tweet_text_column_index] = tweet_content
+    #   worksheet[i + 2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
+    #   worksheet[i + 2, tweet_id_index] = tweet.id
+    #   worksheet[i + 2, tweeted_at_index] = tweet.tweeted_at
 
-      # This version of the Google Sheets API has a limit of 500 requests per 100 seconds per project, and 100 requests per 100 seconds per user. Limits for reads and writes are tracked separately. There is no daily usage limit.
-      worksheet.save
-    end
+    #   # This version of the Google Sheets API has a limit of 500 requests per 100 seconds per project, and 100 requests per 100 seconds per user. Limits for reads and writes are tracked separately. There is no daily usage limit.
+    #   worksheet.save
+    # end
   end
 end
