@@ -14,6 +14,20 @@ class Tweet < ApplicationRecord
   end
 
   def tweet_numbers_of_valid_vote_tweets
-    valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i } # TODO: to_i は全てのロジックで共通にしたほうがいい
+     # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
+    valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i }
+  end
+
+  def check_duplicate_vote_users
+    users_with_valid_vote = User.new.users_with_valid_vote
+
+    @duplicate_vote_users = []
+    users_with_valid_vote.each do |user|
+      if User.new.user_with_valid_votes_count(user) >= 2
+        @duplicate_vote_users << user
+      end
+    end
+
+    @duplicate_vote_users
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :how_to_vote
       get :thanks
+      get :duplicate_check
     end
   end
 

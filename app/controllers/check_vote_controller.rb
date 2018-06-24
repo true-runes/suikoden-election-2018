@@ -8,7 +8,8 @@ class CheckVoteController < ApplicationController
       if user_with_valid_votes.nil?
         @target_tweets = []
       else
-        @target_tweets = user_with_valid_votes.tweets
+        @target_tweets = user_with_valid_votes.tweets # 昇順・降順ロジックはここに
+        # @target_tweets_des = user_with_valid_votes.tweets.foooobarrrr # 昇順・降順ロジックはここに
       end
       @vote_number = @target_tweets.size
 

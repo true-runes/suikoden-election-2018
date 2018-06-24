@@ -51,8 +51,22 @@ class User < ApplicationRecord
     }
   end
 
+  def invalid_condition_for_vote
+    {
+      user_id: 28, # gensosenkyo
+    }
+  end
+
+  def users_with_valid_vote
+    User.joins(:tweets).includes(:tweets).where(tweets: valid_condition_for_vote)
+  end
+
   def user_with_valid_votes(screen_name)
     User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).first
+  end
+
+  def user_with_valid_votes_count(screen_name)
+    User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.tweets.size
   end
 
   # TODO: メソッド名なんか違う
