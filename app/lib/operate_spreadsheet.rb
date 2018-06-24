@@ -26,8 +26,8 @@ class OperateSpreadsheet
     uri_column_index = 15 # O列
 
     valid_users_with_tweets = Tweet.new.valid_users_with_tweets
-    valid_users_with_tweets.each do |user_with_tweets|
-      user_with_tweets.tweets.each do |tweet|
+    valid_users_with_tweets.each do |user|
+      user.tweets.each do |tweet|
         cell_text = <<~TEXT
           #{tweet.text}
 
