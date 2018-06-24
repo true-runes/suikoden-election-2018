@@ -52,7 +52,8 @@ class OperateSpreadsheet
     # 100 ごとに分割
     worksheet = spreadsheet.worksheet_by_title('マスターデータ')
 
-    tweets_ascending.each.with_index(2) do |tweet, i|
+    # 分割するときに index が 0 以外から始まると分かりにくいので、あえて 0 から始める
+    tweets_ascending.each_with_index do |tweet, i|
       user = User.find(tweet.user_id)
       user_name = user.name
       screen_name = user.screen_name
@@ -64,10 +65,10 @@ class OperateSpreadsheet
       TEXT
       tweet_content.chomp!
 
-      worksheet[i, tweet_text_column_index] = tweet_content
-      worksheet[i, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
-s      worksheet[i, tweet_id_index] = tweet.id
-      worksheet[i, tweeted_at_index] = tweet.tweeted_at
+      worksheet[i + 2, tweet_text_column_index] = tweet_content
+      worksheet[i + 2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
+      worksheet[i + 2, tweet_id_index] = tweet.id
+      worksheet[i + 2, tweeted_at_index] = tweet.tweeted_at
 
       worksheet.save
 
