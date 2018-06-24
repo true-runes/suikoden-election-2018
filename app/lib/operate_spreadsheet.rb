@@ -50,7 +50,7 @@ class OperateSpreadsheet
     ]
 
     # 100 ごとに分割
-    worksheet = spreadsheet.worksheet_by_title(target_worksheets[0])
+    worksheet = spreadsheet.worksheet_by_title('マスターデータ')
 
     tweets_ascending.each.with_index(2) do |tweet, i|
       user = User.find(tweet.user_id)
@@ -65,14 +65,15 @@ class OperateSpreadsheet
       tweet_content.chomp!
 
       worksheet[2, tweet_text_column_index] = tweet_content
-      worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", 'リンク'))
+      worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
       worksheet[2, tweet_id_index] = tweet.id
       worksheet[2, tweeted_at_index] = tweet.tweeted_at
+
+      worksheet.save
 
       break if i > 10
     end
 
-    worksheet.save
 
     # target_tweets = User.joins(:tweets).joins(:search_words).includes(:tweets).includes(:search_words).where(tweets: { id: 1006680791961628673 })
     # users = User.joins(:tweets).includes(:tweets).where(users: { screen_name: 'gensosenkyo' })
