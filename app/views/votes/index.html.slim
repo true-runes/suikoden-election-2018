@@ -1,5 +1,28 @@
 .container
   .row
     .col.s12
-      h4
-        = '制作中……'
+      h5
+        = '投票集計用ページ'
+    .col.s12
+      h6
+        = paginate @tweets
+    .col.s12
+      - @tweets.each_with_index do |tweet, i|
+        - user = User.find_by(id: tweet.user_id)
+        - unless user.nil?
+          ul.collection
+            li.collection-item.avatar
+              = link_to image_tag(user.profile_image_uri, class: 'circle'), user.uri, target: '_blank'
+              = "[集計用ID: #{@tweets.offset_value + i + 1}]"
+              br
+              br
+              = "#{user.name} (@#{user.screen_name}) / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
+              br
+              br
+              p.pre-tag-with-font
+                = "#{normalize_tweet_text(tweet.text)}"
+              .secondary-content
+                = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}", target: '_new'
+    .col.s12
+      h6
+        = paginate @tweets
