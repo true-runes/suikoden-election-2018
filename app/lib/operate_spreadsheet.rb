@@ -20,31 +20,33 @@ class OperateSpreadsheet
     worksheet_name = 'マスターデータ'
     worksheet = spreadsheet.worksheet_by_title(worksheet_name)
 
-    # 添字の始まりは 1 であることに注意する
-    # 指定の仕方は WORKSHEET[行, 列]
     tweet_text_column_index = 2 # B列
     uri_column_index = 15 # O列
+    tweet_id_index = 17 # Q列
+    tweeted_at_index = 18 # R列
 
-    valid_users_with_tweets = Tweet.new.valid_users_with_tweets
+    tweets_ascending = Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')).where.not(user_id: 28).order(tweeted_at: :asc)
 
-    i = 0
-    valid_users_with_tweets.each do |user|
+    tweets_ascending.each.with_index(2) do |tweet, i|
+      user_name = User.find(tweet.user_id).name
+      screen_name = User.find(tweet.user_id).screen_name
+
+      tweet_content = <<~TEXT
+        #{tweet.text}
+
+        #{user_name} (@#{screen_name})
+      TEXT
+      tweet_content.chomp!
+
+      worksheet[2, tweet_text_column_index] = tweet_content
+      worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", 'リンク'))
+      worksheet[2, tweet_id_index] = tweet.id
+      worksheet[2, tweeted_at_index] = tweet.tweeted_at
+
       break if i > 10
-      user.tweets.each do |tweet|
-        cell_text = <<~TEXT
-          #{tweet.text}
-
-          #{user.name} (@#{user.screen_name})
-        TEXT
-
-        worksheet[2, tweet_text_column_index] = cell_text.chomp
-        worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", 'リンク'))
-      end
-
-      i = i + 1
     end
 
-    worksheet.save
+    # worksheet.save
 
     # target_tweets = User.joins(:tweets).joins(:search_words).includes(:tweets).includes(:search_words).where(tweets: { id: 1006680791961628673 })
     # users = User.joins(:tweets).includes(:tweets).where(users: { screen_name: 'gensosenkyo' })
