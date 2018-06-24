@@ -9,9 +9,27 @@ class Tweet < ApplicationRecord
   has_many :media
   has_many :hashtags
 
+  def validation_for_vote
+    {
+      is_retweet: 0,
+      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')
+    }
+  end
+
+  def not_validation_for_vote
+    {
+      id: 28, # gensosenkyo
+    }
+  end
+
+  def valid_users_with_tweets
+    User.joins(:tweets).includes(:tweets).where(tweets: valid_condition_for_vote).without_deleted.where.not(not_validation_for_vote)
+  end
+
   def valid_vote_tweets
     Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo'))
   end
+
 
   def tweet_numbers_of_valid_vote_tweets
      # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
