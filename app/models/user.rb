@@ -66,7 +66,11 @@ class User < ApplicationRecord
   end
 
   def user_with_valid_votes_count(screen_name)
-    User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.tweets.size
+    if User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.nil?
+      0
+    else
+      User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.tweets.size
+    end
   end
 
   # TODO: メソッド名なんか違う
