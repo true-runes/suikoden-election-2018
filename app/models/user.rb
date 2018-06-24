@@ -65,6 +65,7 @@ class User < ApplicationRecord
     User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).first
   end
 
+  # TODO: 期待通りの動作でないようだ
   def user_with_valid_votes_count(screen_name)
     if User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.nil?
       0

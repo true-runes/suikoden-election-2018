@@ -18,6 +18,7 @@ class Tweet < ApplicationRecord
     valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i }
   end
 
+  # TODO: 期待通りの動作でないようだ
   def check_duplicate_vote_users
     users_with_valid_vote = User.new.users_with_valid_vote
 
