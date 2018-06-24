@@ -26,19 +26,22 @@ class OperateSpreadsheet
     uri_column_index = 15 # O列
 
     valid_users_with_tweets = Tweet.new.valid_users_with_tweets
+
+    i = 0
     valid_users_with_tweets.each do |user|
+      break if i > 10
       user.tweets.each do |tweet|
         cell_text = <<~TEXT
           #{tweet.text}
 
-          #{user.name} (#{user.screen_name})
+          #{user.name} (@#{user.screen_name})
         TEXT
 
-        worksheet[2, tweet_text_column_index] = cell_text
-        worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}","ツイートへのリンク"))
-
-        break
+        worksheet[2, tweet_text_column_index] = cell_text.chomp
+        worksheet[2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", 'リンク'))
       end
+
+      i = i + 1
     end
 
     worksheet.save
