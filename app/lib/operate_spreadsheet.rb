@@ -54,7 +54,7 @@ class OperateSpreadsheet
 
     # 分割するときに index が 0 以外から始まると分かりにくいので、あえて 0 から始める
     tweets_ascending.each_with_index do |tweet, i|
-      break if i > 99
+      # break if i > 99
 
       user = User.find(tweet.user_id)
       user_name = user.name
@@ -74,7 +74,6 @@ class OperateSpreadsheet
 
       # This version of the Google Sheets API has a limit of 500 requests per 100 seconds per project, and 100 requests per 100 seconds per user. Limits for reads and writes are tracked separately. There is no daily usage limit.
       worksheet.save
-      sleep(5)
     end
   end
 end
