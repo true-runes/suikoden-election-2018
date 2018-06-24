@@ -13,6 +13,7 @@ class OperateSpreadsheet
     GoogleDrive::Session.from_credentials(credentials)
   end
 
+  # TODO: メソッド長すぎ
   def self.master_data
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
     spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
@@ -57,7 +58,9 @@ class OperateSpreadsheet
     end
   end
 
-  def self.debug
+  # TODO: メソッド長すぎ
+  # TODO: 使わずに終わった……あとでリファクタしつつ使ってみる
+  def self.divided_sheets
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
     spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
 
