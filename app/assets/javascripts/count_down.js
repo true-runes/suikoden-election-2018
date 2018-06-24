@@ -17,4 +17,4 @@ let countDownTimer = function() {
   }, 1000)
 }
 
-countDownTimer();
+// countDownTimer();
