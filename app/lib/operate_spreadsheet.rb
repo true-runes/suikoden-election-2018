@@ -16,7 +16,7 @@ class OperateSpreadsheet
   def self.debug
     # Tweet.new.final_valid_vote_tweets.each do
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
-    spreadsheet = @session.spreadsheet_by_url(spreadsheet_uri)
+    spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
     worksheet_name = 'マスターデータ'
     worksheet = spreadsheet.worksheet_by_title(worksheet_name)
 
