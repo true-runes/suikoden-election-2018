@@ -31,10 +31,6 @@ class Tweet < ApplicationRecord
     Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo'))
   end
 
-  def debug_valid_vote_tweets
-    Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')).where.not(user_id: 28)
-  end
-
   def tweet_numbers_of_valid_vote_tweets
      # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
     valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i }

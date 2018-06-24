@@ -17,8 +17,6 @@ class OperateSpreadsheet
     # Tweet.new.final_valid_vote_tweets.each do
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
     spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
-    worksheet_name = 'マスターデータ'
-    worksheet = spreadsheet.worksheet_by_title(worksheet_name)
 
     tweet_text_column_index = 2 # B列
     uri_column_index = 15 # O列
@@ -27,9 +25,37 @@ class OperateSpreadsheet
 
     tweets_ascending = Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')).where.not(user_id: 28).order(tweeted_at: :asc)
 
+    # TODO: NOT DRY
+    target_worksheets = [
+      'ツイ 01',
+      'ツイ 02',
+      'ツイ 03',
+      'ツイ 04',
+      'ツイ 05',
+      'ツイ 06',
+      'ツイ 07',
+      'ツイ 08',
+      'ツイ 09',
+      'ツイ 10',
+      'ツイ 11',
+      'ツイ 12',
+      'ツイ 13',
+      'ツイ 14',
+      'ツイ 15',
+      'ツイ 16',
+      'ツイ 17',
+      'ツイ 18',
+      'ツイ 19',
+      'ツイ 20',
+    ]
+
+    # 100 ごとに分割
+    worksheet = spreadsheet.worksheet_by_title(target_worksheets[0])
+
     tweets_ascending.each.with_index(2) do |tweet, i|
-      user_name = User.find(tweet.user_id).name
-      screen_name = User.find(tweet.user_id).screen_name
+      user = User.find(tweet.user_id)
+      user_name = user.name
+      screen_name = user.screen_name
 
       tweet_content = <<~TEXT
         #{tweet.text}
@@ -46,7 +72,7 @@ class OperateSpreadsheet
       break if i > 10
     end
 
-    # worksheet.save
+    worksheet.save
 
     # target_tweets = User.joins(:tweets).joins(:search_words).includes(:tweets).includes(:search_words).where(tweets: { id: 1006680791961628673 })
     # users = User.joins(:tweets).includes(:tweets).where(users: { screen_name: 'gensosenkyo' })
