@@ -23,7 +23,7 @@ class Tweet < ApplicationRecord
   end
 
   def valid_users_with_tweets
-    User.joins(:tweets).includes(:tweets).where(tweets: valid_condition_for_vote).without_deleted.where.not(not_validation_for_vote)
+    User.joins(:tweets).includes(:tweets).where(tweets: validation_for_vote).without_deleted.where.not(not_validation_for_vote)
   end
 
   def valid_vote_tweets
