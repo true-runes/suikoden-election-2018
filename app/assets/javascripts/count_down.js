@@ -1,6 +1,4 @@
-// $(function() {
-  //   countDown();
-  // });
+// よくない実装なので発展的削除へ
 let countDownTimer = function() {
   setInterval(function() {
     let startDateTime = new Date();
