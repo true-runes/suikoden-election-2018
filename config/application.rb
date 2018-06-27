@@ -37,5 +37,15 @@ module SuikodenElection2018
                        request_specs: false
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    # 10M のファイルを 10個 まで
+    config.logger = Logger.new('log/development.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/production.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/sidekiq.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/unicorn_production_stderr.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/unicorn_production_stdout.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/unicorn_development_stderr.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/unicorn_development_stdout.log', 10, 10 * 1024 * 1024)
+    config.logger = Logger.new('log/whenever.log', 10, 10 * 1024 * 1024)
   end
 end
