@@ -31,6 +31,12 @@ class Tweet < ApplicationRecord
     Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo'))
   end
 
+  # ↑からさらに @gensosenkyo を除いたものが、最終的なツイート投票になる（そこから先の無効票除外もあるが）
+  # user_id_validation = {
+  #   user_id: 28,
+  # }
+  # tweets_ascending = Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: :asc)
+
   def tweet_numbers_of_valid_vote_tweets
      # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
     valid_vote_tweets.map { |tweet| tweet.tweet_number.to_i }

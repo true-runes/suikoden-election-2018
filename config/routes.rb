@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :votes, only: [:index, :create]
   resources :check_vote, only: [:index, :create]
 
-  # get '/practice', to: 'practice#insert_user'
+  get '/practice', to: 'practice#index'
 
   # require 'sidekiq/web'
   # mount Sidekiq::Web => '/sidekiq'
