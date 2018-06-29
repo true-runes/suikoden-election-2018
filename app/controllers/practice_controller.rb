@@ -2,9 +2,10 @@ require 'digest/md5'
 
 class PracticeController < ApplicationController
   def index
-    # ajax
+    @tweets = Tweet.valid_vote_tweets_with_order_by(order_by: :asc).page params[:page]
   end
 
+  # TODO: 外側に出したい
   USERNAME = Rails.application.credentials.digest_auth[:username].freeze
   PASSWORD = Rails.application.credentials.digest_auth[:password].freeze
 
