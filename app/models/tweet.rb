@@ -18,7 +18,7 @@ class Tweet < ApplicationRecord
   }
 
   user_id_validation = {
-    user_id: 28, # @gensosenkyo
+    user_id: User.find_by(screen_name: 'gensosenkyo').id,
   }
 
   scope :valid_vote_tweets_with_order_by, ->(order_by: nil) { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: order_by) }
