@@ -5,16 +5,9 @@
       h5
         = 'Hello, digest_authenticate!'
     - unless @tweets.size == 0
-      .col.s12
-        h6
-          = paginate @tweets
-      .col.s12
-        #practice-tweets
-          = render partial: 'shared/practice_tweets'
-          / , locals: { tweets: @tweets }
-      .col.s12
-        h6
-          = paginate @tweets
+      #practice-tweets
+        = render partial: 'shared/practice_tweets'
+        / , locals: { tweets: @tweets }
     - else
       .col.s12
         = '@tweets.size is 0'
