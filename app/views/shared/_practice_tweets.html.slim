@@ -1,9 +1,9 @@
 .col.s12
   h6
-    = paginate @tweets
+    = paginate @tweets, remote: true
 .col.s12
   = "@tweets.size: #{@tweets.size}"
   / , locals: { tweets: @tweets }
 .col.s12
   h6
-    = paginate @tweets
+    = paginate @tweets, remote: true
