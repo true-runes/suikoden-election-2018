@@ -9,13 +9,19 @@ class TwitterApi::UpsertedColumnsHash::UserHash
       uri = user_object.uri.to_s
     end
 
+    if user_obj.respond_to? :attrs
+      uri_t_co = 'NOTHING'
+    else
+      uri_t_co = user_object.attrs[:url].to_s
+    end
+
     # TODO: ハードコードは切り出す
     {
       screen_name: kill_nil(user_object.screen_name.to_s),
       name: kill_nil(user_object.name.to_s),
       description: kill_nil(user_object.description.to_s, default_value: 'NOTHING'),
       uri: kill_nil(uri.to_s),
-      uri_t_co: kill_nil(user_object.attrs[:url].to_s, default_value: 'NOTHING'), # 場合によってnilになる……
+      uri_t_co: kill_nil(uri_t_co, default_value: 'NOTHING'), # 場合によってnilになる……
       tweet_count: kill_nil(user_object.statuses_count),
       profile_banner_uri: kill_nil(user_object.profile_banner_uri_https('1500x500').to_s),
       profile_image_uri: kill_nil(user_object.profile_image_uri_https('400x400').to_s),
