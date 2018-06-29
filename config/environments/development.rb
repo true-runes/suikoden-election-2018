@@ -64,6 +64,7 @@ Rails.application.configure do
 
   BetterErrors::Middleware.allow_ip! '133.130.100.0/24'
   BetterErrors::Middleware.allow_ip! '192.168.0.0/16'
+  BetterErrors::Middleware.allow_ip! '10.10.10.0/24'
 
   # メソッド名のバッティング回避
   logger            = ActiveSupport::Logger.new(STDOUT)
