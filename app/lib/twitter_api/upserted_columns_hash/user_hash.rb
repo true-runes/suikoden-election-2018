@@ -10,9 +10,9 @@ class TwitterApi::UpsertedColumnsHash::UserHash
     end
 
     if user_object.respond_to? :attrs
-      uri_t_co = 'NOTHING'
-    else
       uri_t_co = user_object.attrs[:url].to_s
+    else
+      uri_t_co = 'NOTHING'
     end
 
     # TODO: ハードコードは切り出す
