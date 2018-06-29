@@ -9,7 +9,7 @@ class TwitterApi::UpsertedColumnsHash::UserHash
       uri = user_object.uri.to_s
     end
 
-    if user_obj.respond_to? :attrs
+    if user_object.respond_to? :attrs
       uri_t_co = 'NOTHING'
     else
       uri_t_co = user_object.attrs[:url].to_s
