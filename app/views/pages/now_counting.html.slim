@@ -1,0 +1,11 @@
+/ = javascript_pack_tag 'hello_vue'
+.container
+  .row
+    .col.s12
+      h5
+        = '開票ツイート速報'
+    - unless @tweets.nil?
+      #now-counting
+        = render partial: 'shared/now_counting'
+    - else
+      = ''

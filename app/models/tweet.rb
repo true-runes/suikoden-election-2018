@@ -17,12 +17,18 @@ class Tweet < ApplicationRecord
     tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo'),
   }
 
+  tweeted_at_validation_for_now_counting = {
+    tweeted_at: '2018-06-30 12:00:00'.in_time_zone('Tokyo')..'2018-06-24 23:59:59'.in_time_zone('Tokyo'),
+  }
+
   user_id = User.find_by(screen_name: 'gensosenkyo').nil? ? 0 : User.find_by(screen_name: 'gensosenkyo').id
   user_id_validation = {
     user_id: user_id,
   }
 
   scope :valid_vote_tweets_with_order_by, ->(order_by: nil) { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: order_by) }
+
+  scope :now_counting_tweets, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).order(tweeted_at: :desc) }
 
   def tweet_numbers_of_valid_vote_tweets
     # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）

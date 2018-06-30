@@ -5,8 +5,8 @@
       h5
         = 'Hello, digest_authenticate!'
     - unless @tweets.size == 0
-      #practice-tweets
-        = render partial: 'shared/practice_tweets'
+      #now-counting
+        = render partial: 'shared/now_counting'
         / , locals: { tweets: @tweets }
     - else
       .col.s12

@@ -24,7 +24,14 @@
               = "#{remove_t_co_link(normalize_tweet_text(tweet.text))}"
           - if tweet.has_media
             br
-            = "（ツイートに添付画像あり）"
+            .divider
+            br
+            - target_tweet = Tweet.joins(:media).includes(:media).where(tweets: { tweet_number: tweet.tweet_number }).first
+            - target_tweet.media.each do |medium|
+              = image_tag medium.uri, width: 300
+              br
 .col.s12
   h6
     = paginate @tweets, remote: true
+
+/ Tweet.joins(:media).includes(:media).where(tweets: { tweet_number: '1010051995195998210' })[0].media[1].uri_number: '1010051995195998210' })[0].media[1].uri
