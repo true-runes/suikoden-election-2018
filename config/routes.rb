@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  # root 'pages#home'
-  root 'pages#now_counting'
+  root 'pages#home'
 
   resources :pages do
     collection do
@@ -9,6 +8,7 @@ Rails.application.routes.draw do
       get :duplicate_check # 不要
       get :summary
       get :ranking
+      get :now_counting
     end
   end
 

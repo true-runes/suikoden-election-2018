@@ -8,15 +8,15 @@ nav.blue.lighten-4
           = link_to '幻水総選挙 2018 集計所', root_path, class: 'black-text'
           ul.right.hide-on-med-and-down
             li
-              = link_to '確定順位', ranking_pages_path, class: 'black-text'
-            / li
-            /   = link_to '結果概要', summary_pages_path, class: 'black-text'
+              = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-vote-result-desktop' } do
+                | 開票結果
+                i.material-icons.right
+                  = 'arrow_drop_down'
             li
-              = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new', class: 'black-text'
-            li
-              = link_to '投票チェック', check_vote_index_path, class: 'black-text'
-            / li
-            /   = link_to '投票ツイート', votes_path, class: 'black-text'
+              = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-vote-desktop' } do
+                | 投票について
+                i.material-icons.right
+                  = 'arrow_drop_down'
             li
               = link_to 'Thanks', thanks_pages_path, class: 'black-text'
 ul#nav-mobile.sidenav
@@ -24,15 +24,42 @@ ul#nav-mobile.sidenav
     .user-view.blue.lighten-4
       = '幻水総選挙 2018 集計所'
   li
-    = link_to '確定順位', ranking_pages_path, class: 'black-text'
-  / li
-  /   = link_to '結果概要', summary_pages_path, class: 'black-text'
+    = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-vote-result-mobile' } do
+      | 開票結果
+      i.material-icons.right
+        = 'arrow_drop_down'
   li
-    = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new'
-    / how_to_vote_pages_path
-  li
-    = link_to '投票チェック', check_vote_index_path
-  / li
-  /   = link_to '投票ツイート', votes_path
+    = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-vote-mobile' } do
+      | 投票について
+      i.material-icons.right
+        = 'arrow_drop_down'
   li
     = link_to 'Thanks', thanks_pages_path
+
+#dropdown-vote-desktop.dropdown-content
+  li
+    = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new', class: 'black-text'
+  li
+    = link_to '投票チェック', check_vote_index_path, class: 'black-text'
+
+#dropdown-vote-mobile.dropdown-content
+  li
+    = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new', class: 'black-text'
+  li
+    = link_to '投票チェック', check_vote_index_path, class: 'black-text'
+
+#dropdown-vote-result-desktop.dropdown-content
+  li
+    = link_to '確定順位', ranking_pages_path, class: 'black-text'
+  li
+    = link_to '結果概要', summary_pages_path, class: 'black-text'
+  li
+    = link_to '開票ツイート', now_counting_pages_path, class: 'black-text'
+
+#dropdown-vote-result-mobile.dropdown-content
+  li
+    = link_to '確定順位', ranking_pages_path, class: 'black-text'
+  li
+    = link_to '結果概要', summary_pages_path, class: 'black-text'
+  li
+    = link_to '開票ツイート', now_counting_pages_path, class: 'black-text'
