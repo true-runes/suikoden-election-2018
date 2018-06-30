@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def now_counting
+    @all_tweets_count = Tweet.now_counting_tweets.size
     @tweets = Tweet.now_counting_tweets.page params[:page]
   end
 
