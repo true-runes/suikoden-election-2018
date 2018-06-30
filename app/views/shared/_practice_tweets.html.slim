@@ -15,14 +15,13 @@
           br
           = "#{user.name} ("
           = link_to "@#{user.screen_name}", user.uri, target: '_blank'
-          = ") / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
+          = ") / "
+          = link_to "#{time_type_to_japanese_datetime_str(tweet.tweeted_at)}", tweet.uri, target: '_blank'
           br
           br
           p
             .pre-tag-with-font
               = "#{remove_t_co_link(normalize_tweet_text(tweet.text))}"
-          .secondary-content
-            = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}", target: '_new'
           - if tweet.has_media
             br
             = "（ツイートに添付画像あり）"
