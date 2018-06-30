@@ -7,7 +7,7 @@ class TwitterApi::Tasks::UpdateUserObject
   end
 
   def self.execute_by_one_user(twitter_user_id:)
-    user_object = TwitterApi::SpecifyUserObject.execute_by_one_user(twitter_user_id.to_i)
+    user_object = TwitterApi::SpecifyUserObject.execute_by_one_user(twitter_user_id: twitter_user_id)
 
     TwitterApi::UpsertObjects::UsersTable.upsert([user_object]) # TODO: each 前提なので引数を配列にしないといけない
   end
