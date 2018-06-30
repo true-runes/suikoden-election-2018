@@ -12,7 +12,7 @@
           / TODO: 25がマジックナンバーだし、式が複雑
           / ↓は降順の時に限る
           / = "No. #{(@tweets.total_count - ((@tweets.current_page - 1) * 25)) - i}"
-          = "No. #{((@tweets.current_page - 1) * 25)) + (i + 1)}"
+          = "No. #{((@tweets.current_page - 1) * 25) + (i + 1)}"
           br
           .divider
           br
