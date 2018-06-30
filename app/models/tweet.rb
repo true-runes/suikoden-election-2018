@@ -28,7 +28,7 @@ class Tweet < ApplicationRecord
 
   scope :valid_vote_tweets_with_order_by, ->(order_by: nil) { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: order_by) }
 
-  scope :now_counting_tweets, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).order(tweeted_at: :desc) }
+  scope :now_counting_tweets, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).where(user_id_validation).order(tweeted_at: :desc) }
 
   def tweet_numbers_of_valid_vote_tweets
     # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
