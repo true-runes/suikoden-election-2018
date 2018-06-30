@@ -6,4 +6,8 @@ module ApplicationHelper
   def normalize_tweet_text(tweet_text)
     CGI.unescapeHTML(tweet_text)
   end
+
+  def remove_t_co_link(tweet_text)
+    tweet_text.gsub(/( https:\/\/t\.co\/[0-9a-zA-Z]{10})/, '')
+  end
 end

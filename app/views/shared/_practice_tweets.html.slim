@@ -3,21 +3,30 @@
     = paginate @tweets, remote: true
 .col.s12
   - @tweets.each_with_index do |tweet, i|
+    / TODO: パーシャルに切り出す
     - user = User.find_by(id: tweet.user_id)
     - unless user.nil?
       ul.collection
         li.collection-item.avatar
           = link_to image_tag(user.profile_image_uri, class: 'circle'), user.uri, target: '_blank'
-          = "[集計用ID: #{@tweets.offset_value + i + 1}]"
+          = "No. #{@tweets.offset_value + i + 1}"
           br
           br
-          = "#{user.name} (@#{user.screen_name}) / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
+          .divider
+          = "#{user.name} ("
+          = link_to "@#{user.screen_name}", user.uri, target: '_blank'
+          = ") / #{time_type_to_japanese_datetime_str(tweet.tweeted_at)}"
           br
           br
-          p.pre-tag-with-font
-            = "#{normalize_tweet_text(tweet.text)}"
+          p
+            .pre-tag-with-font
+              = "#{remove_t_co_link(normalize_tweet_text(tweet.text))}"
           .secondary-content
             = link_to image_tag('twitter_icon_48x48.png', width: "24", height: "24"), "#{tweet.uri}", target: '_new'
+          - if tweet.has_media
+            br
+            br
+            = "（添付画像あり）"
 .col.s12
   h6
     = paginate @tweets, remote: true
