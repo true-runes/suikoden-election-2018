@@ -15,9 +15,9 @@ module ApplicationHelper
     default_title = '幻水総選挙 2018'
 
     if @this_page_title
-      "#{@this_page_title} | #{default_title}"
+      title = "#{@this_page_title} | #{default_title}"
     else
-      "#{default_title}"
+      title = "#{@default_title}"
     end
   end
 end
