@@ -10,4 +10,14 @@ module ApplicationHelper
   def remove_t_co_link(tweet_text)
     tweet_text.gsub(/( https:\/\/t\.co\/[0-9a-zA-Z]{10})/, '')
   end
+
+  def this_page_title
+    default_title = '幻水総選挙 2018'
+
+    if @this_page_title
+      title = "#{@this_page_title} | #{default_title}"
+    else
+      title = "#{@this_page_title}"
+    end
+  end
 end
