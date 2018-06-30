@@ -28,7 +28,7 @@
             br
             - target_tweet = Tweet.joins(:media).includes(:media).where(tweets: { tweet_number: tweet.tweet_number }).first
             - target_tweet.media.each do |medium|
-              = image_tag medium.uri, width: 300
+              = image_tag medium.uri, width: 200
               br
 .col.s12
   h6

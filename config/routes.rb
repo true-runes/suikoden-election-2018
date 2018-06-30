@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :how_to_vote
       get :thanks
       get :duplicate_check # 不要
+      get :summary
     end
   end
 
