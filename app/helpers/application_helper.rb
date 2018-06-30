@@ -17,7 +17,7 @@ module ApplicationHelper
     if @this_page_title
       title = "#{@this_page_title} | #{default_title}"
     else
-      title = "#{@default_title}"
+      title = "#{default_title}"
     end
   end
 end
