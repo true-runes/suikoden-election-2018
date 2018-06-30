@@ -9,9 +9,10 @@
       ul.collection
         li.collection-item.avatar
           = link_to image_tag(user.profile_image_uri, class: 'circle'), user.uri, target: '_blank'
-          / = "No. #{@tweets.size - (@tweets.offset_value + i)}"
           / TODO: 25がマジックナンバーだし、式が複雑
-          = "No. #{(@tweets.total_count - ((@tweets.current_page - 1) * 25)) - i}"
+          / ↓は降順の時に限る
+          / = "No. #{(@tweets.total_count - ((@tweets.current_page - 1) * 25)) - i}"
+          = "No. #{((@tweets.current_page - 1) * 25)) + (i + 1)}"
           br
           .divider
           br
