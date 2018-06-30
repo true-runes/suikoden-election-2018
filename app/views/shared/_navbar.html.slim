@@ -8,6 +8,8 @@ nav.blue.lighten-4
           = link_to '幻水総選挙 2018 集計所', root_path, class: 'black-text'
           ul.right.hide-on-med-and-down
             li
+              = link_to '最新確定順位', ranking_pages_path, class: 'black-text'
+            li
               = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new', class: 'black-text'
             li
               = link_to '投票チェック', check_vote_index_path, class: 'black-text'
@@ -19,6 +21,8 @@ ul#nav-mobile.sidenav
   li
     .user-view.blue.lighten-4
       = '幻水総選挙 2018 集計所'
+  li
+    = link_to '最新確定順位', ranking_pages_path, class: 'black-text'
   li
     = link_to '投票方法', 'https://twitter.com/gensosenkyo/status/1010336071077335040', target: '_new'
     / how_to_vote_pages_path

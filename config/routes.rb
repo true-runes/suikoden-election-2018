@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :thanks
       get :duplicate_check # 不要
       get :summary
+      get :ranking
     end
   end
 
