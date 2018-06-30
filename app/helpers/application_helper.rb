@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def remove_t_co_link(tweet_text)
-    tweet_text.gsub(/( https:\/\/t\.co\/[0-9a-zA-Z]{10})/, '')
+    tweet_text.gsub(/( https:\/\/t\.co\/[0-9a-zA-Z]{10})/, '') # TODO: 行頭だとマッチしない
   end
 
   def this_page_title

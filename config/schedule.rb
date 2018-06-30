@@ -8,10 +8,18 @@ if @environment.to_sym == :development
   every 3.minute, roles: [:batch] do
     runner "TwitterApi::Tasks::SearchAndUpsertTweets.execute(search_word: '#幻水総選挙2018')"
   end
+
+  every 29.minute, roles: [:batch] do
+    runner "TwitterApi::Tasks::SearchAndUpsertTweets.execute(search_word: '#幻水総選挙2018後夜祭')"
+  end
 end
 
 if @environment.to_sym == :production
   every 1.minute, roles: [:batch] do
     runner "TwitterApi::Tasks::SearchAndUpsertTweets.execute(search_word: '#幻水総選挙2018')"
+  end
+
+  every 13.minute, roles: [:batch] do
+    runner "TwitterApi::Tasks::SearchAndUpsertTweets.execute(search_word: '#幻水総選挙2018後夜祭')"
   end
 end

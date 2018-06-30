@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  if Rails.env == 'development'
+  if Rails.env == 'YOUR_ENVIRONMENT'
     USERNAME = Rails.application.credentials.digest_auth[:username].freeze
     PASSWORD = Rails.application.credentials.digest_auth[:password].freeze
 
