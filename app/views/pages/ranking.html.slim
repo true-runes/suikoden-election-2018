@@ -19,6 +19,10 @@
                 = "Charcter Name"
               th
                 = "票数"
+              th
+                = "昨年票数"
+              th
+                = "増減"
           - @ranking_data.each do |csv_row|
             tbody
               tr
@@ -30,3 +34,8 @@
                   = csv_row[2]
                 td
                   = csv_row[3]
+                td
+                  = csv_row[4]
+                td
+                  - fifth_csv_row = csv_row[5] > 0 ? "+#{csv_row[5]}" : "#{csv_row[5]}"
+                  = fifth_csv_row
