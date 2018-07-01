@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_01_044003) do
+ActiveRecord::Schema.define(version: 2018_07_01_051341) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_07_01_044003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["medium_own_id"], name: "index_media_on_medium_own_id"
+    t.index ["tweet_id", "medium_own_id"], name: "index_media_on_tweet_id_and_medium_own_id", unique: true
     t.index ["tweet_id"], name: "index_media_on_tweet_id"
   end
 

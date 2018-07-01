@@ -9,6 +9,7 @@ class TwitterApi::UpsertObjects::MediaTable
           @thumbnail_uri = "#{medium.media_uri_https.to_s}:thumb"
 
           @bulk_upsert_objects << Tweet.find_by(tweet_number: tweet_object.id).media.new(
+            tweet_id: tweet_object.id,
             medium_own_id: medium.id,
             uri: medium.media_uri_https.to_s,
             thumbnail_uri: @thumbnail_uri,
