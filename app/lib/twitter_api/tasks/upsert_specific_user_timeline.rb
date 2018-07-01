@@ -11,7 +11,7 @@ class TwitterApi::Tasks::UpsertSpecificUserTimeline
 
     # 下の2つの順番には依存性がある
     TwitterApi::UpsertObjects::UsersTable.upsert(target_user_objects)
-    TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects, search_word: '検索語なし') # TODO: ハードコーディング
+    TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects)
 
     TwitterApi::UpsertObjects::InUserUrisTable.upsert(target_user_objects)
     TwitterApi::UpsertObjects::HashtagsTable.upsert(target_tweet_objects)
