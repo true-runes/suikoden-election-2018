@@ -1,4 +1,5 @@
 | document.addEventListener('ajax:success', function() {
 |   console.log('ajax success!');
 |   document.getElementById('now-counting').innerHTML = "#{escape_javascript(render 'shared/now_counting')}";
+|   scrollTo(0, 0);
 | });
