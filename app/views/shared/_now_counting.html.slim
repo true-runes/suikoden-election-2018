@@ -30,7 +30,8 @@
             .divider
             br
             - target_tweet = Tweet.joins(:media).includes(:media).where(tweets: { tweet_number: tweet.tweet_number }).first
-            - target_tweet.media.each do |medium|
+            / TDOO: 順番の法則がわからない……
+            - target_tweet.media.order(medium_own_id: :asc).each do |medium|
               = image_tag medium.uri, width: 200
               br
 .col.s12
