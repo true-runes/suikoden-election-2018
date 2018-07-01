@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_22_045747) do
+ActiveRecord::Schema.define(version: 2018_07_01_044003) do
 
   create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 2018_06_22_045747) do
   add_foreign_key "in_tweet_uris", "tweets"
   add_foreign_key "in_user_uris", "users"
   add_foreign_key "media", "tweets"
-  add_foreign_key "tweets", "search_words"
   add_foreign_key "tweets", "users"
   add_foreign_key "user_mentions", "tweets"
   add_foreign_key "user_mentions", "users"
