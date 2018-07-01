@@ -31,7 +31,18 @@ class Tweet < ApplicationRecord
 
   scope :now_counting_tweets_desc, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).where(user_id_validation).order(tweeted_at: :desc) }
 
-  scope :now_counting_tweets_asc, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).where(user_id_validation).order(tweeted_at: :asc) }
+  scope(
+    :now_counting_tweets_asc,
+    ->() {
+      Tweet
+      .without_deleted
+      .where(is_retweet_validation)
+      .where(tweeted_at_validation_for_now_counting)
+      .where(user_id_validation)
+      .where(has_user_mentions: 0)
+      .order(tweeted_at: :asc)
+    }
+  )
 
   scope :latest_original_tweet_of_specific_user_id, ->(user_id) { Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first }
 
