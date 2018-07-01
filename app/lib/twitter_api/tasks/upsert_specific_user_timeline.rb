@@ -36,6 +36,6 @@ class TwitterApi::Tasks::UpsertSpecificUserTimeline
 
   # TODO: this is an example method
   def self.execute_for_gensosenkyo_account
-    execute(screen_name: 'gensosenkyo')
+    execute(screen_name: 'gensosenkyo', options: options)
   end
 end
