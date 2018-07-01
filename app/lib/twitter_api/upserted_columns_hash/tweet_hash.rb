@@ -6,13 +6,14 @@ class TwitterApi::UpsertedColumnsHash::TweetHash
 
     # TODO: ちょっと分かりにくい
     if search_word.nil?
-      search_word_id = SearchWord.where(word: '検索語なし').first.id # seedを忘れずにいれること（マジックワードなので危険みがある）
+      search_word_id = 0
+      # search_word_id = SearchWord.where(word: '検索語なし').first.id # seedを忘れずにいれること（マジックワードなので危険みがある）
     else
-      if SearchWord.where(word: search_word).blank?
-        search_word_id = SearchWord.where(word: '検索語なし').first.id
-      else
+      # if SearchWord.where(word: search_word).blank?
+      #   search_word_id = SearchWord.where(word: '検索語なし').first.id
+      # else
         search_word_id = SearchWord.where(word: search_word).first.id
-      end
+      # end
     end
 
     {
