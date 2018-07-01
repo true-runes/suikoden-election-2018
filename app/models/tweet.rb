@@ -35,7 +35,17 @@ class Tweet < ApplicationRecord
 
   scope :latest_original_tweet_of_specific_user_id, ->(user_id) { Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first }
 
-  scope :latest_original_tweet_number_of_specific_user_id, ->(user_id) { Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first.tweet_number }
+  scope(
+    :latest_original_tweet_number_of_specific_user_id,
+    ->(user_id) {
+      Tweet
+      .without_deleted
+      .where(is_retweet: false)
+      .where(user_id: user_id)
+      .order(tweet_number: :desc)
+      .first.tweet_number
+    }
+  )
 
   def latest_original_tweet_number_of_specific_screen_name(screen_name)
     unless User.where(screen_name: screen_name).empty?
