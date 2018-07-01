@@ -44,6 +44,11 @@ class User < ApplicationRecord
   validates :screen_name, presence: true
   validates :user_number, uniqueness: true, presence: true
 
+  # TODO: ヒットしなかった場合の処理がない
+  scope :specific_user_id_by_screen_name, ->(screen_name=nil) { User.where(screen_name: screen_name).first.id }
+  scope :specific_user_id_by_user_number, ->(user_number=nil) { User.where(user_number: user_number).first.id }
+
+  # TODO: 以下はすべて scope へリファクタリングする
   def valid_condition_for_vote
     {
       is_retweet: 0,

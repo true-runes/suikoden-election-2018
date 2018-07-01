@@ -33,6 +33,22 @@ class Tweet < ApplicationRecord
 
   scope :now_counting_tweets_asc, ->() { Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation_for_now_counting).where(user_id_validation).order(tweeted_at: :asc) }
 
+  scope :latest_original_tweet_of_specific_user_id, ->(user_id) { Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first }
+
+  scope :latest_original_tweet_number_of_specific_user_id, ->(user_id) { Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first.tweet_number }
+
+  def latest_original_tweet_number_of_specific_screen_name(screen_name)
+    unless User.where(screen_name: screen_name).empty?
+      user_id = User.where(screen_name: screen_name).first.id
+
+      if Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).empty?
+        1
+      else
+        Tweet.without_deleted.where(is_retweet: false).where(user_id: user_id).order(tweet_number: :desc).first.tweet_number
+      end
+    end
+  end
+
   def tweet_numbers_of_valid_vote_tweets
     # TODO: to_i は全てのロジックで共通にしたほうがいい（か、DBの型をIntegerにするか？）
    Tweet.valid_vote_tweets_with_order_by.map { |tweet| tweet.tweet_number.to_i }

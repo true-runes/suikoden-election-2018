@@ -1,3 +1,4 @@
+# TODO: クラス名が抽象的過ぎてなにやるのかわからない
 class InsertTweet
   def user_id_list
     max_users_per_request = 100

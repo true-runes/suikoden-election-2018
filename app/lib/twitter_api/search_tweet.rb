@@ -2,7 +2,7 @@ class TwitterApi::SearchTweet
   extend TwitterApi::Client
   TAKE_TWEETS_NUMBER = 100
 
-  def self.search(search_word:, options: nil)
+  def self.search(search_word:, options: {})
     default_options = {
       tweet_mode: 'extended',
       result_type: 'recent',
