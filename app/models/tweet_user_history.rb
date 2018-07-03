@@ -1,0 +1,2 @@
+class TweetUserHistory < ApplicationRecord
+end
