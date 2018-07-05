@@ -113,3 +113,33 @@
                   = '不明'
                 td
                   = '1 人'
+  .row
+    .col.s12
+      ul.collection.with-header
+        li.collection-header.green.lighten-5
+          h6
+            | 英語投票のランキング
+        li.collection-item
+          table.striped
+            thead
+              tr
+                th
+                  = '順位'
+                th
+                  = 'キャラ名'
+                th
+                  = 'CharName'
+                th
+                  = '票数'
+            tbody
+              / TODO: ちゃんとループで処理する
+              - @english_votes_ranking_data.each do |csv_row|
+                tr
+                  td
+                    = csv_row[0]
+                  td
+                    = csv_row[1]
+                  td
+                    = csv_row[2]
+                  td
+                    = csv_row[3]

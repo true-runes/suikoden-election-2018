@@ -9,4 +9,8 @@ class PagesController < ApplicationController
   def ranking
     @ranking_data = CSV.table('public/ranking.tsv', col_sep: "\t")
   end
+
+  def summary
+    @english_votes_ranking_data = CSV.table('public/english_votes_ranking.csv', col_sep: ",")
+  end
 end
