@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     collection do
       get :how_to_vote
       get :thanks
-      get :flowers_stand
       get :duplicate_check # 不要
       get :summary
       get :ranking

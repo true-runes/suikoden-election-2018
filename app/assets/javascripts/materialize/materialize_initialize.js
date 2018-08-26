@@ -20,8 +20,3 @@ document.addEventListener('DOMContentLoaded', function() {
   var sidenavElems = document.querySelectorAll('.sidenav');
   var sidenavInstances = M.Sidenav.init(sidenavElems, {});
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-  var materialBoxElems = document.querySelectorAll('.materialboxed');
-  var materialBoxInstances = M.Materialbox.init(materialBoxElems, {});
-});
