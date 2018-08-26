@@ -18,7 +18,10 @@ nav.blue.lighten-4
                 i.material-icons.right
                   = 'arrow_drop_down'
             li
-              = link_to 'Thanks', thanks_pages_path, class: 'black-text'
+              = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-thanks-desktop' } do
+                | Thanks
+                i.material-icons.right
+                  = 'arrow_drop_down'
 ul#nav-mobile.sidenav
   li
     .user-view.blue.lighten-4
@@ -34,7 +37,10 @@ ul#nav-mobile.sidenav
       i.material-icons.right
         = 'arrow_drop_down'
   li
-    = link_to 'Thanks', thanks_pages_path
+    = link_to '#!', class: ['dropdown-trigger', 'black-text'], data: { target: 'dropdown-thanks-mobile' } do
+      | thanks
+      i.material-icons.right
+        = 'arrow_drop_down'
 
 #dropdown-vote-desktop.dropdown-content
   li
@@ -63,3 +69,15 @@ ul#nav-mobile.sidenav
     = link_to '結果概要', summary_pages_path, class: 'black-text'
   li
     = link_to '開票ツイート', now_counting_pages_path, class: 'black-text'
+
+#dropdown-thanks-desktop.dropdown-content
+  li
+    = link_to 'Staffs', thanks_pages_path, class: 'black-text'
+  li
+    = link_to 'フラスタ', flowers_stand_pages_path, class: 'black-text'
+
+#dropdown-thanks-mobile.dropdown-content
+  li
+    = link_to 'Staffs', thanks_pages_path, class: 'black-text'
+  li
+    = link_to 'フラスタ', flowers_stand_pages_path, class: 'black-text'
