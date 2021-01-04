@@ -65,7 +65,6 @@ gem 'global' # config/global/ に設定ファイルを書くためのgem https:/
 gem 'devise'
 
 # Model
-gem 'sqlite3'
 gem 'mysql2'
 gem 'bullet' # N+1問題の検出 https://maetoo11.hatenablog.com/entry/2016/03/14/212524
 gem 'paranoia' # 論理削除支援 https://github.com/rubysherpas/paranoia
