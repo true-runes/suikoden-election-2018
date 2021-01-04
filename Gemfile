@@ -6,7 +6,7 @@ end
 
 # Rails
 gem 'rails'
-gem 'bootsnap' # config/boot.rb
+gem 'bootsnap', '>= 1.4.5', require: false # config/boot.rb
 
 # debug
 gem 'pry-rails' # https://qiita.com/silmisilon/items/8e08435204d8d08d09ff
