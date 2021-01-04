@@ -7,24 +7,24 @@ default: &default
 
 test:
   <<: *default
-  host: <%= Rails.application.credentials.mysql[:test][:host] %>
-  port: <%= Rails.application.credentials.mysql[:test][:port] %>
-  username: <%= Rails.application.credentials.mysql[:test][:username] %>
-  password: <%= Rails.application.credentials.mysql[:test][:password] %>
-  database: <%= Rails.application.credentials.mysql[:test][:database] %>
+  host: <%= ENV['MYSQL_HOST_TEST'] || Rails.application.credentials.mysql[:test][:host] %>
+  port: <%= ENV['MYSQL_PORT_TEST'] || Rails.application.credentials.mysql[:test][:port] %>
+  username: <%= ENV['MYSQL_USERNAME_TEST'] || Rails.application.credentials.mysql[:test][:username] %>
+  password: <%= ENV['MYSQL_PASSWORD_TEST'] || Rails.application.credentials.mysql[:test][:password] %>
+  database: <%= ENV['MYSQL_DATABASE_TEST'] || Rails.application.credentials.mysql[:test][:database] %>
 
 development:
   <<: *default
-  host: <%= Rails.application.credentials.mysql[:development][:host] %>
-  port: <%= Rails.application.credentials.mysql[:development][:port] %>
-  username: <%= Rails.application.credentials.mysql[:development][:username] %>
-  password: <%= Rails.application.credentials.mysql[:development][:password] %>
-  database: <%= Rails.application.credentials.mysql[:development][:database] %>
+  host: <%= ENV['MYSQL_HOST_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:host] %>
+  port: <%= ENV['MYSQL_PORT_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:port] %>
+  username: <%= ENV['MYSQL_USERNAME_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:username] %>
+  password: <%= ENV['MYSQL_PASSWORD_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:password] %>
+  database: <%= ENV['MYSQL_DATABASE_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:database] %>
 
 production:
   <<: *default
-  host: <%= Rails.application.credentials.mysql[:production][:host] %>
-  port: <%= Rails.application.credentials.mysql[:production][:port] %>
-  username: <%= Rails.application.credentials.mysql[:production][:username] %>
-  password: <%= Rails.application.credentials.mysql[:production][:password] %>
-  database: <%= Rails.application.credentials.mysql[:production][:database] %>
+  host: <%= ENV['MYSQL_HOST_PRODUCTION'] || Rails.application.credentials.mysql[:production][:host] %>
+  port: <%= ENV['MYSQL_PORT_PRODUCTION'] || Rails.application.credentials.mysql[:production][:port] %>
+  username: <%= ENV['MYSQL_USERNAME_PRODUCTION'] || Rails.application.credentials.mysql[:production][:username] %>
+  password: <%= ENV['MYSQL_PASSWORD_PRODUCTION'] || Rails.application.credentials.mysql[:production][:password] %>
+  database: <%= ENV['MYSQL_DATABASE_PRODUCTION'] || Rails.application.credentials.mysql[:production][:database] %>
