@@ -1,7 +1,7 @@
 on: [push]
 name: Suikoden Election 2018
 jobs:
-  eiyuden_chronicle_rewards_github_actions:
+  suikoden_election_2018_github_actions:
     name: Suikoden Election 2018 CI
     runs-on: ubuntu-latest
     container:
