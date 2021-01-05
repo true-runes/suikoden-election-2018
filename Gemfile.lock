@@ -409,7 +409,7 @@ GEM
     raabro (1.1.6)
     racc (1.5.2)
     rack (2.2.3)
-    rack-mini-profiler (1.0.0)
+    rack-mini-profiler (2.3.0)
       rack (>= 1.2.0)
     rack-protection (2.0.3)
       rack
