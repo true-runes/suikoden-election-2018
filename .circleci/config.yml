@@ -2,13 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.6.6-node-browsers-legacy
+    - image: circleci/ruby:3.0.0
       environment:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
-    - image: circleci/mysql:5.7.22
+    - image: circleci/mysql:8.0.4
       environment:
         MYSQL_USER: root
+        MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
         MYSQL_PORT: 3306
         MYSQL_DATABASE: suikoden_election_2018_test
