@@ -22,6 +22,7 @@ jobs:
         MYSQL_ROOT_PASSWORD: suikoden
         MYSQL_ROOT_HOST: '%'
         MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      # mbind: Operation not permitted 対策...効かない
       cap_add:
         - SYS_NICE
     working_directory: ~/repo
@@ -55,7 +56,14 @@ jobs:
         command: |
           bundle install --jobs=4 --retry=3 --path vendor/bundle
     - run:
-        name: Execute yarn install
+        name: Install Yarn
+        command: |
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt update
+          sudo apt install yarn
+    - run:
+        name: Execute "yarn install"
         # TODO: 調整の必要あり
         command: yarn install
     - save_cache:
