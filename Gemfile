@@ -69,6 +69,15 @@ gem 'slim-rails'
 gem 'uglifier'
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-ndenv'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano-rbenv'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-yarn'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'database_rewinder'
@@ -88,16 +97,6 @@ group :development do
   gem 'web-console'
   gem 'webmock'
 end
-
-gem 'capistrano'
-gem 'capistrano3-unicorn'
-gem 'capistrano-bundler'
-gem 'capistrano-ndenv'
-gem 'capistrano-rails'
-gem 'capistrano-rails-console', require: false
-gem 'capistrano-rbenv'
-gem 'capistrano-sidekiq'
-gem 'capistrano-yarn'
 
 gem 'faraday'
 gem 'shrine'
