@@ -8,6 +8,7 @@ ruby '3.0.0'
 
 gem 'bootsnap', require: false
 gem 'rails'
+gem 'puma'
 
 group :development, :test do
   gem 'awesome_print'
