@@ -2,16 +2,24 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.6.6-node-browsers-legacy
+    - image: circleci/ruby:2.7.2
       environment:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
-    - image: circleci/mysql:5.7.22
+    - image: circleci/mysql:8.0.4
+      command: mysqld --default-authentication-plugin=mysql_native_password
       environment:
-        MYSQL_USER: root
-        MYSQL_ROOT_PASSWORD: root
+        MYSQL_HOST: 127.0.0.1
         MYSQL_PORT: 3306
+        MYSQL_USER: suikoden
+        MYSQL_PASSWORD: suikoden
         MYSQL_DATABASE: suikoden_election_2018_test
+        MYSQL_ROOT_PASSWORD: suikoden
+        MYSQL_ROOT_HOST: '%'
+        MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      # mbind: Operation not permitted 対策...効かない
+      cap_add:
+        - SYS_NICE
     working_directory: ~/repo
     steps:
     - checkout
@@ -26,25 +34,33 @@ jobs:
     - run:
         name: Install Chrome
         command: |
-          sudo apt-get update
+          sudo apt update
           sudo apt install -y libappindicator3-1
-          sudo apt-get install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0
-
+          sudo apt install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0 fonts-liberation libasound2 libnspr4 libnss3 xdg-utils
           curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome.deb
           sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
           rm google-chrome.deb
           /opt/google/chrome/google-chrome --version
     - run:
+        # v2.1.4 for Heroku
         name: Install appropriate version's Bundler whose number is written in 'Gemfile.lock'
         command: |
-          gem install bundler:1.17.3
+          gem install bundler:2.1.4
     - run:
+        # v2.1.4 for Heroku
         name: Install gems written in Gemfile
         command: |
-          bundle install --jobs=4 --retry=3 --path vendor/bundle
+          bundle _2.1.4_ install --jobs=4 --retry=3 --path vendor/bundle
     - run:
-        name: Execute yarn install
+        name: Install Yarn
+        command: |
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt update
+          sudo apt install yarn
+    - run:
+        name: Execute "yarn install"
         # TODO: 調整の必要あり
         command: yarn install
     - save_cache:

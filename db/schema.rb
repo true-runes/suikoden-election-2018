@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_07_03_145210) do
 
-  create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "name", default: "UNKNOWN", null: false
     t.string "indices", default: "UNKNOWN", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["tweet_id"], name: "index_hashtags_on_tweet_id"
   end
 
-  create_table "in_tweet_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "in_tweet_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "uri", default: "UNKNOWN", null: false
     t.string "indices", default: "UNKNOWN", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["tweet_id"], name: "index_in_tweet_uris_on_tweet_id"
   end
 
-  create_table "in_user_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "in_user_uris", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "uri", default: "UNKNOWN", null: false
     t.string "expanded_uri", default: "UNKNOWN", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["user_id"], name: "index_in_user_uris_on_user_id"
   end
 
-  create_table "media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tweet_id"
     t.string "medium_own_id", default: "UNKNOWN", null: false
     t.string "uri", default: "UNKNOWN", null: false
@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["tweet_id"], name: "index_media_on_tweet_id"
   end
 
-  create_table "search_words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "search_words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["word"], name: "index_search_words_on_word", unique: true
   end
 
-  create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "tweet_number"
     t.bigint "user_id"
     t.boolean "has_user_mentions", default: false, null: false
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
-  create_table "user_mentions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "user_mentions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tweet_id"
     t.bigint "user_id"
     t.string "indices", default: "UNKNOWN", null: false
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_145210) do
     t.index ["user_id"], name: "index_user_mentions_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "screen_name", default: "", null: false
     t.string "name", default: "", null: false
     t.string "user_number", default: "", null: false
