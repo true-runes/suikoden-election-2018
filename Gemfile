@@ -4,45 +4,34 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# Rails
 gem 'rails'
-gem 'bootsnap', '>= 1.4.5', require: false # config/boot.rb
+gem 'bootsnap', require: false
 
-# debug
-gem 'pry-rails' # https://qiita.com/silmisilon/items/8e08435204d8d08d09ff
+gem 'pry-rails'
 group :development do
-  # gem 'spring'
-  # gem 'spring-watcher-listen'
-  gem 'better_errors' # エラー画面をデバッグしやすい形に整形してくれるGem
-  gem 'binding_of_caller' # メソッド呼び出し元の binding で eval することができる（better_errors用）
-  gem 'pry-byebug' # http://blog.toshimaru.net/rails-pry-byebug/
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-byebug'
   gem 'pry-coolline'
-  gem 'pry-doc' # ソースコードリーディング支援 https://qiita.com/joker1007/items/42f00b12c65bbec0e50a
+  gem 'pry-doc'
   gem 'byebug'
   gem 'web-console'
-  gem 'listen' # ファイルの変更を検知してそれをフックに何か処理ができるgem https://suin.io/536
-  gem 'awesome_print' # デバッグに便利な表示メソッドを提供する gem
+  gem 'listen'
+  gem 'awesome_print'
 end
 
-# Utility
 gem 'dotenv-rails'
-# gem 'trailblazer-rails' # ModelやControllerからビジネスロジックが無くなり3、Fat ModelやFat Controller問題が発生しない https://qiita.com/kazekyo/items/7594d71bc3e4934089b0
 gem 'jp_prefecture'
-# gem 'geocoder' # 地図情報をあれやこれや
-gem 'money-rails' # お金のケタ区切り https://qiita.com/kento1218@github/items/b404aafff754af32db68
-# gem 'letter_opener' # アプリ開発中にメールを確認する方法
-# gem 'roadie-rails' # HTMLメールを送る
+gem 'money-rails'
 gem 'whenever'
 gem 'rubocop'
 gem 'guard-rubocop'
-gem 'rufo' # Rubocop の超簡易版
-gem 'webpacker' # bundle exec rails webpacker:install
+gem 'rufo'
+gem 'webpacker'
 
-# Controller
-gem 'retryable' # 例外処理の回数を指定した処理が書ける https://qiita.com/giiko_/items/311a9d3869912daa9128
-gem 'draper' # ビューのロジックをプレゼンテーション層へ委譲する
+gem 'retryable'
+gem 'draper'
 
-# Middleware
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'sidekiq-scheduler'
@@ -53,45 +42,33 @@ gem 'sidekiq-history'
 gem 'redis-namespace'
 gem 'unicorn'
 gem 'redis'
-gem 'active_model_serializers' # Web API
+gem 'active_model_serializers'
 
-# System
 gem 'foreman'
-# gem 'turbolinks' # 慎重に使うこと
-gem 'bundler-audit' # gemの脆弱性をチェックする
-gem 'brakeman' # Railsのセキュリティチェックを行う
-gem 'global' # config/global/ に設定ファイルを書くためのgem https://doruby.jp/users/maya/entries/%E3%80%90Rails%E3%80%91gem--global-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%E3%80%90global%E3%80%91
-# gem 'pundit' # ユーザにより動作を分けたいときに便利なgem
+gem 'bundler-audit'
+gem 'brakeman'
+gem 'global'
 gem 'devise'
 
-# Model
 gem 'mysql2'
-gem 'bullet' # N+1問題の検出 https://maetoo11.hatenablog.com/entry/2016/03/14/212524
-gem 'paranoia' # 論理削除支援 https://github.com/rubysherpas/paranoia
-gem 'annotate' # schemaをmodelに書き出してくれる https://techracho.bpsinc.jp/ikeda-kazuyuki/2014_08_29/18876
-gem 'groupdate' # モデルの日時を簡単にグルーピングできる https://github.com/ankane/groupdate
-gem 'activerecord-import' # BULK INSERT をするための gem https://qiita.com/xend/items/79184ded56158ea1b97a
-# gem 'hirb'          # モデルの出力結果を表形式で表示するGem
-# gem 'hirb-unicode'  # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
+gem 'bullet'
+gem 'paranoia'
+gem 'annotate'
+gem 'groupdate'
+gem 'activerecord-import'
 gem 'default_value_for'
 gem 'seed-fu'
 
-# View
 gem 'slim-rails'
 gem 'sass-rails'
 gem 'simple_form'
-gem 'uglifier' # UglifyJS2 という JavaScript のコード軽量化ライブラリを、Ruby で簡単に使えるようにした gem
+gem 'uglifier'
 gem 'jbuilder'
-# gem 'active_model_serializers'
 gem 'ransack'
 gem 'chartkick'
 gem 'kaminari'
-gem 'activeadmin' # いい感じのAdmin画面を作る https://qiita.com/hkusu/items/3b0fb7f94a254e2ed6fd
-# gem 'view_source_map' # (by r7kamura) Rails、レンダリングされたHTMLのどこがどのpartialから来たのかをコメントとして埋める http://r7kamura.hatenablog.com/entry/2012/12/04/141911
-# gem 'sitemap_generator' # https://qiita.com/hirotakasasaki/items/2c183dee5d890d5ab57a
-# gem 'wicked_pdf' # PDF生成 https://qiita.com/simukappu/items/ab061a3ae5be8036488a
+gem 'activeadmin'
 
-# Test
 group :development do
   gem 'rspec-rails'
   gem 'guard-rspec'
@@ -100,22 +77,20 @@ group :development do
   gem 'rspec-retry'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'database_rewinder' # (by amatsuda) Rspecのテスト後に、 Createで作成したTestデータをデータベースから削除する http://takapi86.hatenablog.com/entry/2017/04/02/164117
+  gem 'database_rewinder'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'timecop' # 日時のテスト http://ruby-rails.hatenadiary.com/entry/20141218/1418901424
-  gem 'rack-mini-profiler' # 左上に実行時間が出る https://wonderwall.hatenablog.com/entry/2015/08/16/160845
+  gem 'timecop'
+  gem 'rack-mini-profiler'
   gem 'webmock'
-  gem 'vcr' # Webmock支援 http://morizyun.github.io/blog/webmock-vcr-gem-rails/
-  gem 'rspec-request_describer' # APIテストのため https://qiita.com/izumin5210/items/de614b5b5b2c44486e87
-  gem 'json_spec' # JSONテストのため http://ohs30359.hatenablog.com/entry/2016/09/06/232738
-  gem 'rspec-json_matcher' # JSONテストのため https://qiita.com/ma2shita/items/a75e43512b43cde712e6
-  # gem 'autodoc' # APIドキュメント作成 https://qiita.com/Yarimizu14/items/82b67f9ee4fc5177096f
+  gem 'vcr'
+  gem 'rspec-request_describer'
+  gem 'json_spec'
+  gem 'rspec-json_matcher'
 end
 
-# Deploy
-gem 'capistrano', '~> 3.10.2'
+gem 'capistrano'
 gem 'capistrano-rbenv'
 gem 'capistrano-rails'
 gem 'capistrano-rails-console', require: false
@@ -125,13 +100,12 @@ gem 'capistrano-yarn'
 gem 'capistrano-sidekiq'
 gem 'capistrano-ndenv'
 
-# Others
 gem 'faraday'
 gem "shrine"
 gem 'smarter_csv'
 gem 'twitter'
 gem 'upsert'
-# gem 'gon'
+
 gem 'simplecov'
 gem 'google_drive'
 gem 'search_cop'
