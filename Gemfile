@@ -18,16 +18,15 @@ group :development, :test do
   gem 'pry-coolline'
   gem 'pry-doc'
   gem 'pry-rails'
-  gem 'web-console'
 end
 
 gem 'dotenv-rails'
 gem 'jp_prefecture'
 gem 'money-rails'
 gem 'rubocop'
-gem 'whenever'
 gem 'rufo'
 gem 'webpacker'
+gem 'whenever'
 
 gem 'draper'
 gem 'retryable'
@@ -70,7 +69,6 @@ gem 'slim-rails'
 gem 'uglifier'
 
 group :development do
-  gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'database_rewinder'
@@ -81,11 +79,13 @@ group :development do
   gem 'rspec-json_matcher'
   gem 'rspec-parameterized'
   gem 'rspec-power_assert'
+  gem 'rspec-rails'
   gem 'rspec-request_describer'
   gem 'rspec-retry'
   gem 'selenium-webdriver'
   gem 'timecop'
   gem 'vcr'
+  gem 'web-console'
   gem 'webmock'
 end
 
