@@ -26,9 +26,7 @@ vendor/
 coverage/
 spec/tmp
 .rspec
-<<<<<<< HEAD
 start_unicorn.sh
-=======
 /public/packs
 /public/packs-test
 /node_modules
