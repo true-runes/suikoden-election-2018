@@ -5,8 +5,10 @@ jobs:
     name: Suikoden Election 2018 CI
     runs-on: ubuntu-latest
     container:
-      image: ruby:2.6.6
+      image: ruby:2.7.2
     steps:
     - uses: actions/checkout@v2
+    - name: Install appropriate version's Bundler
+      run: gem install bundler:2.1.4
     - name: Install dependencies
-      run: bundle install
+      run: bundle _2.1.4_ install --jobs=4 --retry=3

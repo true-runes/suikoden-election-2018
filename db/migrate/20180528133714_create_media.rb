@@ -5,13 +5,6 @@ class CreateMedia < ActiveRecord::Migration[5.2]
       t.string :uri, null: false, default: 'UNKNOWN'
 
       t.timestamps
-      t.timestamps
     end
   end
 end
-
-# Module: Twitter::Media
-# Defined in:
-# lib/twitter/media/photo.rb more...
-# Defined Under Namespace
-# Classes: AnimatedGif, Photo, Video, VideoInfo
