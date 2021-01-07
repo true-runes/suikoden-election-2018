@@ -7,6 +7,7 @@ jobs:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
     - image: circleci/mysql:8.0.4
+      command: [--default-authentication-plugin=mysql_native_password]
       environment:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
@@ -27,10 +28,9 @@ jobs:
     - run:
         name: Install Chrome
         command: |
-          sudo apt-get update
+          sudo apt update
           sudo apt install -y libappindicator3-1
-          sudo apt-get install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0
-
+          sudo apt install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0 fonts-liberation libasound2 libnspr4 libnss3 xdg-utils
           curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome.deb
           sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
