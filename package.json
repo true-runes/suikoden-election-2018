@@ -16,6 +16,6 @@
     "postcss-import": ">=14.0.0",
     "postcss-loader": ">=4.1.0",
     "sugarss": ">=3.0.3",
-    "webpack-dev-server": ">=3.11.1"
+    "webpack-dev-server": ">=3.11.2"
   }
 }
