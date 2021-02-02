@@ -109,7 +109,7 @@ GEM
     binding_ninja (0.2.3)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.6.0)
+    bootsnap (1.7.0)
       msgpack (~> 1.0)
     brakeman (5.0.0)
     buftok (0.2.0)
