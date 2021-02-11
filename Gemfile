@@ -16,9 +16,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug'
   gem 'listen'
-  gem 'pry', '0.14.0'
+  gem 'pry'
   gem 'pry-byebug'
-  gem 'pry-coolline'
   gem 'pry-doc'
   gem 'pry-rails'
 end

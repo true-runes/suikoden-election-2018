@@ -168,8 +168,6 @@ GEM
     concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
     content_disposition (1.0.0)
-    coolline (0.5.0)
-      unicode_utils (~> 1.4)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -377,8 +375,6 @@ GEM
     pry-byebug (3.8.0)
       byebug (~> 11.0)
       pry (~> 0.10)
-    pry-coolline (0.2.5)
-      coolline (~> 0.5)
     pry-doc (1.1.0)
       pry (~> 0.11)
       yard (~> 0.9.11)
@@ -589,7 +585,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
-    unicode_utils (1.4.0)
     unicorn (5.8.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -680,9 +675,8 @@ DEPENDENCIES
   money-rails
   mysql2
   paranoia
-  pry (= 0.14.0)
+  pry
   pry-byebug
-  pry-coolline
   pry-doc
   pry-rails
   puma
