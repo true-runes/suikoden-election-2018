@@ -166,7 +166,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    database_rewinder (0.9.4)
+    database_rewinder (0.9.5)
     debug_inspector (1.1.0)
     declarative (0.0.20)
     default_value_for (3.4.0)
