@@ -490,7 +490,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    search_cop (1.1.0)
+    search_cop (1.2.0)
       treetop
     seed-fu (2.3.9)
       activerecord (>= 3.1)
