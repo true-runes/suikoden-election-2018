@@ -2,7 +2,7 @@
   "name": "suikoden-election-2018",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": ">=5.3.0",
+    "@rails/webpacker": ">=5.4.0",
     "axios": ">=0.21.1",
     "vue": ">=2.6.11",
     "vue-loader": ">=15.9.7",
