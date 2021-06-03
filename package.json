@@ -4,9 +4,9 @@
   "dependencies": {
     "@rails/webpacker": ">=5.4.0",
     "axios": ">=0.21.1",
-    "vue": ">=2.6.11",
+    "vue": ">=2.6.13",
     "vue-loader": ">=15.9.7",
-    "vue-template-compiler": ">=2.6.11"
+    "vue-template-compiler": ">=2.6.13"
   },
   "devDependencies": {
     "autoprefixer": ">=10.2.6",
