@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.7.2
+    - image: circleci/ruby:3.0.2
       environment:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
@@ -30,7 +30,13 @@ jobs:
     - run:
         name: Install system dependencies
         command: |
-          sudo apt-get install fonts-migmix
+          sudo apt install fonts-migmix
+    - run:
+        name: Install Node.js
+        # https://github.com/nodesource/distributions/blob/master/README.md#debmanual
+        command: |
+          curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+          sudo apt install -y nodejs
     - run:
         name: Install Chrome
         command: |
