@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.7.2
+    - image: circleci/ruby:3.0.3
       environment:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
-    - image: circleci/mysql:8.0.4
+    - image: circleci/mysql:8.0.27
       command: mysqld --default-authentication-plugin=mysql_native_password
       environment:
         MYSQL_HOST: 127.0.0.1
@@ -30,12 +30,17 @@ jobs:
     - run:
         name: Install system dependencies
         command: |
-          sudo apt-get install fonts-migmix
+          sudo apt install fonts-migmix
+    - run:
+        name: Install Node.js
+        # https://github.com/nodesource/distributions/blob/master/README.md#debmanual
+        command: |
+          curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+          sudo apt install -y nodejs
     - run:
         name: Install Chrome
         command: |
-          sudo apt update
-          sudo apt install -y libappindicator3-1
+          sudo apt update --allow-releaseinfo-change
           sudo apt install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0 fonts-liberation libasound2 libnspr4 libnss3 xdg-utils
           curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome.deb
@@ -63,6 +68,10 @@ jobs:
         name: Execute "yarn install"
         # TODO: 調整の必要あり
         command: yarn install
+    - run:
+        name: Ubuntu 20.04 libffi7 対応（ワークアラウンド）
+        command: |
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 /usr/lib/x86_64-linux-gnu/libffi.so.6
     - save_cache:
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
         paths:
