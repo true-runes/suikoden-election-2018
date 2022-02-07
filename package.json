@@ -10,7 +10,7 @@
   "devDependencies": {
     "autoprefixer": "10.4.2",
     "css-loader": "6.6.0",
-    "cssnano": "5.0.16",
+    "cssnano": "5.0.17",
     "postcss-cssnext": "3.1.1",
     "postcss-import": "14.0.2",
     "postcss-loader": "6.2.1",
