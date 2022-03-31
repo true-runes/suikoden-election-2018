@@ -5,7 +5,7 @@ jobs:
     name: Suikoden Election 2018 CI
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.0.3
+      image: ruby:3.1.1
     steps:
     - uses: actions/checkout@v3
     - name: Bundler cache
@@ -21,8 +21,8 @@ jobs:
         curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
         apt install -y nodejs
     - name: Install appropriate version's Bundler
-      run: gem install bundler:2.1.4
+      run: gem install bundler:2.2.32
     - name: $ bundle install
       run: |
         bundle config path vendor/bundle
-        bundle _2.1.4_ install --jobs=4 --retry=3
+        bundle _2.2.32_ install --jobs=4 --retry=3
