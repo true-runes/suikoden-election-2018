@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:3.0.3
+    - image: cimg/ruby:3.1.1
       environment:
       - RAILS_ENV: test
       - SELENIUM_CHROME_HEADLESS: true
-    - image: circleci/mysql:8.0.27
+    - image: circleci/mysql:8.0.28
       command: mysqld --default-authentication-plugin=mysql_native_password
       environment:
         MYSQL_HOST: 127.0.0.1
@@ -30,7 +30,13 @@ jobs:
     - run:
         name: Install system dependencies
         command: |
+          sudo apt update --allow-releaseinfo-change
+          sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc-s1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libnss3 lsb-release xdg-utils wget lsof libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0
           sudo apt install fonts-migmix
+    - run:
+        name: libffi7 対策
+        command: |
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 /usr/lib/x86_64-linux-gnu/libffi.so.6
     - run:
         name: Install Node.js
         # https://github.com/nodesource/distributions/blob/master/README.md#debmanual
@@ -40,23 +46,21 @@ jobs:
     - run:
         name: Install Chrome
         command: |
-          sudo apt update --allow-releaseinfo-change
-          sudo apt install -y libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0 fonts-liberation libasound2 libnspr4 libnss3 xdg-utils
           curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome.deb
           sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
           rm google-chrome.deb
           /opt/google/chrome/google-chrome --version
     - run:
-        # v2.1.4 for Heroku
+        # For Heroku
         name: Install appropriate version's Bundler whose number is written in 'Gemfile.lock'
         command: |
-          gem install bundler:2.1.4
+          gem install bundler:2.2.32
     - run:
         # v2.1.4 for Heroku
         name: Install gems written in Gemfile
         command: |
-          bundle _2.1.4_ install --jobs=4 --retry=3 --path vendor/bundle
+          bundle _2.2.32_ install --jobs=4 --retry=3 --path vendor/bundle
     - run:
         name: Install Yarn
         command: |
@@ -68,10 +72,6 @@ jobs:
         name: Execute "yarn install"
         # TODO: 調整の必要あり
         command: yarn install
-    - run:
-        name: Ubuntu 20.04 libffi7 対応（ワークアラウンド）
-        command: |
-          sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 /usr/lib/x86_64-linux-gnu/libffi.so.6
     - save_cache:
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
         paths:
