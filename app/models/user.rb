@@ -54,7 +54,7 @@ class User < ApplicationRecord
   def valid_condition_for_vote
     {
       is_retweet: 0,
-      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo')
+      tweeted_at: ('2018-06-22 21:00:00'.in_time_zone('Tokyo'))..('2018-06-24 09:59:59'.in_time_zone('Tokyo'))
     }
   end
 

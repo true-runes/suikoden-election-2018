@@ -16,7 +16,7 @@ class Tweet < ApplicationRecord
   }
 
   tweeted_at_validation = {
-    tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo')
+    tweeted_at: ('2018-06-22 21:00:00'.in_time_zone('Tokyo'))..('2018-06-24 09:59:59'.in_time_zone('Tokyo'))
   }
 
   user_id = User.find_by(screen_name: 'gensosenkyo').nil? ? 0 : User.find_by(screen_name: 'gensosenkyo').id
@@ -30,7 +30,7 @@ class Tweet < ApplicationRecord
 
   # now_counting
   tweeted_at_validation_for_now_counting = {
-    tweeted_at: '2018-06-30 12:00:00'.in_time_zone('Tokyo')..'2018-07-01 23:59:59'.in_time_zone('Tokyo')
+    tweeted_at: ('2018-06-30 12:00:00'.in_time_zone('Tokyo'))..('2018-07-01 23:59:59'.in_time_zone('Tokyo'))
   }
 
   scope :now_counting_tweets_desc, lambda {

@@ -7,7 +7,7 @@ class OperateSpreadsheet
       client_secret: Rails.application.credentials.spreadsheet_api[:client_secret],
       scope: [
         'https://www.googleapis.com/auth/drive',
-        'https://spreadsheets.google.com/feeds/'
+        'https://spreadsheets.google.com/feeds/',
       ],
       refresh_token: Rails.application.credentials.spreadsheet_api[:refresh_token]
     )
@@ -31,7 +31,7 @@ class OperateSpreadsheet
       is_retweet: 0
     }
     tweeted_at_validation = {
-      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo')
+      tweeted_at: ('2018-06-22 21:00:00'.in_time_zone('Tokyo'))..('2018-06-24 09:59:59'.in_time_zone('Tokyo'))
     }
     user_id_validation = {
       user_id: 28
@@ -72,7 +72,7 @@ class OperateSpreadsheet
     tweeted_at_index        = 18 # R列
 
     # TODO: whereの条件を分割する
-    tweets_ascending = Tweet.where(is_retweet: 0).where(tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:00:00'.in_time_zone('Tokyo')).where.not(user_id: 28).order(tweeted_at: :asc)
+    tweets_ascending = Tweet.where(is_retweet: 0).where(tweeted_at: ('2018-06-22 21:00:00'.in_time_zone('Tokyo'))..('2018-06-24 09:00:00'.in_time_zone('Tokyo'))).where.not(user_id: 28).order(tweeted_at: :asc)
 
     # TODO: NOT DRY
     target_worksheets = [
@@ -95,7 +95,7 @@ class OperateSpreadsheet
       'ツイ 17',
       'ツイ 18',
       'ツイ 19',
-      'ツイ 20'
+      'ツイ 20',
     ]
 
     # 100 ごとに分割

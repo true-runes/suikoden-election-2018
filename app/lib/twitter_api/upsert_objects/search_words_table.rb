@@ -11,8 +11,8 @@ module TwitterApi
                 word: search_word
               },
               {
-                created_at: Time.now,
-                updated_at: Time.now
+                created_at: Time.zone.now,
+                updated_at: Time.zone.now
               }
             )
           end
