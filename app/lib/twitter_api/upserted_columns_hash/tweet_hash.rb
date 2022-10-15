@@ -40,8 +40,8 @@ module TwitterApi
           text: kill_nil(tweet_object.attrs[:full_text]),
           search_word_id: kill_nil(search_word_id),
 
-          created_at: Time.now,
-          updated_at: Time.now
+          created_at: Time.zone.now,
+          updated_at: Time.zone.now
         }
       end
     end

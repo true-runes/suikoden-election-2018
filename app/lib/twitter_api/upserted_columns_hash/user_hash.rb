@@ -47,8 +47,8 @@ module TwitterApi
           connections: kill_nil(user_object.connections, default_value: 'NOTHING'),
           email: kill_nil(user_object.email, default_value: 'NOTHING'),
 
-          created_at: Time.now,
-          updated_at: Time.now
+          created_at: Time.zone.now,
+          updated_at: Time.zone.now
         }
       end
     end

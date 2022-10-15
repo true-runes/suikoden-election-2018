@@ -20,10 +20,8 @@ module TwitterApi
       # TODO: 汚い
       if SearchWord.where(word: search_word).first.nil?
         false
-      elsif SearchWord.where(word: search_word).first.tweets.empty?
-        false
       else
-        true
+        !SearchWord.where(word: search_word).first.tweets.empty?
       end
     end
 
