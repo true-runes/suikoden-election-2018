@@ -5,7 +5,7 @@ module TwitterApi
     class TweetHash
       include TwitterApi::UpsertedColumnsHash::KillNil
 
-      def all_columns(tweet_object, search_word: nil)
+      def all_columns(tweet_object, search_word: nil) # rubocop:disable Metrics/AbcSize
         user_id = User.where(user_number: tweet_object.user.id).first.id
 
         # TODO: ちょっと分かりにくい

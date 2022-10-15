@@ -35,6 +35,7 @@
 #  email              :string(255)      default(""), not null
 #
 
+# rubocop:disable Rails/HasManyOrHasOneDependent, Metrics/AbcSize
 class User < ApplicationRecord
   acts_as_paranoid
 
@@ -88,3 +89,4 @@ class User < ApplicationRecord
     User.where(screen_name:).first
   end
 end
+# rubocop:enable Rails/HasManyOrHasOneDependent, Metrics/AbcSize

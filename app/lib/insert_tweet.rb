@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Lint/UselessAssignment
 # TODO: クラス名が抽象的過ぎてなにやるのかわからない
 class InsertTweet
   def user_id_list
@@ -11,3 +12,4 @@ class InsertTweet
     divided_array = user_ids_int_array.each_slice(max_users_per_request).to_a
   end
 end
+# rubocop:enable Lint/UselessAssignment

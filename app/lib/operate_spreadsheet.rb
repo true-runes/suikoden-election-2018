@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength, Lint/UselessAssignment
 class OperateSpreadsheet
   def self.session
     credentials = Google::Auth::UserRefreshCredentials.new(
@@ -16,7 +17,7 @@ class OperateSpreadsheet
   end
 
   # TODO: メソッド長すぎ
-  def self.master_data
+  def self.master_data # rubocop:disable Metrics/AbcSize
     spreadsheet_uri = Rails.application.credentials.spreadsheet_uri
     spreadsheet = session.spreadsheet_by_url(spreadsheet_uri)
 
@@ -130,3 +131,4 @@ class OperateSpreadsheet
     # end
   end
 end
+# rubocop:enable Layout/LineLength, Lint/UselessAssignment

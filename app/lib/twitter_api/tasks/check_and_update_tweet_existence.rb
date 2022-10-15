@@ -37,7 +37,7 @@ module TwitterApi
       end
 
       def self.restore_all
-        all_tweet_numbers = Tweet.new.tweet_numbers_of_valid_vote_tweets
+        all_tweet_numbers = Tweet.new.tweet_numbers_of_valid_vote_tweets # rubocop:disable Lint/UselessAssignment
 
         only_deleted_tweet_ids = Tweet.only_deleted.pluck(:id)
         Tweet.restore(only_deleted_tweet_ids)

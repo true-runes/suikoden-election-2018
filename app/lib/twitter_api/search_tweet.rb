@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
 module TwitterApi
   class SearchTweet
     extend TwitterApi::Client
@@ -34,3 +35,4 @@ module TwitterApi
     end
   end
 end
+# rubocop:enable Layout/LineLength

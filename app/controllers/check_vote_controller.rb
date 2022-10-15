@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/AbcSize, Style/GuardClause
 class CheckVoteController < ApplicationController
   def index
     if params[:screen_name]
@@ -42,3 +43,4 @@ class CheckVoteController < ApplicationController
     'https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png'
   end
 end
+# rubocop:enable Metrics/AbcSize, Style/GuardClause
