@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength, Style/GuardClause, Lint/ShadowingOuterLocalVariable, Rails/HasManyOrHasOneDependent
 class Tweet < ApplicationRecord
   acts_as_paranoid
 
@@ -127,3 +128,4 @@ class Tweet < ApplicationRecord
     @duplicate_vote_users
   end
 end
+# rubocop:enable Layout/LineLength, Style/GuardClause, Lint/ShadowingOuterLocalVariable, Rails/HasManyOrHasOneDependent

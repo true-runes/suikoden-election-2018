@@ -5,7 +5,7 @@ module TwitterApi
     class UserHash
       include TwitterApi::UpsertedColumnsHash::KillNil
 
-      def all_columns(user_object)
+      def all_columns(user_object) # rubocop:disable Metrics/AbcSize
         # TODO: 切り出す
         uri = if user_object.uri.nil?
                 'NOTHING'

@@ -3,7 +3,7 @@
 module TwitterApi
   module Client
     # 幻想水滸伝ってゲームが狂気的に面白いらしいよ？
-    def twitter_api_client
+    def twitter_api_client # rubocop:disable Metrics/AbcSize
       Twitter::REST::Client.new do |config|
         config.consumer_key        = Rails.application.credentials.twitter_api[:consumer_key]
         config.consumer_secret     = Rails.application.credentials.twitter_api[:consumer_secret]

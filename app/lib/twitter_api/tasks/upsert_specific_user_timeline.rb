@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/SkipsModelValidations
 module TwitterApi
   module Tasks
     class UpsertSpecificUserTimeline
@@ -47,3 +48,4 @@ module TwitterApi
     end
   end
 end
+# rubocop:enable Rails/SkipsModelValidations

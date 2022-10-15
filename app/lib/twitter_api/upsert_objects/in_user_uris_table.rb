@@ -3,7 +3,7 @@
 module TwitterApi
   module UpsertObjects
     class InUserUrisTable
-      def self.upsert(user_objects)
+      def self.upsert(user_objects) # rubocop:disable Metrics/AbcSize
         user_objects.each do |user_object|
           user_attrs = user_object.attrs
           in_user_uri_object = user_attrs[:entities][:description][:urls]
