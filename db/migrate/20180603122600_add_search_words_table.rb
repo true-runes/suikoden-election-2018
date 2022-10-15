@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSearchWordsTable < ActiveRecord::Migration[5.2]
   def change
     create_table :search_words do |t|

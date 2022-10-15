@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CheckVoteController < ApplicationController
   def index
     if params[:screen_name]
@@ -5,12 +7,12 @@ class CheckVoteController < ApplicationController
       user_object = User.new
       user_with_valid_votes = user_object.user_with_valid_votes(@screen_name)
 
-      if user_with_valid_votes.nil?
-        @target_tweets = []
-      else
-        @target_tweets = user_with_valid_votes.tweets # 昇順・降順ロジックはここに
-        # @target_tweets_des = user_with_valid_votes.tweets.foooobarrrr # 昇順・降順ロジックはここに
-      end
+      @target_tweets = if user_with_valid_votes.nil?
+                         []
+                       else
+                         user_with_valid_votes.tweets # 昇順・降順ロジックはここに
+                         # @target_tweets_des = user_with_valid_votes.tweets.foooobarrrr # 昇順・降順ロジックはここに
+                       end
       @vote_number = @target_tweets.size
 
       user_name_in_db = user_object.user_name_in_db(@screen_name)
@@ -27,6 +29,7 @@ class CheckVoteController < ApplicationController
   end
 
   private
+
   def normalize_screen_name(screen_name)
     screen_name.gsub(/\A@(.*)\z/, '\1')
   end

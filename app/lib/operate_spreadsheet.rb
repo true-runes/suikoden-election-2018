@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OperateSpreadsheet
   def self.session
     credentials = Google::Auth::UserRefreshCredentials.new(
@@ -5,9 +7,9 @@ class OperateSpreadsheet
       client_secret: Rails.application.credentials.spreadsheet_api[:client_secret],
       scope: [
         'https://www.googleapis.com/auth/drive',
-        'https://spreadsheets.google.com/feeds/',
+        'https://spreadsheets.google.com/feeds/'
       ],
-      refresh_token: Rails.application.credentials.spreadsheet_api[:refresh_token],
+      refresh_token: Rails.application.credentials.spreadsheet_api[:refresh_token]
     )
     # @session = GoogleDrive::Session.from_credentials(credentials)
     GoogleDrive::Session.from_credentials(credentials)
@@ -26,13 +28,13 @@ class OperateSpreadsheet
     worksheet = spreadsheet.worksheet_by_title('マスターデータ')
 
     is_retweet_validation = {
-      is_retweet: 0,
+      is_retweet: 0
     }
     tweeted_at_validation = {
-      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo'),
+      tweeted_at: '2018-06-22 21:00:00'.in_time_zone('Tokyo')..'2018-06-24 09:59:59'.in_time_zone('Tokyo')
     }
     user_id_validation = {
-      user_id: 28,
+      user_id: 28
     }
     tweets_ascending = Tweet.without_deleted.where(is_retweet_validation).where(tweeted_at_validation).where.not(user_id_validation).order(tweeted_at: :asc)
 
@@ -49,7 +51,7 @@ class OperateSpreadsheet
       tweet_content.chomp!
 
       worksheet[i + 2, tweet_text_column_index] = tweet_content
-      worksheet[i + 2, uri_column_index] = %Q(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
+      worksheet[i + 2, uri_column_index] = %(=HYPERLINK("#{tweet.uri}", "リンク")) # ダブルクォーテーションでないとダメ
       worksheet[i + 2, tweet_id_index] = tweet.id
       worksheet[i + 2, tweeted_at_index] = tweet.tweeted_at
 
@@ -93,7 +95,7 @@ class OperateSpreadsheet
       'ツイ 17',
       'ツイ 18',
       'ツイ 19',
-      'ツイ 20',
+      'ツイ 20'
     ]
 
     # 100 ごとに分割

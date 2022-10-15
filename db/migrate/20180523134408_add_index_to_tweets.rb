@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndexToTweets < ActiveRecord::Migration[5.2]
   def up
     add_index :tweets, :tweet_id, unique: true

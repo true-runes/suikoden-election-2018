@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddManyColumnsToUsers < ActiveRecord::Migration[5.2]
   def up
     add_column :users, :name, :string, after: :screen_name, null: false, default: ''
@@ -27,7 +29,8 @@ class AddManyColumnsToUsers < ActiveRecord::Migration[5.2]
 
     add_column :users, :time_zone, :string, before: :created_at, null: false, default: ''
     add_column :users, :utc_offset, :string, before: :created_at, null: false, default: ''
-    add_column :users, :account_created_at, :datetime, before: :created_at, null: false, default: '1980-01-01 12:00:00 UTC'
+    add_column :users, :account_created_at, :datetime, before: :created_at, null: false,
+                                                       default: '1980-01-01 12:00:00 UTC'
 
     add_column :users, :connections, :string, before: :created_at, null: false, default: ''
     add_column :users, :email, :string, before: :created_at, null: false, default: ''
@@ -60,7 +63,8 @@ class AddManyColumnsToUsers < ActiveRecord::Migration[5.2]
 
     remove_column :users, :time_zone, :string, before: :created_at, null: false, default: ''
     remove_column :users, :utc_offset, :string, before: :created_at, null: false, default: ''
-    remove_column :users, :account_created_at, :datetime, before: :created_at, null: false, default: '1980-01-01 12:00:00 UTC'
+    remove_column :users, :account_created_at, :datetime, before: :created_at, null: false,
+                                                          default: '1980-01-01 12:00:00 UTC'
 
     remove_column :users, :connections, :string, before: :created_at, null: false, default: ''
     remove_column :users, :email, :string, before: :created_at, null: false, default: ''

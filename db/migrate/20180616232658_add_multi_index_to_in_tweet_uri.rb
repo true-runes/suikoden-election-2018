@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddMultiIndexToInTweetUri < ActiveRecord::Migration[5.2]
   def change
     # TODO: これ、同じ URI が複数埋め込まれていたらユニークにならない（実際そういうツイートがあった……）

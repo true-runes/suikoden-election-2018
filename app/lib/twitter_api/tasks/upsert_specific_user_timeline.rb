@@ -1,41 +1,49 @@
-class TwitterApi::Tasks::UpsertSpecificUserTimeline
-  def self.execute(user_id: nil, screen_name: nil, options: {})
-    # TODO: user_id で取得するロジックがまだ無い
-    target_tweet_objects = TwitterApi::SpecificUserTimeline.execute(user_id: user_id, screen_name: screen_name, options: options)
-    target_user_objects = TwitterApi::ExchangeTweetToUser.execute(target_tweet_objects);
+# frozen_string_literal: true
 
-    # 下の2つの順番には依存性がある
-    TwitterApi::UpsertObjects::UsersTable.upsert(target_user_objects)
-    TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects)
+module TwitterApi
+  module Tasks
+    class UpsertSpecificUserTimeline
+      def self.execute(user_id: nil, screen_name: nil, options: {})
+        # TODO: user_id で取得するロジックがまだ無い
+        target_tweet_objects = TwitterApi::SpecificUserTimeline.execute(user_id:, screen_name:,
+                                                                        options:)
+        target_user_objects = TwitterApi::ExchangeTweetToUser.execute(target_tweet_objects)
 
-    TwitterApi::UpsertObjects::InUserUrisTable.upsert(target_user_objects)
-    TwitterApi::UpsertObjects::HashtagsTable.upsert(target_tweet_objects)
-    TwitterApi::UpsertObjects::InTweetUrisTable.upsert(target_tweet_objects)
-    TwitterApi::UpsertObjects::MediaTable.upsert(target_tweet_objects)
-  end
+        # 下の2つの順番には依存性がある
+        TwitterApi::UpsertObjects::UsersTable.upsert(target_user_objects)
+        TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects)
 
-  def self.execute_continuously(user_id: nil, screen_name: nil, options: {})
-    since_id = Tweet.new.latest_original_tweet_number_of_specific_screen_name(screen_name)
-    default_options = {
-      since_id: since_id,
-    }
-    options = default_options.update(options)
+        TwitterApi::UpsertObjects::InUserUrisTable.upsert(target_user_objects)
+        TwitterApi::UpsertObjects::HashtagsTable.upsert(target_tweet_objects)
+        TwitterApi::UpsertObjects::InTweetUrisTable.upsert(target_tweet_objects)
+        TwitterApi::UpsertObjects::MediaTable.upsert(target_tweet_objects)
+      end
 
-    target_tweet_objects = TwitterApi::SpecificUserTimeline.execute(user_id: user_id, screen_name: screen_name, options: options)
-    target_user_objects = TwitterApi::ExchangeTweetToUser.execute(target_tweet_objects);
+      def self.execute_continuously(user_id: nil, screen_name: nil, options: {})
+        since_id = Tweet.new.latest_original_tweet_number_of_specific_screen_name(screen_name)
+        default_options = {
+          since_id:
+        }
+        options = default_options.update(options)
 
-    # 下の2つの順番には依存性がある
-    TwitterApi::UpsertObjects::UsersTable.upsert(target_user_objects)
-    TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects)
+        target_tweet_objects = TwitterApi::SpecificUserTimeline.execute(user_id:, screen_name:,
+                                                                        options:)
+        target_user_objects = TwitterApi::ExchangeTweetToUser.execute(target_tweet_objects)
 
-    TwitterApi::UpsertObjects::InUserUrisTable.upsert(target_user_objects)
-    TwitterApi::UpsertObjects::HashtagsTable.upsert(target_tweet_objects)
-    TwitterApi::UpsertObjects::InTweetUrisTable.upsert(target_tweet_objects)
-    TwitterApi::UpsertObjects::MediaTable.upsert(target_tweet_objects)
-  end
+        # 下の2つの順番には依存性がある
+        TwitterApi::UpsertObjects::UsersTable.upsert(target_user_objects)
+        TwitterApi::UpsertObjects::TweetsTable.upsert(target_tweet_objects)
 
-  # TODO: this is an example method
-  def self.execute_for_gensosenkyo_account(options)
-    execute(screen_name: 'gensosenkyo', options: options)
+        TwitterApi::UpsertObjects::InUserUrisTable.upsert(target_user_objects)
+        TwitterApi::UpsertObjects::HashtagsTable.upsert(target_tweet_objects)
+        TwitterApi::UpsertObjects::InTweetUrisTable.upsert(target_tweet_objects)
+        TwitterApi::UpsertObjects::MediaTable.upsert(target_tweet_objects)
+      end
+
+      # TODO: this is an example method
+      def self.execute_for_gensosenkyo_account(options)
+        execute(screen_name: 'gensosenkyo', options:)
+      end
+    end
   end
 end

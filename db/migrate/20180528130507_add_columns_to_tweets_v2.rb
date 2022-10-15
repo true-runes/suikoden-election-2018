@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class AddColumnsToTweetsV2 < ActiveRecord::Migration[5.2]
-  def change # up and down が望ましい
+  # up and down が望ましい
+  def change
     add_column :tweets, :favorite_count, :integer, after: :user_id, null: false, default: -1
     add_column :tweets, :in_reply_to_screen_name, :string, after: :user_id, null: false, default: 'NO SCREEN NAME'
     add_column :tweets, :in_reply_to_status_id, :string, after: :user_id, null: false, default: 'NO STATUS ID'
     add_column :tweets, :in_reply_to_user_id, :string, after: :user_id, null: false, default: 'NO_USER_ID'
-    add_column :tweets, :lang , :string, after: :user_id, null: false, default: 'UNKNOWN'
+    add_column :tweets, :lang, :string, after: :user_id, null: false, default: 'UNKNOWN'
     add_column :tweets, :retweet_count, :integer, after: :user_id, null: false, default: -1
     add_column :tweets, :client_name, :string, after: :user_id, null: false, default: 'UNKNOWN'
     add_column :tweets, :uri, :string, after: :user_id, null: false, default: 'UNKNOWN'

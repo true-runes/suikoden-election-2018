@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddEntitiesColumnsToIndices < ActiveRecord::Migration[5.2]
   def change
     add_column :in_tweet_uris, :indices, :string, after: :uri, null: false, default: 'UNKNOWN'

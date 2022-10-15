@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -45,8 +47,8 @@ class User < ApplicationRecord
   validates :user_number, uniqueness: true, presence: true
 
   # TODO: ヒットしなかった場合の処理がない
-  scope :specific_user_id_by_screen_name, ->(screen_name=nil) { User.where(screen_name: screen_name).first.id }
-  scope :specific_user_id_by_user_number, ->(user_number=nil) { User.where(user_number: user_number).first.id }
+  scope :specific_user_id_by_screen_name, ->(screen_name = nil) { User.where(screen_name:).first.id }
+  scope :specific_user_id_by_user_number, ->(user_number = nil) { User.where(user_number:).first.id }
 
   # TODO: 以下はすべて scope へリファクタリングする
   def valid_condition_for_vote
@@ -58,7 +60,7 @@ class User < ApplicationRecord
 
   def invalid_condition_for_vote
     {
-      user_id: 28, # gensosenkyo
+      user_id: 28 # gensosenkyo
     }
   end
 
@@ -67,20 +69,22 @@ class User < ApplicationRecord
   end
 
   def user_with_valid_votes(screen_name)
-    User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).first
+    User.joins(:tweets).includes(:tweets).where(screen_name:, tweets: valid_condition_for_vote).first
   end
 
   # TODO: 期待通りの動作でないようだ
   def user_with_valid_votes_count(screen_name)
-    if User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.nil?
+    if User.joins(:tweets).includes(:tweets).where(screen_name:,
+                                                   tweets: valid_condition_for_vote).where.not(id: 28).first.nil?
       0
     else
-      User.joins(:tweets).includes(:tweets).where(screen_name: screen_name, tweets: valid_condition_for_vote).where.not(id: 28).first.tweets.size
+      User.joins(:tweets).includes(:tweets).where(screen_name:,
+                                                  tweets: valid_condition_for_vote).where.not(id: 28).first.tweets.size
     end
   end
 
   # TODO: メソッド名なんか違う
   def user_name_in_db(screen_name)
-    User.where(screen_name: screen_name).first
+    User.where(screen_name:).first
   end
 end

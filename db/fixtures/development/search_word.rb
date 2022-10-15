@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 SearchWord.seed do |s|
   # id がわからない場合の UPSERT だが……ハードコーディングが頂けない
   target_word = '検索語なし'

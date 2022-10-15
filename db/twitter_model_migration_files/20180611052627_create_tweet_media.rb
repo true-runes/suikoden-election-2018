@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTweetMedia < ActiveRecord::Migration[5.2]
   def change
     create_table :tweet_media do |t|
@@ -8,6 +10,6 @@ class CreateTweetMedia < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_foreign_key "tweet_media", "tweets"
+    add_foreign_key 'tweet_media', 'tweets'
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUserMentions < ActiveRecord::Migration[5.2]
   def change
     # 命名がイケてない

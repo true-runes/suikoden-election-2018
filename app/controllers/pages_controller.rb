@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
-  def home
-  end
+  def home; end
 
   def now_counting
     @tweets = Tweet.now_counting_tweets_asc.page params[:page]

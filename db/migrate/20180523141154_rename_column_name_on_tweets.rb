@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenameColumnNameOnTweets < ActiveRecord::Migration[5.2]
   def up
     rename_column :tweets, :tweet_id, :tweet_number

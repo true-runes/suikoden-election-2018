@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArrangeMediaModel < ActiveRecord::Migration[5.2]
   def change
     remove_column :media, :uri_t_co, :string
