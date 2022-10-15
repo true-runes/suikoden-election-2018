@@ -26,8 +26,19 @@ jobs:
     - name: Node.js のインストールを行う
       # https://github.com/nodesource/distributions/blob/master/README.md#debmanual
       run: |
-        curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
-        apt install -y nodejs
+        KEYRING=/usr/share/keyrings/nodesource.gpg
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null
+        gpg --no-default-keyring --keyring "$KEYRING" --list-keys
+
+        # TODO: ハードコーディングは直したい
+        VERSION=node_18.x
+        KEYRING=/usr/share/keyrings/nodesource.gpg
+        DISTRO="$(lsb_release -s -c)"
+        echo "deb [signed-by=$KEYRING] https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+        echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list
+
+        sudo apt-get update
+        sudo apt-get install nodejs
     # For Heroku
     - name: Install appropriate version's Bundler
       run: gem install bundler:2.2.32
