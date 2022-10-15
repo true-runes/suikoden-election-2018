@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChageTweetTextLengthStringToTextType < ActiveRecord::Migration[5.2]
   # Twitter の文字数制限が 280文字 になったので :string では収まりきらないときがある
   def up

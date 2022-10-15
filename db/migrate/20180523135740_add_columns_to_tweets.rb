@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddColumnsToTweets < ActiveRecord::Migration[5.2]
   def up
     # add_column :tweets, :text, :string, after: :user_id, null: false, default: ''

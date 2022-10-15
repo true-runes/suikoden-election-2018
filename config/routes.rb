@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'pages#home'
 
@@ -12,8 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :votes, only: [:index, :create] # 将来的に必要
-  resources :check_vote, only: [:index, :create] # :create は不要っぽい Ajaxにしたかった
+  resources :votes, only: %i[index create] # 将来的に必要
+  resources :check_vote, only: %i[index create] # :create は不要っぽい Ajaxにしたかった
 
   get '/practice', to: 'practice#index'
 

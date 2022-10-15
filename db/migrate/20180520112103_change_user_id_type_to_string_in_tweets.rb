@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeUserIdTypeToStringInTweets < ActiveRecord::Migration[5.2]
   # def up
   #   change_column :tweets, :user_id, :string

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ModifyDateTimeFormatInUsers < ActiveRecord::Migration[5.2]
   def change
     change_column_default :users, :account_created_at, Time.local(1980, 1, 1, 21, 0, 0, 0).utc

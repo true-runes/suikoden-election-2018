@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTweetInnerUris < ActiveRecord::Migration[5.2]
   def change
     create_table :tweet_inner_uris do |t|

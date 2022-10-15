@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddMultiIndexToHashtag < ActiveRecord::Migration[5.2]
   def change
     # TODO: これ、同じ ハッシュタグ が複数埋め込まれていたらユニークにならない（実際そういうツイートがあった……）

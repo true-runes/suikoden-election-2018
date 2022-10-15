@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
@@ -67,7 +69,7 @@ Rails.application.configure do
   BetterErrors::Middleware.allow_ip! '10.10.10.0/24'
 
   # メソッド名のバッティング回避
-  logger            = ActiveSupport::Logger.new(STDOUT)
+  logger            = ActiveSupport::Logger.new($stdout)
   logger.formatter  = config.log_formatter
   config.logger     = ActiveSupport::TaggedLogging.new(logger)
 end

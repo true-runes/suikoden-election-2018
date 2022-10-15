@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateInUserUris < ActiveRecord::Migration[5.2]
   def change
     create_table :in_user_uris do |t|
