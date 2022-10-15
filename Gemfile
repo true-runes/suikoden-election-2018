@@ -4,11 +4,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.1.1'
+ruby '3.1.2'
 
 gem 'bootsnap', require: false
-gem 'rails'
 gem 'puma'
+gem 'rails'
 
 group :development, :test do
   gem 'awesome_print'
