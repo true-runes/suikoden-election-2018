@@ -1,7 +1,8 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
 
-RUN apt update -qq && apt install -y build-essential libpq-dev nodejs
+RUN apt update -qq && apt install -y build-essential libpq-dev
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
 RUN gem install bundler
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
