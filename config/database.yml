@@ -1,30 +1,36 @@
 default: &default
-  adapter: mysql2
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  encoding: utf8mb4
-  strict: false
-
-test:
-  <<: *default
-  host: <%= ENV['MYSQL_HOST_TEST'] || Rails.application.credentials.mysql[:test][:host] %>
-  port: <%= ENV['MYSQL_PORT_TEST'] || Rails.application.credentials.mysql[:test][:port] %>
-  username: <%= ENV['MYSQL_USERNAME_TEST'] || Rails.application.credentials.mysql[:test][:username] %>
-  password: <%= ENV['MYSQL_PASSWORD_TEST'] || Rails.application.credentials.mysql[:test][:password] %>
-  database: <%= ENV['MYSQL_DATABASE_TEST'] || Rails.application.credentials.mysql[:test][:database] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV['RAILS_MAX_THREADS'] || 5 %>
 
 development:
   <<: *default
-  host: <%= ENV['MYSQL_HOST_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:host] %>
-  port: <%= ENV['MYSQL_PORT_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:port] %>
-  username: <%= ENV['MYSQL_USERNAME_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:username] %>
-  password: <%= ENV['MYSQL_PASSWORD_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:password] %>
-  database: <%= ENV['MYSQL_DATABASE_DEVELOPMENT'] || Rails.application.credentials.mysql[:development][:database] %>
+  host: <%= ENV['PG_HOST_DEVELOPMENT'] || 'localhost' %>
+  port: <%= ENV['PG_PORT_DEVELOPMENT'] || 5432 %>
+  username: <%= ENV['PG_USERNAME_DEVELOPMENT'] || 'root' %>
+  password: <%= ENV['PG_PASSWORD_DEVELOPMENT'] || 'password' %>
+  database: gss2018_development
+  template: template0
+  collation: ja_JP.UTF-8
+  ctype: ja_JP.UTF-8
+  sslmode: disable
 
 production:
   <<: *default
-  host: <%= ENV['MYSQL_HOST_PRODUCTION'] || Rails.application.credentials.mysql[:production][:host] %>
-  port: <%= ENV['MYSQL_PORT_PRODUCTION'] || Rails.application.credentials.mysql[:production][:port] %>
-  username: <%= ENV['MYSQL_USERNAME_PRODUCTION'] || Rails.application.credentials.mysql[:production][:username] %>
-  password: <%= ENV['MYSQL_PASSWORD_PRODUCTION'] || Rails.application.credentials.mysql[:production][:password] %>
-  database: <%= ENV['MYSQL_DATABASE_PRODUCTION'] || Rails.application.credentials.mysql[:production][:database] %>
+  host: <%= ENV['PG_HOST_PRODUCTION'] || 'localhost' %>
+  port: <%= ENV['PG_PORT_PRODUCTION'] || 5432 %>
+  username: <%= ENV['PG_USERNAME_PRODUCTION'] || 'root' %>
+  password: <%= ENV['PG_PASSWORD_PRODUCTION'] || 'password' %>
+  database: gss2018_production
+  template: template0
+  collation: ja_JP.UTF-8
+  ctype: ja_JP.UTF-8
+
+test:
+  <<: *default
+  host: <%= ENV['PG_HOST_TEST'] || 'localhost' %>
+  port: <%= ENV['PG_PORT_TEST'] || 5432 %>
+  username: <%= ENV['PG_USERNAME_TEST'] || 'gss2017' %>
+  password: <%= ENV['PG_PASSWORD_TEST'] || 'gss2017_password' %>
+  database: gss2018_test
+  sslmode: disable
