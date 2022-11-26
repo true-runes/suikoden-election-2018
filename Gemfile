@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.1.2'
+ruby '3.1.3'
 
 gem 'activeadmin'
 gem 'active_model_serializers'
