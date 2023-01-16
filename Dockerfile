@@ -1,5 +1,12 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
+ARG FOO=bar
+ARG HOGE=fuga
+RUN echo $FOO
+RUN echo $HOGE
+RUN FOO=foobar
+RUN echo $FOO
+
 RUN --mount=type=secret,id=rails_master_key RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key)
 RUN --mount=type=secret,id=secret_key_base SECRET_KEY_BASE=$(cat /run/secrets/secret_key_base)
 
