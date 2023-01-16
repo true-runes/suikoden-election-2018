@@ -43,4 +43,4 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
         run: |
-          docker build --secret id={{ env.RAILS_MASTER_KEY }} --secret id={{ env.SECRET_KEY_BASE }} --tag ${{ env.DOCKER_IMAGE }} .
+          docker build --secret id=rails_master_key,env=${{ env.RAILS_MASTER_KEY }} --secret id=secret_key_base,env=${{ env.SECRET_KEY_BASE }} --tag ${{ env.DOCKER_IMAGE }} .
