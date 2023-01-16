@@ -23,7 +23,7 @@ env:
 jobs:
   rails_app_test:
     name: Rails アプリのテスト
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgres:15.1
@@ -58,7 +58,7 @@ jobs:
     needs: rails_app_test
     if: ${{ github.ref_name == 'main' }}
     name: Cloud Run に production デプロイする
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: ソースコードをチェックアウトする
         uses: actions/checkout@v3
