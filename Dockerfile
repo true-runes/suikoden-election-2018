@@ -1,13 +1,15 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
+ARG NODEJS_MAJOR_VERSION=16.x
+ARG NODEJS_PATCH_VERSION=16.19.0
+ARG YARN_VERSION=1.22.19
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+RUN curl -o nodejs.deb https://deb.nodesource.com/node_$NODEJS_MAJOR_VERSION/pool/main/n/nodejs/nodejs_$NODEJS_PATCH_VERSION-deb-1nodesource1_amd64.deb && \
+    apt install -y ./nodejs.deb && \
+    rm nodejs.deb
+RUN npm install -g yarn@$YARN_VERSION
 RUN gem install bundler
-RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
 
 RUN mkdir /myapp
 WORKDIR /myapp
@@ -15,20 +17,14 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 
-RUN gem install bundler
-
-# TODO: production ビルド前提なので、開発環境として Docker を利用する場合は Dockerfile を分ける
+# production ビルド前提なので、開発環境として Docker を利用する場合は Dockerfile を分ける
 RUN bundle config set --local without 'test development'
 RUN bundle install
 
 COPY . /myapp
 
 # production ビルド前提になっている
-# RAILS_ENV を逐一指定するのではなく一括で指定してもよい
-RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails assets:precompile
-RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:create
-RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:migrate
-RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:seed
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key) bin/rails assets:precompile
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
