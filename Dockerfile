@@ -9,12 +9,10 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
 
+RUN node --version
+
 RUN mkdir /myapp
 WORKDIR /myapp
-
-COPY package.json /myapp/package.json
-COPY yarn.lock /myapp/yarn.lock
-RUN yarn install --check-files
 
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
