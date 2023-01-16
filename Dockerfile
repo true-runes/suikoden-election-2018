@@ -25,10 +25,10 @@ COPY . /myapp
 
 # production ビルド前提になっている
 # RAILS_ENV を逐一指定するのではなく一括で指定してもよい
-RUN RAILS_ENV=production bin/rails assets:precompile
-RUN RAILS_ENV=production bin/rails db:create
-RUN RAILS_ENV=production bin/rails db:migrate
-RUN RAILS_ENV=production bin/rails db:seed
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails assets:precompile
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:create
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:migrate
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production bin/rails db:seed
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
