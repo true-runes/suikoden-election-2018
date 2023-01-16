@@ -25,7 +25,8 @@ COPY . /myapp
 
 # production ビルド前提になっている
 # RAILS_ENV を逐一指定するのではなく一括で指定してもよい
-RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
+RUN --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
+# RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
 RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:create
 RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:migrate
 RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:seed
