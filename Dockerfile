@@ -1,7 +1,11 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
-RUN --mount=type=secret,id=rails_master_key RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key)
-RUN --mount=type=secret,id=secret_key_base SECRET_KEY_BASE=$(cat /run/secrets/secret_key_base)
+RUN --mount=type=secret,id=sample cat /run/secrets/sample
+RUN --mount=type=secret,id=sample SAMPLE=$(cat /run/secrets/sample)
+# RUN --mount=type=secret,id=rails_master_key RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key)
+# RUN --mount=type=secret,id=secret_key_base SECRET_KEY_BASE=$(cat /run/secrets/secret_key_base)
+# RUN --mount=type=secret,id=rails_master_key RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key)
+# RUN --mount=type=secret,id=secret_key_base SECRET_KEY_BASE=$(cat /run/secrets/secret_key_base)
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
