@@ -1,0 +1,47 @@
+name: Docker イメージをビルドする
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+env:
+  # TODO: Git のタグを取得して、イメージのタグにする
+  DOCKER_IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT }}/cloud-run-source-deploy/gensosenkyo-2018
+  RAILS_ENV: test
+  PG_HOST_TEST: localhost
+  PG_PORT_TEST: 5432
+  PG_USERNAME_TEST: postgres_user
+  PG_PASSWORD_TEST: postgres_password
+
+jobs:
+  build_docker_image:
+    name: Docker イメージ をビルドできるかどうか
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:15.1
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres_user
+          POSTGRES_PASSWORD: postgres_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: ソースコードをチェックアウトする
+        uses: actions/checkout@v3
+      - name: Docker イメージ をビルドする
+        env:
+          DOCKER_BUILDKIT: 1 # FIXME: これがもはや不要かどうか調べること (# syntax = docker/dockerfile:1.2 はすでに不要)
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+          SAMPLE: this_is_a_sample
+        run: |
+          docker build --secret id=rails_master_key,env=RAILS_MASTER_KEY --secret id=secret_key_base,env=SECRET_KEY_BASE --tag ${{ env.DOCKER_IMAGE }} .
