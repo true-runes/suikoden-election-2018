@@ -73,8 +73,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
         run: |
-          docker build --secret id=rails_master_key,env=RAILS_MASTER_KEY --tag ${{ env.DOCKER_IMAGE }} .
+          docker build --secret id=rails_master_key,env=RAILS_MASTER_KEY --secret id=secret_key_base,env=SECRET_KEY_BASE --tag ${{ env.DOCKER_IMAGE }} .
       - name: Docker イメージ をプッシュする
         run: |
           docker push ${{ env.DOCKER_IMAGE }}
