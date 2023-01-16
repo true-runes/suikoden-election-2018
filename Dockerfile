@@ -8,9 +8,7 @@ RUN apt update -qq && apt install -y build-essential libpq-dev
 RUN curl -o nodejs.deb https://deb.nodesource.com/node_$NODEJS_MAJOR_VERSION/pool/main/n/nodejs/nodejs_$NODEJS_PATCH_VERSION-deb-1nodesource1_amd64.deb && \
     apt install -y ./nodejs.deb && \
     rm nodejs.deb
-RUN node --version
-RUN npm --version
-RUN npm install -g yarn --version $YARN_VERSION
+RUN npm install -g yarn@$YARN_VERSION
 RUN gem install bundler
 
 RUN mkdir /myapp
