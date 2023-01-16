@@ -23,6 +23,11 @@ RUN bundle install
 
 COPY . /myapp
 
+RUN bin/rails assets:precompile
+RUN bin/rails db:create
+RUN bin/rails db:migrate
+RUN bin/rails db:seed
+
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 ENTRYPOINT ["entrypoint.sh"]
