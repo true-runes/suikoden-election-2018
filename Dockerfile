@@ -1,5 +1,7 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
+RUN --mount=type=secret,id=rails_master_key RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key)
+RUN --mount=type=secret,id=secret_key_base SECRET_KEY_BASE=$(cat /run/secrets/secret_key_base)
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
@@ -25,11 +27,15 @@ COPY . /myapp
 
 # production ビルド前提になっている
 # RAILS_ENV を逐一指定するのではなく一括で指定してもよい
-RUN --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
+# RUN --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
 # RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails assets:precompile
-RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:create
-RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:migrate
-RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:seed
+# RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:create
+# RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:migrate
+# RUN --mount=type=secret,id=rails_master_key --mount=type=secret,id=secret_key_base RAILS_ENV=production RAILS_MASTER_KEY=rails_master_key SECRET_KEY_BASE=secret_key_base bin/rails db:seed
+RUN RAILS_ENV=production bin/rails assets:precompile
+RUN RAILS_ENV=production bin/rails db:create
+RUN RAILS_ENV=production bin/rails db:migrate
+RUN RAILS_ENV=production bin/rails db:seed
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
