@@ -1,9 +1,11 @@
 FROM ruby:3.1.3
 ENV LANG C.UTF-8
-ARG NODEJS_VERSION=16.19.0
+ARG NODEJS_MAJOR_VERSION=16.x
+ARG NODEJS_PATCH_VERSION=16.19.0
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
-RUN curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash - && apt-get install -y nodejs
+RUN curl -o nodejs.deb https://deb.nodesource.com/node_$NODEJS_MAJOR_VERSION/pool/main/n/nodejs/nodejs_$NODEJS_PATCH_VERSION-deb-1nodesource1_amd64.deb && apt install -y ./nodejs.deb && rm nodejs.deb
+# RUN curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash - && apt-get install -y nodejs
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
