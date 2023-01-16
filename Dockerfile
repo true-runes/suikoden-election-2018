@@ -23,10 +23,12 @@ RUN bundle install
 
 COPY . /myapp
 
-RUN bin/rails assets:precompile
-RUN bin/rails db:create
-RUN bin/rails db:migrate
-RUN bin/rails db:seed
+# production ビルド前提になっている
+# RAILS_ENV を逐一指定するのではなく一括で指定してもよい
+RUN RAILS_ENV=production bin/rails assets:precompile
+RUN RAILS_ENV=production bin/rails db:create
+RUN RAILS_ENV=production bin/rails db:migrate
+RUN RAILS_ENV=production bin/rails db:seed
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
