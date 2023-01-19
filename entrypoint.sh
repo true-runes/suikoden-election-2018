@@ -6,9 +6,10 @@ if [ -n "$PORT" ]; then
   RAILS_PORT=$PORT
 fi
 
-bin/rails db:create
-bin/rails db:migrate
-bin/rails db:seed
+# entrypoint でマイグレーションするのはだめ
+# bin/rails db:create
+# bin/rails db:migrate
+# bin/rails db:seed
 
 rm -f tmp/pids/server.pid
 
