@@ -39,9 +39,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Docker イメージ をビルドする
         env:
-          DOCKER_BUILDKIT: 1 # FIXME: これがもはや不要かどうか調べること (# syntax = docker/dockerfile:1.2 はすでに不要)
+          DOCKER_BUILDKIT: 1 # '# syntax = docker/dockerfile:1.2' は不要だが、この指定は 2023/01/23 現在、必須
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
-          SAMPLE: this_is_a_sample
         run: |
           docker build --secret id=rails_master_key,env=RAILS_MASTER_KEY --secret id=secret_key_base,env=SECRET_KEY_BASE --tag ${{ env.DOCKER_IMAGE }} .

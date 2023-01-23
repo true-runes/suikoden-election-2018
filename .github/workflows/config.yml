@@ -71,7 +71,7 @@ jobs:
           gcloud auth configure-docker ${{ env.GCP_AUTH_HOST }}
       - name: Docker イメージ をビルドする
         env:
-          DOCKER_BUILDKIT: 1
+          DOCKER_BUILDKIT: 1 # '# syntax = docker/dockerfile:1.2' は不要だが、この指定は 2023/01/23 現在、必須
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
         run: |
@@ -85,3 +85,6 @@ jobs:
           service: ${{ env.CLOUD_RUN_SERVICE_NAME }}
           image: ${{ env.DOCKER_IMAGE }}
           region: ${{ env.GCP_REGION }}
+      - name: Rake タスク（データベース操作など）があれば行う
+        run: |
+          echo 'Rake タスク（データベース操作など）があれば行う'
