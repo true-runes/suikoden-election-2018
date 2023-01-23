@@ -93,7 +93,6 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rspec-json_matcher'
   gem 'rspec-parameterized'
-  gem 'rspec-power_assert'
   gem 'rspec-rails', require: false
   gem 'rspec-request_describer'
   gem 'rspec-retry'
