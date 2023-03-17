@@ -471,15 +471,20 @@ GEM
     rspec-json_matcher (0.2.0)
       amazing_print
       json
-    rspec-mocks (3.12.3)
+    rspec-mocks (3.12.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-parameterized (0.5.3)
-      binding_of_caller
+    rspec-parameterized (1.0.0)
+      rspec-parameterized-core (< 2)
+      rspec-parameterized-table_syntax (< 2)
+    rspec-parameterized-core (1.0.0)
       parser
       proc_to_ast
       rspec (>= 2.13, < 4)
       unparser
+    rspec-parameterized-table_syntax (1.0.0)
+      binding_of_caller
+      rspec-parameterized-core (< 2)
     rspec-rails (5.1.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
