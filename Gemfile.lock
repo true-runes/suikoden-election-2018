@@ -374,7 +374,7 @@ GEM
     parallel (1.22.1)
     paranoia (2.6.1)
       activerecord (>= 5.1, < 7.1)
-    parser (3.2.1.1)
+    parser (3.2.2.0)
       ast (~> 2.4.1)
     pg (1.4.6)
     polyglot (0.3.5)
@@ -431,7 +431,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.1.1)
-    raindrops (0.20.0)
+    raindrops (0.20.1)
     rake (13.0.6)
     ransack (3.2.1)
       activerecord (>= 6.1.5)
@@ -471,7 +471,7 @@ GEM
     rspec-json_matcher (0.2.0)
       amazing_print
       json
-    rspec-mocks (3.12.4)
+    rspec-mocks (3.12.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-parameterized (1.0.0)
@@ -738,7 +738,7 @@ DEPENDENCIES
   whenever
 
 RUBY VERSION
-   ruby 3.2.1p31
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.11
