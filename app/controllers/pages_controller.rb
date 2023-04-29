@@ -8,10 +8,12 @@ class PagesController < ApplicationController
   end
 
   def ranking
-    @ranking_data = CSV.table('public/ranking.tsv', col_sep: "\t")
+    ranking_tsv_filepath = Rails.public_path.join('ranking.tsv')
+    @ranking_data = CSV.table(ranking_tsv_filepath, col_sep: "\t")
   end
 
   def summary
-    @english_votes_ranking_data = CSV.table('public/english_votes_ranking.csv', col_sep: "\t")
+    ranking_csv_filepath = Rails.public_path.join('english_votes_ranking.csv')
+    @english_votes_ranking_data = CSV.table(ranking_csv_filepath, col_sep: "\t")
   end
 end
