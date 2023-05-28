@@ -13,7 +13,7 @@
     "cssnano": "6.0.1",
     "postcss-cssnext": "3.1.1",
     "postcss-import": "15.1.0",
-    "postcss-loader": "7.3.1",
+    "postcss-loader": "7.3.2",
     "sugarss": "4.0.1",
     "webpack-dev-server": "4.15.0"
   },
