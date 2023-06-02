@@ -8019,10 +8019,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-loader@17.1.1:
-  version "17.1.1"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-17.1.1.tgz#546c85eb844f98653921c02e8b0b060ebea19bfb"
-  integrity sha512-qpqEVkKdrAsgyIBMHaiXurDeCuBWqRyKqg2GI4aG3NbggEls+BLqTZdqahbJJh7fm83sz+iz3gg6eDWdbNlG7Q==
+vue-loader@17.2.1:
+  version "17.2.1"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-17.2.1.tgz#d06aee3cfd80db03c2c9a66ca291219471115f1d"
+  integrity sha512-6vIZPxekZ23gWQtVlaJgT1sKW9zV7YeiW1kgtdQ0rpbMWmfoajeZ+GS17xtXDlz8ZpydrFKPza1CrwHSG4lIww==
   dependencies:
     chalk "^4.1.0"
     hash-sum "^2.0.0"
