@@ -15,7 +15,7 @@
     "postcss-import": "15.1.0",
     "postcss-loader": "7.3.2",
     "sugarss": "4.0.1",
-    "webpack-dev-server": "4.15.0"
+    "webpack-dev-server": "4.15.1"
   },
   "private": true
 }
