@@ -497,7 +497,7 @@ GEM
       rspec-expectations (~> 3.12)
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
-    rspec-request_describer (0.3.2)
+    rspec-request_describer (0.4.0)
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.12.0)
