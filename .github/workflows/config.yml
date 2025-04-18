@@ -38,10 +38,14 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: コードをチェックアウトする
-        uses: actions/checkout@v3
-      - name: Ruby のセットアップを行う
-        uses: ruby/setup-ruby@v1
+      - name: $ git clone する
+        # https://github.com/actions/checkout/releases
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Ruby や RubyGems のセットアップを行う
+        # https://github.com/ruby/setup-ruby/releases
+        uses: ruby/setup-ruby@354a1ad156761f5ee2b7b13fa8e09943a5e8d252 # v1.229.0
         with:
           ruby-version: .ruby-version
           bundler-cache: true
@@ -60,8 +64,11 @@ jobs:
     name: Cloud Run に production デプロイする
     runs-on: ubuntu-22.04
     steps:
-      - name: ソースコードをチェックアウトする
-        uses: actions/checkout@v3
+      - name: $ git clone する
+        # https://github.com/actions/checkout/releases
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
       - name: GCP の認証を行う
         uses: google-github-actions/auth@v1
         with:

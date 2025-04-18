@@ -1,14 +1,10 @@
 FROM ruby:3.2.2
 ENV LANG C.UTF-8
-ARG NODEJS_MAJOR_VERSION=16.x
-ARG NODEJS_PATCH_VERSION=16.19.0
+ARG NODEJS_VERSION=16.19.0
 ARG YARN_VERSION=1.22.19
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
-RUN curl -o nodejs.deb https://deb.nodesource.com/node_$NODEJS_MAJOR_VERSION/pool/main/n/nodejs/nodejs_$NODEJS_PATCH_VERSION-deb-1nodesource1_amd64.deb && \
-    apt install -y ./nodejs.deb && \
-    rm nodejs.deb
-RUN npm install -g yarn@$YARN_VERSION
+RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn@$YARN_VERSION
 RUN gem install bundler
 
 RUN mkdir /myapp
