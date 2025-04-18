@@ -13,7 +13,6 @@ gem 'active_model_serializers'
 gem 'activerecord-import'
 gem 'annotate'
 gem 'bootsnap', require: false
-gem 'brakeman'
 gem 'bullet'
 gem 'bundler-audit'
 gem 'chartkick'
