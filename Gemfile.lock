@@ -197,6 +197,7 @@ GEM
       activesupport (>= 5.0)
       request_store (>= 1.0)
       ruby2_keywords
+    drb (2.2.1)
     equalizer (0.0.11)
     erubi (1.12.0)
     execjs (2.8.1)
@@ -699,6 +700,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   draper
+  drb
   factory_bot_rails
   faker
   faraday
