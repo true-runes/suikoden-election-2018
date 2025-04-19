@@ -1,10 +1,9 @@
 FROM ruby:3.2.2
 ENV LANG C.UTF-8
-ARG NODEJS_VERSION=16.19.0
-ARG YARN_VERSION=1.22.19
+ARG NODEJS_VERSION=22.14.0
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
-RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn@$YARN_VERSION
+RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn
 RUN gem install bundler
 
 RUN mkdir /myapp
