@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.2.2'
+ruby '3.4.3'
 
 gem 'activeadmin'
 gem 'active_model_serializers'
@@ -15,14 +15,15 @@ gem 'annotate'
 gem 'base64'
 gem 'bigdecimal'
 gem 'bootsnap', require: false
-gem 'brakeman'
 gem 'bullet'
 gem 'bundler-audit'
 gem 'chartkick'
+gem 'csv'
 gem 'default_value_for'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'draper'
+gem 'drb'
 gem 'faraday'
 gem 'foreman'
 gem 'global'
@@ -33,6 +34,7 @@ gem 'jp_prefecture'
 gem 'kaminari'
 gem 'money-rails'
 gem 'mutex_m'
+gem 'observer'
 gem 'paranoia'
 gem 'pg'
 gem 'puma'
