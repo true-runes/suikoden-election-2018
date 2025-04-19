@@ -20,7 +20,7 @@ env:
 jobs:
   build_docker_image:
     name: Docker イメージ をビルドできるかどうか
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:15.4
@@ -35,8 +35,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: ソースコードをチェックアウトする
-        uses: actions/checkout@v3
+      - name: $ git clone する
+        # https://github.com/actions/checkout/releases
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
       - name: Docker イメージ をビルドする
         env:
           DOCKER_BUILDKIT: 1 # '# syntax = docker/dockerfile:1.2' は不要だが、この指定は 2023/01/23 現在、必須
