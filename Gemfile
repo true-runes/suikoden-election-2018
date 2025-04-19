@@ -15,7 +15,6 @@ gem 'annotate'
 gem 'base64'
 gem 'bigdecimal'
 gem 'bootsnap', require: false
-gem 'brakeman'
 gem 'bullet'
 gem 'bundler-audit'
 gem 'chartkick'
