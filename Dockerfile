@@ -1,10 +1,10 @@
 FROM ruby:3.4.3
 ENV LANG C.UTF-8
 ARG NODEJS_VERSION=$(cat .node-version)
-ARG YARN_VERSION=1.22.19
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
-RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn@$YARN_VERSION
+# NOTE: Yarn のバージョン指定をすることも可能だが、ここでは行わない（将来的に行うかもしれない）
+RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn
 RUN gem install bundler
 
 RUN mkdir /myapp
