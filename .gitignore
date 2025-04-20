@@ -29,6 +29,7 @@ coverage/
 spec/tmp
 .rspec
 start_unicorn.sh
+/public/assets
 /public/packs
 /public/packs-test
 /node_modules
