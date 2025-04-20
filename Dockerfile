@@ -1,6 +1,6 @@
 FROM ruby:3.4.3
 ENV LANG C.UTF-8
-ARG NODEJS_VERSION=$(cat .node-version)
+ARG NODEJS_VERSION
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
 # NOTE: Yarn のバージョン指定をすることも可能だが、ここでは行わない（将来的に行うかもしれない）
