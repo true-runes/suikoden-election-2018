@@ -18,6 +18,8 @@ gem 'bootsnap', require: false
 gem 'bullet'
 gem 'bundler-audit'
 gem 'chartkick'
+# https://github.com/facebook/react-native/issues/48746#issuecomment-2602408458
+gem 'concurrent-ruby', '1.3.4'
 gem 'csv'
 gem 'default_value_for'
 gem 'devise'
