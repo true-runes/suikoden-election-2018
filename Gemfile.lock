@@ -156,7 +156,7 @@ GEM
     chartkick (5.1.5)
     chronic (0.10.2)
     coderay (1.1.3)
-    concurrent-ruby (1.3.4)
+    concurrent-ruby (1.3.5)
     connection_pool (2.5.1)
     content_disposition (1.0.0)
     crack (0.4.5)
@@ -703,7 +703,7 @@ DEPENDENCIES
   capistrano3-unicorn
   capybara
   chartkick
-  concurrent-ruby (= 1.3.4)
+  concurrent-ruby (= 1.3.5)
   csv
   database_cleaner
   database_rewinder
