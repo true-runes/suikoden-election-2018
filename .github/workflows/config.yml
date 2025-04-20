@@ -52,7 +52,7 @@ jobs:
       - name: assets:precompile を行う (NODE_OPTIONS="--openssl-legacy-provider")
         # TODO: NODE_OPTIONS="--openssl-legacy-provider" は一時的な回避策なので、将来的には削除すべきである
         run: |
-          RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} NODE_OPTIONS="--openssl-legacy-provider" bundle exec rails assets:precompile
+          RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} NODE_OPTIONS="--openssl-legacy-provider" bundle exec rails assets:precompile
       - name: データベースをセットアップする
         run: |
           bin/rails db:create
