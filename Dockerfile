@@ -1,6 +1,6 @@
 FROM ruby:3.4.3
 ENV LANG C.UTF-8
-ARG NODEJS_VERSION=16.19.0
+ARG NODEJS_VERSION=$(cat .node-version)
 ARG YARN_VERSION=1.22.19
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
