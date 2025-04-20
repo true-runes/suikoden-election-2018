@@ -1,8 +1,9 @@
 FROM ruby:3.4.3
 ENV LANG C.UTF-8
-ARG NODEJS_VERSION=22.14.0
+ARG NODEJS_VERSION
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
+# NOTE: Yarn のバージョン指定をすることも可能だが、ここでは行わない（将来的に行うかもしれない）
 RUN apt install -y nodejs npm && npm install -g n && n $NODEJS_VERSION && npm install -g yarn
 RUN gem install bundler
 
@@ -19,7 +20,8 @@ RUN bundle install
 COPY . /myapp
 
 # production ビルド前提になっている
-RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key) bin/rails assets:precompile
+# TODO: NODE_OPTIONS="--openssl-legacy-provider" は一時的な回避策なので、将来的には削除すべきである
+RUN --mount=type=secret,id=rails_master_key RAILS_ENV=production RAILS_MASTER_KEY=$(cat /run/secrets/rails_master_key) NODE_OPTIONS="--openssl-legacy-provider" bin/rails assets:precompile
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
