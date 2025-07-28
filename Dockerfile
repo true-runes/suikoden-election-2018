@@ -1,5 +1,5 @@
 FROM ruby:3.4.3
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 ARG NODEJS_VERSION
 
 RUN apt update -qq && apt install -y build-essential libpq-dev
